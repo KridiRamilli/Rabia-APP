@@ -2,13 +2,17 @@ import { Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
-  primary: "#37A372", // Green
-  secondary: "#2C2C2C", // Gray
+  primary: "#32b7b6", // Green
+  secondary: "#d575dd", // Purple
 
-  lightPurple: "#7B789F",
+  //Gradient Colors
+  darkBlue: "#425389",
+  darkPurple: "#ce72ee",
   purple: "#595683",
-  yellow: "#F1CD7C",
-  lightYellow: "#FFD88A",
+  green: "#119241",
+  darkGreen: "#086d59",
+
+  //Plain colors
   white: "#fff",
   white1: "#F1E6D8",
   lightGreen: "#7EBDA2",
@@ -21,7 +25,7 @@ export const COLORS = {
   gray2: "#4B4B4B",
   gray3: "#4D4D4D",
   lightGray: "#3B3B3B",
-  lightGray2: "#707070",
+  lightGray2: "#a0a0a0",
   lightGray3: "#f0f0f0",
 
   pink: "#D993B4",
@@ -63,7 +67,7 @@ export const FONTS = {
   h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
   h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: 30 },
   h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 22 },
-  h4: { fontFamily: "Roboto-Bold", fontSize: SIZES.h4, lineHeight: 22 },
+  h4: { fontFamily: "Roboto-Medium", fontSize: SIZES.h4, lineHeight: 22 },
   body1: {
     fontFamily: "Roboto-Regular",
     fontSize: SIZES.body1,
@@ -86,6 +90,16 @@ export const FONTS = {
   },
   body5: {
     fontFamily: "Roboto-Regular",
+    fontSize: SIZES.body5,
+    lineHeight: 22,
+  },
+  body5Thin: {
+    fontFamily: "Roboto-Thin",
+    fontSize: SIZES.body5,
+    lineHeight: 22,
+  },
+  body5Light: {
+    fontFamily: "Roboto-Thin",
     fontSize: SIZES.body5,
     lineHeight: 22,
   },
