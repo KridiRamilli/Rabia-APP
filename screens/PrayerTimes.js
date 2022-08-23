@@ -1,39 +1,78 @@
-import { Text, View, StyleSheet } from "react-native";
 import React from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  ImageBackground,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
+
+import { LinearGradient } from "expo-linear-gradient";
+import { DateHeader } from "../components";
+import { IMAGES, ICONS } from "../constants";
+
+import { COLORS } from "../theme/theme";
 
 function PrayerTimes({ navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.upper}>
-        <View style={styles.schedule}>
-          <Text onPress={() => navigation.navigate("Schedule")}>
-            ScheduleIcon
-          </Text>
-        </View>
-        <View style={styles.settings}>
-          <Text onPress={() => navigation.navigate("Settings")}>
-            SettingsIcon
-          </Text>
-        </View>
-      </View>
-      <View style={styles.prayerTimes}>
-        <Text>PrayerTimes</Text>
-      </View>
-    </View>
+    <ImageBackground style={styles.imageBackground} source={IMAGES.little_girl}>
+      <LinearGradient
+        style={styles.gradientBackground}
+        colors={[COLORS.primary95, COLORS.darkBlue95]}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
+          {/* upper icons */}
+          <View style={styles.upper}>
+            <TouchableOpacity onPress={() => navigation.navigate("Schedule")}>
+              <Image source={ICONS.schedule_icon} style={styles.upperIcons} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+              <Image source={ICONS.settings_icon} style={styles.upperIcons} />
+            </TouchableOpacity>
+          </View>
+          {/* Finish: upper icons */}
+          <ScrollView style={styles.container}>
+            <View style={styles.prayerTimes}>
+              {/* <Text>PrayerTimes</Text> */}
+              <DateHeader />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+        <StatusBar style='light' />
+      </LinearGradient>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
+  },
+  gradientBackground: {
+    flex: 1,
+  },
+  imageBackground: {
+    flex: 1,
   },
   upper: {
-    flex: 1,
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
+    marginTop: 10,
+    backgroundColor: COLORS.transparent,
+  },
+  upperIcons: {
+    resizeMode: "contain",
+    width: 25,
+    height: 25,
+  },
+  prayerTimes: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

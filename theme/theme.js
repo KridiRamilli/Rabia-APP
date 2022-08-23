@@ -3,10 +3,14 @@ const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
   primary: "#32b7b6", // Green
+  primary85: "rgba(50,183,182,0.85)",
+  primary95: "rgba(50,183,182,0.95)",
   secondary: "#d575dd", // Purple
 
   //Gradient Colors
   darkBlue: "#425389",
+  darkBlue85: "rgba(66,83,137,0.85)",
+  darkBlue95: "rgba(66,83,137,0.95)",
   darkPurple: "#ce72ee",
   purple: "#595683",
   green: "#119241",
@@ -24,6 +28,7 @@ export const COLORS = {
   gray1: "#363636",
   gray2: "#4B4B4B",
   gray3: "#4D4D4D",
+  gray4: "#cecece",
   lightGray: "#3B3B3B",
   lightGray2: "#a0a0a0",
   lightGray3: "#f0f0f0",
@@ -52,7 +57,7 @@ export const SIZES = {
   h4: 14,
   h5: 12,
   body1: 30,
-  body2: 22,
+  body2: 20,
   body3: 16,
   body4: 14,
   body5: 12,
@@ -67,7 +72,7 @@ export const FONTS = {
   h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
   h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: 30 },
   h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 22 },
-  h4: { fontFamily: "Roboto-Medium", fontSize: SIZES.h4, lineHeight: 22 },
+  h4: { fontFamily: "Roboto-Medium", fontSize: SIZES.h4, lineHeight: 20 },
   body1: {
     fontFamily: "Roboto-Regular",
     fontSize: SIZES.body1,

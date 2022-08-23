@@ -33,6 +33,7 @@ const RootTab = () => {
         />
       );
     },
+    //FINISH tab icon fn
     tabBarActiveTintColor: COLORS.secondary,
     tabBarInactiveTintColor: COLORS.lightGray2,
     tabBarStyle: {
@@ -43,6 +44,7 @@ const RootTab = () => {
       borderRadius: 30,
       marginBottom: 60,
       position: "absolute",
+      //To center the nav using (100% - width)/2
       left: "7.5%",
       shadowColor: "#ddd",
       shadowOffset: {
@@ -61,12 +63,12 @@ const RootTab = () => {
       paddingBottom: 2,
     },
     tabBarLabelStyle: {
-      ...FONTS.body4,
+      ...FONTS.body5,
       lineHeight: 0,
     },
   });
   const sceneContainerStyle = {
-    backgroundColor: "teal",
+    // backgroundColor: "teal",
   };
   return (
     <NavigationContainer>
