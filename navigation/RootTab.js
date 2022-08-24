@@ -27,15 +27,16 @@ const RootTab = () => {
           style={{
             width: size,
             height: size,
-            tintColor: focused ? COLORS.secondary : COLORS.lightGray2,
+            tintColor: focused ? COLORS.white : COLORS.lightGray2,
           }}
           source={ICONS[iconName]}
         />
       );
     },
     //FINISH tab icon fn
-    tabBarActiveTintColor: COLORS.secondary,
+    tabBarActiveTintColor: COLORS.white,
     tabBarInactiveTintColor: COLORS.lightGray2,
+    tabBarActiveBackgroundColor: COLORS.secondary,
     tabBarStyle: {
       backgroundColor: "#fff",
       width: "85%",
@@ -46,20 +47,20 @@ const RootTab = () => {
       position: "absolute",
       //To center the nav using (100% - width)/2
       left: "7.5%",
-      shadowColor: "#ddd",
+      shadowColor: "#ccc",
       shadowOffset: {
         width: 0,
         height: 0,
       },
-      shadowOpacity: 0.5,
-      shadowRadius: 10.84,
-      elevation: 5,
+      shadowOpacity: 0.8,
+      shadowRadius: 3.84,
+      elevation: 10,
     },
     tabBarItemStyle: {
       height: 52,
-      borderRadius: 15,
+      borderRadius: 12,
       margin: 4,
-      marginHorizontal: 10,
+      marginHorizontal: 15,
       paddingBottom: 2,
     },
     tabBarLabelStyle: {
@@ -67,14 +68,11 @@ const RootTab = () => {
       lineHeight: 0,
     },
   });
-  const sceneContainerStyle = {
-    // backgroundColor: "teal",
-  };
   return (
     <NavigationContainer>
       <TabNavigator.Navigator
         initialRouteName='Prayer Times'
-        {...{ screenOptions, sceneContainerStyle }}
+        {...{ screenOptions }}
       >
         <TabNavigator.Screen name='Dhikr' component={Dhikr} />
         <TabNavigator.Screen name='Prayer Times' component={RootStack} />
