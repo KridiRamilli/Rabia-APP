@@ -12,12 +12,26 @@ import {
 import { StatusBar } from "expo-status-bar";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { DateHeader } from "../components";
+import { DateHeader, PrayerItem, NextPrayer } from "../components";
 import { IMAGES, ICONS } from "../constants";
 
-import { COLORS } from "../theme/theme";
+import { prayerTimes } from "../__mocks__";
+
+import { COLORS, SIZES } from "../theme/theme";
 
 function PrayerTimes({ navigation }) {
+  const renderPrayerInfo = () => {
+    return prayerTimes.map(({ id, prayer, time }) => {
+      return (
+        <PrayerItem
+          key={id}
+          prayer={prayer}
+          time={time}
+          activePrayer={id == 3}
+        />
+      );
+    });
+  };
   return (
     <ImageBackground style={styles.imageBackground} source={IMAGES.little_girl}>
       <LinearGradient
@@ -35,10 +49,14 @@ function PrayerTimes({ navigation }) {
             </TouchableOpacity>
           </View>
           {/* Finish: upper icons */}
-          <ScrollView style={styles.container}>
+          <ScrollView
+            style={styles.container}
+            contentContainerStyle={{ flex: 1 }}
+          >
             <View style={styles.prayerTimes}>
-              {/* <Text>PrayerTimes</Text> */}
               <DateHeader />
+              <NextPrayer />
+              <View style={styles.prayerInfo}>{renderPrayerInfo()}</View>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -71,8 +89,15 @@ const styles = StyleSheet.create({
     height: 25,
   },
   prayerTimes: {
-    justifyContent: "center",
+    flex: 1,
+    justifyContent: "space-between",
     alignItems: "center",
+    paddingBottom: 150,
+  },
+  prayerInfo: {
+    flex: 0.75,
+    width: "80%",
+    justifyContent: "space-between",
   },
 });
 

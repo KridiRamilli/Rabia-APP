@@ -67,14 +67,11 @@ const RootTab = () => {
       lineHeight: 0,
     },
   });
-  const sceneContainerStyle = {
-    // backgroundColor: "teal",
-  };
   return (
     <NavigationContainer>
       <TabNavigator.Navigator
         initialRouteName='Prayer Times'
-        {...{ screenOptions, sceneContainerStyle }}
+        {...{ screenOptions }}
       >
         <TabNavigator.Screen name='Dhikr' component={Dhikr} />
         <TabNavigator.Screen name='Prayer Times' component={RootStack} />
