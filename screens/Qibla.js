@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Image, Animated, Easing } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { Text, View, StyleSheet, Image, SafeAreaView } from "react-native";
 import { Magnetometer } from "expo-sensors";
+import Animated, {
+  useSharedValue,
+  withTiming,
+  useAnimatedStyle,
+  Easing,
+} from "react-native-reanimated";
+// import CompassHeading from "react-native-compass-heading";
 
+import { IMAGES } from "../constants";
 import { COLORS, SIZES, FONTS } from "../theme/theme";
-
-const spinValue = new Animated.Value(0);
 
 function Qibla() {
   const [isFound, setIsFound] = useState(false);
@@ -13,12 +19,35 @@ function Qibla() {
     y: 0,
     z: 0,
   });
+  const [directionAngle, setDirectionAngle] = useState(135);
   const [subscription, setSubscription] = useState(null);
+  const spinValue = useSharedValue(0);
+
+  const config = {
+    duration: 200,
+    easing: Easing.linear,
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      // width: withTiming(spinValue.value, config),
+      transform: [
+        {
+          rotate: withTiming(`${directionAngle}deg`, config),
+        },
+      ],
+    };
+  });
 
   const subscribe = () => {
     setSubscription(
       Magnetometer.addListener((result) => {
-        setData(result);
+        const { x, y, z } = result;
+        setData({
+          x: Math.round(+x),
+          y: Math.round(+y),
+          z: Math.round(+z),
+        });
       })
     );
   };
@@ -29,64 +58,55 @@ function Qibla() {
   };
 
   useEffect(() => {
-    Magnetometer.setUpdateInterval(100);
+    Magnetometer.setUpdateInterval(40);
     subscribe();
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    Animated.timing(spinValue, {
-      toValue: 1,
-      duration: 3000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
+    spinValue.value = directionAngle;
+  }, [directionAngle]);
+
+  useEffect(() => {
+    getAngle(data);
   }, [data]);
 
   //change background color when Qibla is found
-  useEffect(() => {
-    if (Math.abs(_degree(getAngle()) - 134) < 10) {
-      setIsFound(true);
-    } else {
-      setIsFound(false);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (Math.abs(_degree(directionAngle) - 134) < 10) {
+  //     setIsFound(true);
+  //   } else {
+  //     setIsFound(false);
+  //   }
+  // }, [directionAngle]);
 
-  const { x, y, z } = data;
-
-  const getAngle = () => {
+  const getAngle = (data) => {
     let angle = 0;
+    const { x, y } = data;
     if (Math.atan2(y, x) >= 0) {
       angle = Math.atan2(y, x) * (180 / Math.PI);
     } else {
       angle = (Math.atan2(y, x) + 2 * Math.PI) * (180 / Math.PI);
     }
+    // angle = _degree(angle);
 
-    return Math.round(angle);
+    if (Math.abs(directionAngle - angle) > 4) {
+      setDirectionAngle(Math.round(angle));
+    }
   };
 
   const _degree = (magnetometer) => {
     return magnetometer >= 0 ? magnetometer - 90 : magnetometer + 271;
   };
 
-  const spin = spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", `${_degree(getAngle())}deg`],
-  });
-
   return (
-    <View style={[styles.container, isFound ? styles.found : ""]}>
+    <SafeAreaView style={[styles.container, isFound ? styles.found : ""]}>
       <Text style={[styles.title, FONTS.h1]}>Kibla</Text>
       <View style={styles.imageContainer}>
-        <Text style={styles.text}>{_degree(getAngle())}</Text>
+        <Text style={styles.text}>{_degree(directionAngle)}</Text>
         <Animated.Image
-          style={{
-            width: "100%",
-            height: "100%",
-            // transform: [{ rotate: "135deg" }],
-            transform: [{ rotate: spin }],
-          }}
-          source={require("../assets/images/qibla_compass.png")}
+          style={[styles.image, animatedStyle]}
+          source={IMAGES.qibla_compass}
         />
       </View>
       <View style={styles.footer}>
@@ -99,7 +119,7 @@ function Qibla() {
           <Text style={styles.text}>133.21°N</Text>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -122,18 +142,19 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: "center",
     alignItems: "center",
-    width: 250,
-    height: 250,
+    flex: 1,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    resizeMode: "contain",
+    width: SIZES.width * 0.7,
+    height: SIZES.height * 0.4,
   },
   footer: {
     width: "90%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    marginBottom: 150,
   },
   footerElement: {
     justifyContent: "center",
