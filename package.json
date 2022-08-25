@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.7.0",
     "expo": "~46.0.8",
     "expo-font": "^10.2.0",
+    "expo-sensors": "^11.4.0",
     "expo-status-bar": "~1.4.0",
     "jest-expo": "^46.0.1",
     "react": "^18.2.0",
