@@ -15,6 +15,8 @@ export const COLORS = {
   purple: "#595683",
   green: "#119241",
   darkGreen: "#086d59",
+  pinkGradient: "#f687e6",
+  purpleGradient: "#a158cd",
 
   //Plain colors
   white: "#fff",
@@ -34,6 +36,7 @@ export const COLORS = {
   lightGray3: "#f0f0f0",
 
   pink: "#D993B4",
+  pink2: "#f072d5",
   lightPink: "#F3DEE8",
 
   transparentWhite: "rgba(255, 255, 255, 0.2)",
