@@ -6,6 +6,7 @@ const ICONS = {
   qibla_icon: require("../assets/icons/qibla-icon.png"),
   schedule_icon: require("../assets/icons/schedule-icon.png"),
   settings_icon: require("../assets/icons/settings-icon.png"),
+  reset_icon: require("../assets/icons/reset_icon.png"),
 };
 
 export default ICONS;
