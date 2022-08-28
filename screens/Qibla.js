@@ -19,7 +19,7 @@ function Qibla() {
     y: 0,
     z: 0,
   });
-  const [directionAngle, setDirectionAngle] = useState(135);
+  const [directionAngle, setDirectionAngle] = useState(0);
   const [subscription, setSubscription] = useState(null);
   const spinValue = useSharedValue(0);
 
@@ -44,9 +44,9 @@ function Qibla() {
       Magnetometer.addListener((result) => {
         const { x, y, z } = result;
         setData({
-          x: Math.round(+x),
-          y: Math.round(+y),
-          z: Math.round(+z),
+          x,
+          y,
+          z,
         });
       })
     );
@@ -90,7 +90,7 @@ function Qibla() {
     }
     // angle = _degree(angle);
 
-    if (Math.abs(directionAngle - angle) > 4) {
+    if (Math.abs(directionAngle - angle) > 0) {
       setDirectionAngle(Math.round(angle));
     }
   };
@@ -103,7 +103,7 @@ function Qibla() {
     <SafeAreaView style={[styles.container, isFound ? styles.found : ""]}>
       <Text style={[styles.title, FONTS.h1]}>Kibla</Text>
       <View style={styles.imageContainer}>
-        <Text style={styles.text}>{_degree(directionAngle)}</Text>
+        <Text style={styles.text}>{directionAngle}</Text>
         <Animated.Image
           style={[styles.image, animatedStyle]}
           source={IMAGES.qibla_compass}
