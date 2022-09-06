@@ -61,7 +61,7 @@ function Dhikr() {
   };
 
   //Alert before reseting
-  const resetCounter = () => {
+  const handleResetCounter = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
     alertResetCounter();
   };
@@ -72,7 +72,7 @@ function Dhikr() {
       <View style={styles.counterContainer}>
         <TouchableOpacity
           style={styles.resetIconContainer}
-          onPress={resetCounter}
+          onPress={handleResetCounter}
         >
           <Image source={ICONS.reset_icon} style={styles.resetIcon} />
         </TouchableOpacity>
