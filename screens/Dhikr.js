@@ -8,50 +8,64 @@ import {
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as Haptics from "expo-haptics";
-import { DateTime } from "luxon";
 import { FONTS, COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
-
-const getTodayDate = () => {
-  let dt = DateTime.now();
-  return dt.toLocaleString();
-};
+import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
+import { getTodayDate } from "../utils";
+import { getData } from "../db";
 
 function Dhikr() {
-  const [counter, setCounter] = useState(0);
-  const [logCounter, setLogCounter] = useState({
-    [getTodayDate()]: 0,
+  const [todayDate, setTodayDate] = useState(() => {
+    let today = getTodayDate();
+    return today;
   });
+  const counter = useSelector((state) => {
+    console.log(state);
+    return state.counter;
+  });
+  const [logCounter, setLogCounter] = useState({ [todayDate]: 0 });
+  const dispatch = useDispatch();
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    setLogCounter({
-      [getTodayDate()]: counter,
+    setLogCounter(() => {
+      return {
+        ...logCounter,
+        [todayDate]: logCounter[todayDate] + 1,
+      };
     });
-  }, [counter]);
+    getData();
+  }, [counter.num]);
+
+  console.log(counter.num);
 
   const handleBtnPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    setCounter((counter) => counter + 1);
+    dispatch(addCounter());
   };
 
   const alertResetCounter = () => {
     Alert.alert("Reset Counter", "Jeni i sigurtë", [
       {
         text: "Cancel",
+        //TODO: Remove console
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
-      { text: "PO", onPress: () => setCounter(0) },
+      { text: "PO", onPress: () => dispatch(resetCounter()) },
     ]);
   };
+
+  //Alert before reseting
   const resetCounter = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
     alertResetCounter();
   };
 
-  getTodayDate();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Dhikr</Text>
@@ -62,7 +76,7 @@ function Dhikr() {
         >
           <Image source={ICONS.reset_icon} style={styles.resetIcon} />
         </TouchableOpacity>
-        <Text style={styles.counter}>{counter}</Text>
+        <Text style={styles.counter}>{counter.num}</Text>
       </View>
       <TouchableOpacity style={styles.mainBtn} onPress={handleBtnPress}>
         <LinearGradient
