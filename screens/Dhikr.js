@@ -18,7 +18,7 @@ import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
 import { getData } from "../db";
 
-function Dhikr() {
+export const Dhikr = () => {
   const [todayDate, setTodayDate] = useState(() => {
     let today = getTodayDate();
     return today;
@@ -90,7 +90,7 @@ function Dhikr() {
       </TouchableOpacity>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -173,5 +173,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-
-export default Dhikr;

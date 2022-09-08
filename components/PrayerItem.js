@@ -3,7 +3,7 @@ import React from "react";
 
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 
-const PrayerItem = ({ prayer, time, activePrayer }) => {
+export const PrayerItem = ({ prayer, time, activePrayer }) => {
   return (
     <View style={[styles.container, activePrayer && styles.activePrayer]}>
       <Text style={styles.infoPrayer}>{prayer}</Text>
@@ -28,4 +28,3 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-export default PrayerItem;

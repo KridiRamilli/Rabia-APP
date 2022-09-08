@@ -12,7 +12,7 @@ import Animated, {
 import { IMAGES } from "../constants";
 import { COLORS, SIZES, FONTS } from "../theme/theme";
 
-function Qibla() {
+export const Qibla = () => {
   const [isFound, setIsFound] = useState(false);
   const [data, setData] = useState({
     x: 0,
@@ -121,7 +121,7 @@ function Qibla() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -167,5 +167,3 @@ const styles = StyleSheet.create({
     padding: 1,
   },
 });
-
-export default Qibla;

@@ -19,7 +19,7 @@ import { prayerTimes } from "../__mocks__";
 
 import { COLORS, SIZES } from "../theme/theme";
 
-function PrayerTimes({ navigation }) {
+export const PrayerTimes = ({ navigation }) => {
   const renderPrayerInfo = () => {
     return prayerTimes.map(({ id, prayer, time }) => {
       return (
@@ -64,7 +64,7 @@ function PrayerTimes({ navigation }) {
       </LinearGradient>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -100,5 +100,3 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-
-export default PrayerTimes;

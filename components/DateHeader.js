@@ -4,7 +4,7 @@ import React from "react";
 import { ICONS } from "../constants";
 import { FONTS, SIZES, COLORS } from "../theme/theme";
 
-const DateHeader = () => {
+export const DateHeader = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.dateText}>E Premte, 18 Gusht</Text>
@@ -44,5 +44,3 @@ const styles = StyleSheet.create({
     color: COLORS.gray4,
   },
 });
-
-export default DateHeader;

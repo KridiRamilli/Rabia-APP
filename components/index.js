@@ -1,5 +1,5 @@
-import DateHeader from "./DateHeader";
-import PrayerItem from "./PrayerItem";
-import NextPrayer from "./NextPrayer";
-
-export { DateHeader, PrayerItem, NextPrayer };
+export { DateHeader } from "./DateHeader";
+export { PrayerItem } from "./PrayerItem";
+export { NextPrayer } from "./NextPrayer";
+export { IntroButton } from "./IntroButton";
+export { IntroPagination } from "./IntroPagination";
