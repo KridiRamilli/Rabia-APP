@@ -19,9 +19,9 @@ import { prayerTimes } from "../__mocks__";
 
 import { COLORS, SIZES } from "../theme/theme";
 
-function PrayerTimes({ navigation }) {
-  const renderPrayerInfo = (data) => {
-    return data.map(({ id, prayer, time }) => {
+export const PrayerTimes = ({ navigation }) => {
+  const renderPrayerInfo = () => {
+    return prayerTimes.map(({ id, prayer, time }) => {
       return (
         <PrayerItem
           key={id}
@@ -56,9 +56,7 @@ function PrayerTimes({ navigation }) {
             <View style={styles.prayerTimes}>
               <DateHeader />
               <NextPrayer />
-              <View style={styles.prayerInfo}>
-                {renderPrayerInfo(prayerTimes)}
-              </View>
+              <View style={styles.prayerInfo}>{renderPrayerInfo()}</View>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -66,7 +64,7 @@ function PrayerTimes({ navigation }) {
       </LinearGradient>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -102,5 +100,3 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-
-export default PrayerTimes;

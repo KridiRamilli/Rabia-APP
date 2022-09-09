@@ -5,7 +5,7 @@ import React from "react";
 import { ICONS } from "../constants";
 import { FONTS, COLORS } from "../theme/theme";
 
-const NextPrayer = () => {
+export const NextPrayer = () => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -56,5 +56,3 @@ const styles = StyleSheet.create({
     left: 10,
   },
 });
-
-export default NextPrayer;
