@@ -9,10 +9,16 @@ import React from "react";
 import { COLORS } from "../theme/theme";
 import { IntroButton } from "./IntroButton";
 
+const slideBtnInfo = {
+  0: "",
+  1: "Allow Notifications",
+  2: "Allow Location",
+};
+
 export const IntroPagination = ({ activeIndex, slider, slides }) => {
   return (
     <View style={styles.paginationContainer}>
-      <SafeAreaView>
+      <SafeAreaView style={styles.contentArea}>
         <View style={styles.paginationDots}>
           {slides.length > 1 &&
             slides.map((_, i) => (
@@ -24,12 +30,16 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
                     ? { backgroundColor: COLORS.pink2 }
                     : { backgroundColor: "rgba(0, 0, 0, .2)" },
                 ]}
-                onPress={() => slider?.goToSlide(i, true)}
+                onPress={() => slider?.current.goToSlide(i, true)}
               />
             ))}
         </View>
         <View style={styles.buttonContainer}>
-          <IntroButton />
+          {activeIndex === 1 ? <Text>Skip</Text> : <View></View>}
+          <IntroButton
+            rounded={activeIndex == 1}
+            text={slideBtnInfo[activeIndex]}
+          />
           {/* <TouchableOpacity
             style={[styles.button, { backgroundColor: "#023e3f" }]}
           >
@@ -50,6 +60,14 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     right: 16,
+    height: 200,
+    alignItems: "center",
+  },
+  contentArea: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "space-around",
+    backgroundColor: "teal",
   },
   paginationDots: {
     height: 17,
@@ -66,6 +84,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginHorizontal: 24,
   },
   button: {

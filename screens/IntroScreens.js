@@ -71,8 +71,6 @@ export const IntroScreens = () => {
   );
 };
 
-// export default IntroScreens;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
