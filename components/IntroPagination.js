@@ -19,6 +19,7 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
   return (
     <View style={styles.paginationContainer}>
       <SafeAreaView style={styles.contentArea}>
+        {/* Render custom pagination dots */}
         <View style={styles.paginationDots}>
           {slides.length > 1 &&
             slides.map((_, i) => (
@@ -35,19 +36,13 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
             ))}
         </View>
         <View style={styles.buttonContainer}>
+          {/* show skip only on notifications page */}
           {activeIndex === 1 ? <Text>Skip</Text> : <View></View>}
           <IntroButton
-            rounded={activeIndex == 1}
+            rounded={activeIndex == 0}
             text={slideBtnInfo[activeIndex]}
+            activeIndex={activeIndex}
           />
-          {/* <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#023e3f" }]}
-          >
-            <Text style={styles.buttonText}>Log in</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign up</Text>
-          </TouchableOpacity> */}
         </View>
       </SafeAreaView>
     </View>
@@ -64,10 +59,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   contentArea: {
-    flex: 1,
+    flex: 0.8,
     width: "100%",
-    justifyContent: "space-around",
-    backgroundColor: "teal",
+    justifyContent: "space-between",
   },
   paginationDots: {
     height: 17,

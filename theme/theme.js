@@ -11,7 +11,7 @@ export const COLORS = {
   darkBlue: "#425389",
   darkBlue85: "rgba(66,83,137,0.85)",
   darkBlue95: "rgba(66,83,137,0.95)",
-  darkPurple: "#ce72ee",
+  darkPurple: "#d272db",
   purple: "#595683",
   green: "#119241",
   darkGreen: "#086d59",

@@ -11,7 +11,9 @@ import {
 
 import AppIntroSlider from "react-native-app-intro-slider";
 
-import { IntroButton, IntroPagination } from "../components";
+import { IntroPage, IntroPagination, IntroButton } from "../components";
+
+import { IMAGES, ICONS } from "../constants";
 
 export const IntroScreens = () => {
   const [shouldShowSkip, setShouldShowSkip] = useState(false);
@@ -29,36 +31,20 @@ export const IntroScreens = () => {
   const handleSlideChange = (idx) => {
     setShouldShowSkip(idx == 1);
   };
-
-  const RenderItem = ({ item }) => {
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: item.backgroundColor,
-          alignItems: "center",
-          justifyContent: "space-around",
-          paddingBottom: 100,
-        }}
-      >
-        <Text style={styles.introTitleStyle}>{item.title}</Text>
-        <Image style={styles.introImageStyle} source={item.image} />
-        <Text style={styles.introTextStyle}>{item.text}</Text>
-      </View>
-    );
+  const renderItem = ({ item }) => {
+    return <IntroPage item={item} />;
   };
 
   return (
     <>
       <AppIntroSlider
         data={slides}
-        renderItem={RenderItem}
+        renderItem={renderItem}
         onDone={onDone}
         showSkipButton={shouldShowSkip}
         onSkip={onSkip}
         onSlideChange={handleSlideChange}
         ref={slider}
-        renderNextButton={() => <IntroButton />}
         renderPagination={(activeIndex) => (
           <IntroPagination
             activeIndex={activeIndex}
@@ -92,52 +78,49 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "teal",
   },
-  introImageStyle: {
-    width: 200,
-    height: 200,
-  },
-  introTextStyle: {
-    fontSize: 18,
-    color: "teal",
-    textAlign: "center",
-    paddingVertical: 30,
-  },
-  introTitleStyle: {
-    fontSize: 25,
-    color: "white",
-    textAlign: "center",
-    marginBottom: 16,
-    fontWeight: "bold",
-  },
 });
 
 const slides = [
   {
-    key: "s1",
-    text: "Best Recharge offers",
-    title: "Mobile Recharge",
-    image: {
-      uri: "https://ntv.al/wp-content/uploads/2022/09/a16.jpg",
-    },
-    backgroundColor: "#fff",
+    key: "r1",
+    content: [
+      {
+        text: "Simple and easy to use Dhikr counter which saves your history by day.",
+        icon: ICONS.dhikr_icon,
+      },
+      {
+        text: "Get prayer times  daily and in advance, also notification when it’s time to pray.",
+        icon: ICONS.prayer_times_icon,
+      },
+      {
+        text: "Find your Qibla direction wherever you want to pray by using your location.",
+        icon: ICONS.qibla_icon,
+      },
+    ],
+    title: "Welcome to Rabia",
+    logo: IMAGES.logo,
+    image: IMAGES.intro_image_1,
   },
   {
-    key: "s2",
-    title: "Flight Booking",
-    text: "Upto 25% off on Domestic Flights",
-    image: {
-      uri: "https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_flight_ticket_booking.png",
-    },
-    backgroundColor: "#fff",
+    key: "r2",
+    title: "Get prayer time alerts",
+    content: [
+      {
+        text: "Enable notification services to  get alerts for each prayer daily or by choosing specific prayers.",
+      },
+    ],
+    image: IMAGES.intro_image_2,
+    infoIcon: ICONS.intro_notification,
   },
   {
-    key: "s3",
-    title: "Great Offers",
-    button: true,
-    text: "Enjoy Great offers on our all services",
-    image: {
-      uri: "https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_discount.png",
-    },
-    backgroundColor: "#fff",
+    key: "r3",
+    title: "Find qibla direction",
+    content: [
+      {
+        text: "Enable location services to calculate prayer times and qibla direction based on your location.",
+      },
+    ],
+    image: IMAGES.intro_image_3,
+    infoIcon: ICONS.intro_location,
   },
 ];
