@@ -11,7 +11,7 @@ const RootStack = () => {
     <Stack.Navigator>
       <Stack.Group>
         <Stack.Screen
-          name='PrayerTimes'
+          name="PrayerTimes"
           component={PrayerTimes}
           options={{
             headerShown: false,
@@ -28,8 +28,17 @@ const RootStack = () => {
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name='Schedule' component={Schedule} />
-        <Stack.Screen name='Settings' component={Settings} />
+        <Stack.Screen name="Schedule" component={Schedule} />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            headerTitleStyle: {
+              ...FONTS.h4,
+              fontSize: SIZES.font + 4,
+            },
+          }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

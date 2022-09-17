@@ -60,7 +60,7 @@ export const PrayerTimes = ({ navigation }) => {
             </View>
           </ScrollView>
         </SafeAreaView>
-        <StatusBar style='light' />
+        <StatusBar style="light" />
       </LinearGradient>
     </ImageBackground>
   );
