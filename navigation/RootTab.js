@@ -8,7 +8,7 @@ import RootStack from "./RootStack";
 const TabNavigator = createBottomTabNavigator();
 
 const RootTab = () => {
-  const [showRealApp, setShowRealApp] = useState(false);
+  const [showRealApp, setShowRealApp] = useState(true);
 
   return (
     <>
@@ -17,12 +17,12 @@ const RootTab = () => {
       ) : (
         <NavigationContainer>
           <TabNavigator.Navigator
-            initialRouteName='Prayer Times'
+            initialRouteName="Prayer Times"
             {...{ screenOptions }}
           >
-            <TabNavigator.Screen name='Dhikr' component={Dhikr} />
-            <TabNavigator.Screen name='Prayer Times' component={RootStack} />
-            <TabNavigator.Screen name='Qibla Finder' component={Qibla} />
+            <TabNavigator.Screen name="Dhikr" component={Dhikr} />
+            <TabNavigator.Screen name="Prayer Times" component={RootStack} />
+            <TabNavigator.Screen name="Qibla Finder" component={Qibla} />
           </TabNavigator.Navigator>
         </NavigationContainer>
       )}

@@ -11,6 +11,16 @@ const ICONS = {
   intro_arrow: require("../assets/icons/intro_arrow.png"),
   intro_location: require("../assets/icons/intro_location.png"),
   intro_notification: require("../assets/icons/intro_notification.png"),
+  search_icon: require("../assets/icons/search_icon.png"),
+  right_arrow_icon: require("../assets/icons/right_arrow_icon.png"),
+  account_icon: require("../assets/icons/account_icon.png"),
+  notification_icon: require("../assets/icons/notification_icon.png"),
+  privacy_icon: require("../assets/icons/privacy_icon.png"),
+  support_icon: require("../assets/icons/support_icon.png"),
+  appearence_icon: require("../assets/icons/appearence_icon.png"),
+  about_icon: require("../assets/icons/about_icon.png"),
+  left_arrow_icon: require("../assets/icons/left_arrow_icon.png"),
+  close_icon: require("../assets/icons/close_icon.png"),
 };
 
 export default ICONS;

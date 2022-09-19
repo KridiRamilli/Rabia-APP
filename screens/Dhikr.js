@@ -86,7 +86,7 @@ export const Dhikr = () => {
         >
           <Image source={ICONS.hand_icon} style={styles.icon} />
         </LinearGradient>
-        <StatusBar style='dark' />
+        <StatusBar style="dark" />
       </TouchableOpacity>
     </SafeAreaView>
   );
