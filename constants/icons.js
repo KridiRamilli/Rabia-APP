@@ -19,6 +19,8 @@ const ICONS = {
   support_icon: require("../assets/icons/support_icon.png"),
   appearence_icon: require("../assets/icons/appearence_icon.png"),
   about_icon: require("../assets/icons/about_icon.png"),
+  left_arrow_icon: require("../assets/icons/left_arrow_icon.png"),
+  close_icon: require("../assets/icons/close_icon.png"),
 };
 
 export default ICONS;
