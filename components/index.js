@@ -5,3 +5,7 @@ export { IntroButton } from "./IntroButton";
 export { IntroPagination } from "./IntroPagination";
 export { IntroPage } from "./IntroPage";
 export { CustomModal } from "./CustomModal";
+export { SearchInput } from "./SearchInput";
+export { SettingsElement } from "./SettingsElement";
+export { ScheduleItem } from "./ScheduleItem";
+export { ScheduleHeader } from "./ScheduleHeader";

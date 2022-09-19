@@ -42,6 +42,10 @@ export const COLORS = {
 	transparentWhite: "rgba(255, 255, 255, 0.2)",
 	transparentBlack: "rgba(0, 0, 0, 0.4)",
 	transparent: "transparent",
+
+	//zebra rows
+	oddGray: "#2c2c2e",
+	evenGray: "#1c1c1e",
 };
 
 export const SIZES = {
