@@ -1,5 +1,4 @@
-import ICONS from "./icons";
-import FONT_FILES from "./fonts";
-import IMAGES from "./images";
-
-export { ICONS, FONT_FILES, IMAGES };
+export { ICONS } from "./icons";
+export { FONT_FILES } from "./fonts";
+export { IMAGES } from "./images";
+export { SLIDES } from "./slides";

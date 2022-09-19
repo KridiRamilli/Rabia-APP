@@ -7,13 +7,13 @@ import { Schedule, Settings, PrayerTimes } from "../screens";
 const Stack = createNativeStackNavigator();
 
 const Prayer = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name='PrayerTimes' component={PrayerTimes} />
-      <Stack.Screen name='Schedule' component={Schedule} />
-      <Stack.Screen name='Settings' component={Settings} />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="PrayerTimes" component={PrayerTimes} />
+			<Stack.Screen name="Schedule" component={Schedule} />
+			<Stack.Screen name="Settings" component={Settings} />
+		</Stack.Navigator>
+	);
 };
 
 export default Prayer;
