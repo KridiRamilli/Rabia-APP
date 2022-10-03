@@ -21,6 +21,9 @@ const ICONS = {
   about_icon: require("../assets/icons/about_icon.png"),
   left_arrow_icon: require("../assets/icons/left_arrow_icon.png"),
   close_icon: require("../assets/icons/close_icon.png"),
+  clock_icon: require("../assets/icons/clock_icon.png"),
+  evening_dhikr_icon: require("../assets/icons/evening_dhikr_icon.png"),
+  morning_dhikr_icon: require("../assets/icons/morning_dhikr_icon.png"),
 };
 
 export default ICONS;
