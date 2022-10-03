@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
-import { SIZES } from "../theme/theme";
+import {
+	Alert,
+	Modal,
+	StyleSheet,
+	Text,
+	Pressable,
+	View,
+	TouchableOpacity,
+	Image,
+} from "react-native";
+import { ICONS } from "../constants";
+import { COLORS, SIZES } from "../theme/theme";
 
-export const CustomModal = () => {
-	const [modalVisible, setModalVisible] = useState(false);
+export const CustomModal = ({ showModal, onClosePress }) => {
+	const [modalVisible, setModalVisible] = useState(true);
+
 	return (
 		<View style={styles.centeredView}>
 			<Modal
@@ -16,6 +27,9 @@ export const CustomModal = () => {
 				}}
 			>
 				<View style={styles.centeredView}>
+					<TouchableOpacity style={styles.closeIconContainer}>
+						<Image source={ICONS.close_icon} style={styles.closeIcon} />
+					</TouchableOpacity>
 					<View style={styles.modalView}>
 						<Text style={styles.modalText}>Hello World!</Text>
 						<Pressable
@@ -27,12 +41,6 @@ export const CustomModal = () => {
 					</View>
 				</View>
 			</Modal>
-			<Pressable
-				style={[styles.button, styles.buttonOpen]}
-				onPress={() => setModalVisible(true)}
-			>
-				<Text style={styles.textStyle}>Show Modal</Text>
-			</Pressable>
 		</View>
 	);
 };
@@ -40,14 +48,19 @@ export const CustomModal = () => {
 const styles = StyleSheet.create({
 	centeredView: {
 		flex: 1,
-		justifyContent: "flex-end",
+		width: "90%",
+		position: "absolute",
+		justifyContent: "center",
 		alignItems: "center",
-		marginBottom: 22,
+		bottom: 30,
+		left: "5%",
+		backgroundColor: COLORS.white,
+		borderRadius: 20,
 	},
 	modalView: {
-		width: SIZES.width * 0.9,
+		width: "90%",
 		margin: 20,
-		backgroundColor: "red",
+		// backgroundColor: "red",
 		// borderRadius: 20,
 		padding: 35,
 		alignItems: "center",
@@ -68,8 +81,30 @@ const styles = StyleSheet.create({
 	buttonOpen: {
 		backgroundColor: "#F194FF",
 	},
-	buttonClose: {
-		backgroundColor: "#2196F3",
+	closeIconContainer: {
+		width: 40,
+		height: 40,
+		position: "absolute",
+		top: -20,
+		right: 0,
+		backgroundColor: COLORS.secondary,
+		padding: 5,
+		borderRadius: 40,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+
+		elevation: 5,
+	},
+	closeIcon: {
+		width: "100%",
+		height: "100%",
+		tintColor: COLORS.white,
+		resizeMode: "contain",
 	},
 	textStyle: {
 		color: "white",

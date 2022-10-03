@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -40,14 +40,23 @@ const RootStack = ({ navigation }) => {
 					component={Schedule}
 					options={{
 						headerRight: () => (
-							<Image
-								source={ICONS.close_icon}
-								style={{
-									width: 25,
-									height: 25,
-									marginLeft: 10,
-								}}
-							/>
+							<TouchableOpacity
+								onPress={() => navigation.navigate("PrayerTimes")}
+							>
+								<Image
+									source={ICONS.close_icon}
+									style={{
+										width: 25,
+										height: 25,
+										marginLeft: 10,
+									}}
+								/>
+							</TouchableOpacity>
+						),
+						headerLeft: () => (
+							<TouchableOpacity>
+								<Text>Today</Text>
+							</TouchableOpacity>
 						),
 						headerTitleStyle: {
 							...FONTS.h4,

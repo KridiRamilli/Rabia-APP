@@ -40,7 +40,15 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
 				</View>
 				<View style={styles.buttonContainer}>
 					{/* show skip only on notifications page */}
-					{activeIndex === 1 ? <Text>Skip</Text> : <View></View>}
+					{activeIndex === 1 ? (
+						<TouchableOpacity
+							onPress={() => slider.current.goToSlide(activeIndex + 1)}
+						>
+							<Text>Skip</Text>
+						</TouchableOpacity>
+					) : (
+						<View></View>
+					)}
 					<IntroButton
 						rounded={activeIndex == 0}
 						text={slideBtnInfo[activeIndex]}

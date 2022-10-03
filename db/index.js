@@ -28,22 +28,22 @@ const createTable = () => {
 const createMockData = (text) => {
 	db.transaction((tx) => {
 		tx.executeSql("insert into items (done, value) values (0, ?)", [text]);
-		tx.executeSql("select * from items", [], (_, { rows }) =>
-			console.log(JSON.stringify(rows))
-		);
+		tx.executeSql("select * from items", [], (_, { rows }) => {
+			// console.log(JSON.stringify(rows))
+		});
 	}, null);
 };
 
 const getData = () => {
 	db.transaction((tx) => {
-		tx.executeSql(`select * from items`, null, (_, { rows: { _array } }) =>
-			console.log(_array)
-		);
+		tx.executeSql(`select * from items`, null, (_, { rows: { _array } }) => {
+			// console.log(_array)
+		});
 	});
 };
 
-createTable();
-createMockData("Hello");
-getData();
+// createTable();
+// createMockData("Hello");
+// getData();
 
 export { db, getData };

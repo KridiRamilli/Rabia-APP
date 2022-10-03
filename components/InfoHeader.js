@@ -1,16 +1,29 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import { useState, useEffect } from "react";
 
 import { ICONS } from "../constants";
 import { FONTS, SIZES, COLORS } from "../theme/theme";
+import { getLocationAddress, getTodayDate } from "../utils";
 
-export const DateHeader = () => {
+export const InfoHeader = () => {
+	const [address, setAddress] = useState("");
+	const [todayDate, setTodayDate] = useState("");
+
+	useEffect(() => {
+		(async () => {
+			const address = await getLocationAddress();
+			setAddress(address);
+		})();
+		const todayDate = getTodayDate();
+		setTodayDate(todayDate);
+	}, []);
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.dateText}>E Premte, 18 Gusht</Text>
+			<Text style={styles.dateText}>{todayDate}</Text>
 			<View style={styles.location}>
 				<Image source={ICONS.prayer_location_icon} style={styles.icon} />
-				<Text style={styles.locationText}>Shijak, Durres</Text>
+				<Text style={styles.locationText}>{address}</Text>
 			</View>
 		</View>
 	);

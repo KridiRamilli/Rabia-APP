@@ -1,3 +1,3 @@
-export { getTodayDate } from "./dhikr";
-export { getLocationPermission, useLocation } from "./location";
+export { getTodayDate } from "./dateTime";
+export { getLocationPermission, getLocationAddress } from "./location";
 export { getNotificationsPermission } from "./notification";

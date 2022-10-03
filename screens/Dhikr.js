@@ -30,7 +30,7 @@ export const Dhikr = () => {
 	});
 	const [logCounter, setLogCounter] = useState({ [todayDate]: 0 });
 	const dispatch = useDispatch();
-	dispatch(setShowRealApp(false));
+	// dispatch(setShowRealApp(false));
 	useEffect(() => {
 		setLogCounter(() => {
 			return {

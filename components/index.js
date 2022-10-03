@@ -1,4 +1,4 @@
-export { DateHeader } from "./DateHeader";
+export { InfoHeader } from "./InfoHeader";
 export { PrayerItem } from "./PrayerItem";
 export { NextPrayer } from "./NextPrayer";
 export { IntroButton } from "./IntroButton";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	Text,
 	View,
@@ -12,13 +12,11 @@ import {
 import { StatusBar } from "expo-status-bar";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { DateHeader, PrayerItem, NextPrayer } from "../components";
+import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
 import { IMAGES, ICONS } from "../constants";
-
 import { prayerTimes } from "../__mocks__";
 
 import { COLORS, SIZES } from "../theme/theme";
-
 export const PrayerTimes = ({ navigation }) => {
 	const renderPrayerInfo = () => {
 		return prayerTimes.map(({ id, prayer, time }) => {
@@ -39,6 +37,7 @@ export const PrayerTimes = ({ navigation }) => {
 				colors={[COLORS.primary95, COLORS.darkBlue95]}
 			>
 				<SafeAreaView style={{ flex: 1 }}>
+					<CustomModal />
 					{/* upper icons */}
 					<View style={styles.upper}>
 						<TouchableOpacity onPress={() => navigation.navigate("Schedule")}>
@@ -54,7 +53,7 @@ export const PrayerTimes = ({ navigation }) => {
 						contentContainerStyle={{ flex: 1 }}
 					>
 						<View style={styles.prayerTimes}>
-							<DateHeader />
+							<InfoHeader />
 							<NextPrayer />
 							<View style={styles.prayerInfo}>{renderPrayerInfo()}</View>
 						</View>

@@ -39,8 +39,8 @@ export const COLORS = {
 	pink2: "#f072d5",
 	lightPink: "#F3DEE8",
 
-	transparentWhite: "rgba(255, 255, 255, 0.2)",
-	transparentBlack: "rgba(0, 0, 0, 0.4)",
+	transparentWhite: "rgba(255, 255, 255, 0.8)",
+	transparentBlack: "rgba(0, 0, 0, 0.8)",
 	transparent: "transparent",
 
 	//zebra rows

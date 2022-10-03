@@ -1,4 +1,4 @@
-const ICONS = {
+export const ICONS = {
 	prayer_location_icon: require("../assets/icons/prayer_location_icon.png"),
 	next_prayer_icon: require("../assets/icons/next_prayer_icon.png"),
 	prayer_times_icon: require("../assets/icons/clock_icon.png"),
@@ -21,4 +21,6 @@ const ICONS = {
 	about_icon: require("../assets/icons/about_icon.png"),
 	left_arrow_icon: require("../assets/icons/left_arrow_icon.png"),
 	close_icon: require("../assets/icons/close_icon.png"),
+	prayer_notification: require("../assets/icons/prayer_notification.png"),
+	prayer_notification_active: require("../assets/icons/prayer_notification_active.png"),
 };
