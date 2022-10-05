@@ -1,4 +1,4 @@
-const FONT_FILES = {
+export const FONT_FILES = {
   "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
   "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
   "Roboto-Black": require("../assets/fonts/Roboto-Black.ttf"),
@@ -8,5 +8,3 @@ const FONT_FILES = {
   "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
   "Roboto-Condensed": require("../assets/fonts/Roboto-Condensed.ttf"),
 };
-
-export default FONT_FILES;

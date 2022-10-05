@@ -1,4 +1,4 @@
-const ICONS = {
+export const ICONS = {
   prayer_location_icon: require("../assets/icons/prayer_location_icon.png"),
   next_prayer_icon: require("../assets/icons/next_prayer_icon.png"),
   prayer_times_icon: require("../assets/icons/clock_icon.png"),
@@ -25,5 +25,3 @@ const ICONS = {
   evening_dhikr_icon: require("../assets/icons/evening_dhikr_icon.png"),
   morning_dhikr_icon: require("../assets/icons/morning_dhikr_icon.png"),
 };
-
-export default ICONS;

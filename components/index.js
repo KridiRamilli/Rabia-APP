@@ -1,9 +1,10 @@
-export { DateHeader } from "./DateHeader";
+export { InfoHeader } from "./InfoHeader";
 export { PrayerItem } from "./PrayerItem";
 export { NextPrayer } from "./NextPrayer";
 export { IntroButton } from "./IntroButton";
 export { IntroPagination } from "./IntroPagination";
 export { IntroPage } from "./IntroPage";
+export { CustomModal } from "./CustomModal";
 export { SearchInput } from "./SearchInput";
 export { SettingsElement } from "./SettingsElement";
 export { ScheduleItem } from "./ScheduleItem";

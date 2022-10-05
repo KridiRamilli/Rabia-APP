@@ -11,19 +11,19 @@ import { FONT_FILES } from "./constants";
 import * as db from "./db/index.js";
 
 export default function App() {
-  const [fontsLoaded] = useFonts(FONT_FILES);
-  if (!fontsLoaded) {
-    return null;
-  }
-  db.getData();
-  return (
-    <Provider store={store}>
-      <PersistGate
-        loading={<ActivityIndicator size='large' color='teal' />}
-        persistor={persistor}
-      >
-        <RootTab />
-      </PersistGate>
-    </Provider>
-  );
+	const [fontsLoaded] = useFonts(FONT_FILES);
+	if (!fontsLoaded) {
+		return null;
+	}
+	db.getData();
+	return (
+		<Provider store={store}>
+			<PersistGate
+				loading={<ActivityIndicator size="large" color="teal" />}
+				persistor={persistor}
+			>
+				<RootTab />
+			</PersistGate>
+		</Provider>
+	);
 }
