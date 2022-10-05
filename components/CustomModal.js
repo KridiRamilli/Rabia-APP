@@ -10,34 +10,52 @@ import {
 	Image,
 } from "react-native";
 import { ICONS } from "../constants";
-import { COLORS, SIZES } from "../theme/theme";
+import { COLORS, SIZES, FONTS } from "../theme/theme";
 
-export const CustomModal = ({ showModal, onClosePress }) => {
-	const [modalVisible, setModalVisible] = useState(true);
-
+export const CustomModal = ({
+	modalVisible,
+	onClosePress,
+	titleText,
+	leftButtonLabel,
+	rightButtonLabel,
+	onLeftButtonPress,
+	onRightButtonPress,
+}) => {
 	return (
-		<View style={styles.centeredView}>
+		<View style={styles.container}>
 			<Modal
 				animationType="slide"
 				transparent={true}
 				visible={modalVisible}
-				onRequestClose={() => {
-					Alert.alert("Modal has been closed.");
-					setModalVisible(!modalVisible);
-				}}
+				onRequestClose={() => {}}
 			>
-				<View style={styles.centeredView}>
-					<TouchableOpacity style={styles.closeIconContainer}>
+				<View style={styles.container}>
+					<TouchableOpacity
+						style={styles.closeIconContainer}
+						onPress={onClosePress}
+					>
 						<Image source={ICONS.close_icon} style={styles.closeIcon} />
 					</TouchableOpacity>
-					<View style={styles.modalView}>
-						<Text style={styles.modalText}>Hello World!</Text>
-						<Pressable
-							style={[styles.button, styles.buttonClose]}
-							onPress={() => setModalVisible(!modalVisible)}
-						>
-							<Text style={styles.textStyle}>Hide Modal</Text>
-						</Pressable>
+					<View style={styles.modalContainer}>
+						<Text style={styles.titleText}>{titleText}</Text>
+						<View style={styles.buttonContainer}>
+							{leftButtonLabel && (
+								<TouchableOpacity
+									style={[styles.button, styles.buttonLeft]}
+									onPress={onLeftButtonPress}
+								>
+									<Text style={styles.textStyle}>{leftButtonLabel}</Text>
+								</TouchableOpacity>
+							)}
+							{rightButtonLabel && (
+								<TouchableOpacity
+									style={[styles.button]}
+									onPress={onRightButtonPress}
+								>
+									<Text style={styles.textStyle}>{rightButtonLabel}</Text>
+								</TouchableOpacity>
+							)}
+						</View>
 					</View>
 				</View>
 			</Modal>
@@ -46,23 +64,20 @@ export const CustomModal = ({ showModal, onClosePress }) => {
 };
 
 const styles = StyleSheet.create({
-	centeredView: {
+	container: {
 		flex: 1,
 		width: "90%",
 		position: "absolute",
 		justifyContent: "center",
 		alignItems: "center",
-		bottom: 30,
+		bottom: 50,
 		left: "5%",
 		backgroundColor: COLORS.white,
 		borderRadius: 20,
 	},
-	modalView: {
+	modalContainer: {
 		width: "90%",
 		margin: 20,
-		// backgroundColor: "red",
-		// borderRadius: 20,
-		padding: 35,
 		alignItems: "center",
 		shadowColor: "#000",
 		shadowOffset: {
@@ -73,14 +88,20 @@ const styles = StyleSheet.create({
 		shadowRadius: 4,
 		elevation: 5,
 	},
+	buttonContainer: {
+		width: "100%",
+		flexDirection: "row",
+		justifyContent: "space-around",
+	},
 	button: {
-		borderRadius: 20,
+		minWidth: 120,
+		borderRadius: 5,
 		padding: 10,
+		marginTop: 15,
 		elevation: 2,
+		backgroundColor: COLORS.white,
 	},
-	buttonOpen: {
-		backgroundColor: "#F194FF",
-	},
+	buttonLeft: {},
 	closeIconContainer: {
 		width: 40,
 		height: 40,
@@ -107,12 +128,13 @@ const styles = StyleSheet.create({
 		resizeMode: "contain",
 	},
 	textStyle: {
-		color: "white",
-		fontWeight: "bold",
+		...FONTS.body3,
+		color: COLORS.darkGreen,
 		textAlign: "center",
 	},
-	modalText: {
-		marginBottom: 15,
+	titleText: {
+		...FONTS.body2,
+		// marginBottom: 15,
 		textAlign: "center",
 	},
 });

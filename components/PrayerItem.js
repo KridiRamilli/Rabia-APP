@@ -4,26 +4,36 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 
-export const PrayerItem = ({ prayer, time, activePrayer }) => {
-	const [notificationActive, setNotificationActive] = useState(false);
+export const PrayerItem = ({
+	prayer,
+	time,
+	activePrayer,
+	onNotificationPress,
+	notificationType,
+}) => {
+	const selectNotificationIcon = (notificationType) => {
+		switch (notificationType) {
+			case "once":
+				return ICONS.prayer_notification_once;
+			case "everyday":
+				return ICONS.prayer_notification_active;
+			default:
+				return ICONS.prayer_notification;
+		}
+	};
+
 	return (
 		<View style={[styles.container, activePrayer && styles.activePrayer]}>
 			<Text style={styles.infoPrayer}>{prayer}</Text>
 			<View style={styles.timeContainer}>
-				<TouchableOpacity
-					onPress={() => setNotificationActive(!notificationActive)}
-				>
+				<TouchableOpacity onPress={onNotificationPress}>
 					<Image
 						style={[
 							styles.notificationIcon,
-							//Change icon color when active
-							notificationActive && { tintColor: COLORS.pink2 },
+							//Change icon color when notification Once | Every Day
+							notificationType && { tintColor: COLORS.pink2 },
 						]}
-						source={
-							!notificationActive
-								? ICONS.prayer_notification
-								: ICONS.prayer_notification_active
-						}
+						source={selectNotificationIcon(notificationType)}
 					/>
 				</TouchableOpacity>
 				<Text style={styles.infoPrayer}>{time}</Text>
