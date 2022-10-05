@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Text,
 	View,
@@ -18,7 +18,12 @@ import { prayerTimes } from "../__mocks__";
 
 import { COLORS, SIZES } from "../theme/theme";
 export const PrayerTimes = ({ navigation }) => {
-	const renderPrayerInfo = () => {
+	const [showModal, setShowModal] = useState(false);
+	const [selectedPrayerId, setSelectedPrayerId] = useState(null);
+	const [notificationType, setNotificationType] = useState({});
+
+	//Prayer element containing single prayer info
+	const renderPrayerInfo = (prayerTimes) => {
 		return prayerTimes.map(({ id, prayer, time }) => {
 			return (
 				<PrayerItem
@@ -26,6 +31,19 @@ export const PrayerTimes = ({ navigation }) => {
 					prayer={prayer}
 					time={time}
 					activePrayer={id == 3}
+					notificationType={notificationType[id]}
+					onNotificationPress={() => {
+						//When notification set, reset on press
+						if (notificationType[id]) {
+							setNotificationType({
+								...notificationType,
+								[id]: undefined,
+							});
+							return;
+						}
+						setSelectedPrayerId(id);
+						setShowModal(true);
+					}}
 				/>
 			);
 		});
@@ -37,7 +55,31 @@ export const PrayerTimes = ({ navigation }) => {
 				colors={[COLORS.primary95, COLORS.darkBlue95]}
 			>
 				<SafeAreaView style={{ flex: 1 }}>
-					<CustomModal />
+					<CustomModal
+						modalVisible={showModal}
+						onClosePress={() => setShowModal(false)}
+						titleText={"Please choose your notification type!"}
+						leftButtonLabel={"Once"}
+						rightButtonLabel={"Every Day"}
+						onLeftButtonPress={() => {
+							setNotificationType({
+								...notificationType,
+								[selectedPrayerId]: "once",
+							});
+							setTimeout(() => {
+								setShowModal(false);
+							}, 300);
+						}}
+						onRightButtonPress={() => {
+							setNotificationType({
+								...notificationType,
+								[selectedPrayerId]: "everyday",
+							});
+							setTimeout(() => {
+								setShowModal(false);
+							}, 300);
+						}}
+					/>
 					{/* upper icons */}
 					<View style={styles.upper}>
 						<TouchableOpacity onPress={() => navigation.navigate("Schedule")}>
@@ -55,7 +97,9 @@ export const PrayerTimes = ({ navigation }) => {
 						<View style={styles.prayerTimes}>
 							<InfoHeader />
 							<NextPrayer />
-							<View style={styles.prayerInfo}>{renderPrayerInfo()}</View>
+							<View style={styles.prayerInfo}>
+								{renderPrayerInfo(prayerTimes)}
+							</View>
 						</View>
 					</ScrollView>
 				</SafeAreaView>

@@ -23,4 +23,5 @@ export const ICONS = {
 	close_icon: require("../assets/icons/close_icon.png"),
 	prayer_notification: require("../assets/icons/prayer_notification.png"),
 	prayer_notification_active: require("../assets/icons/prayer_notification_active.png"),
+	prayer_notification_once: require("../assets/icons/prayer_notification_once.png"),
 };
