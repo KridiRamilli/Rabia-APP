@@ -14,16 +14,23 @@ import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
 import { IMAGES, ICONS } from "../constants";
+import { getTodayDate } from "../utils";
+import { getSinglePrayer } from "../db";
 import { prayerTimes } from "../__mocks__";
 
 import { COLORS, SIZES } from "../theme/theme";
 export const PrayerTimes = ({ navigation }) => {
+	const [todayDate, setTodayDate] = useState(() =>
+		getTodayDate({ formated: false })
+	);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedPrayerId, setSelectedPrayerId] = useState(null);
 	const [notificationType, setNotificationType] = useState({});
 
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
+		// const prayer = getSinglePrayer(todayDate);
+		console.log(todayDate);
 		return prayerTimes.map(({ id, prayer, time }) => {
 			return (
 				<PrayerItem
@@ -33,7 +40,7 @@ export const PrayerTimes = ({ navigation }) => {
 					activePrayer={id == 3}
 					notificationType={notificationType[id]}
 					onNotificationPress={() => {
-						//When notification set, reset on press
+						//When notification set, RESET on press
 						if (notificationType[id]) {
 							setNotificationType({
 								...notificationType,

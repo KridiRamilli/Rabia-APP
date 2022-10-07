@@ -1,49 +1,55 @@
+import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
 import * as SQLite from "expo-sqlite";
 
-function openDatabase() {
-	if (Platform.OS === "web") {
-		return {
-			transaction: () => {
-				return {
-					executeSql: () => {},
-				};
-			},
-		};
-	}
+import { promisifyQuery } from "../utils";
 
-	const db = SQLite.openDatabase("prayerTimes.db");
-	return db;
-}
-
-const db = openDatabase();
-
-const createTable = () => {
-	db.transaction((tx) => {
-		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS items (id integer primary key not null, done int, value text);"
+//TODO insert db on intro pages
+(async function insertDbLocally() {
+	let dbFile = require("./prayerTimes.db");
+	if (
+		!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
+			.exists
+	) {
+		await FileSystem.makeDirectoryAsync(
+			FileSystem.documentDirectory + "SQLite"
 		);
-	});
+	}
+	const { exists: dbExists } = await FileSystem.getInfoAsync(
+		FileSystem.documentDirectory + "SQLite/prayerTimes.db"
+	);
+	if (!dbExists) {
+		await FileSystem.downloadAsync(
+			Asset.fromModule(dbFile).uri,
+			FileSystem.documentDirectory + "SQLite/prayerTimes.db"
+		);
+	}
+})();
+
+const db = SQLite.openDatabase("prayerTimes.db");
+
+const _getRowId = async (date) => {
+	let query = `SELECT rowid FROM prayers WHERE data="${date}"`;
+	const [resultObj] = await promisifyQuery(db, query);
+	return resultObj.rowid;
 };
 
-const createMockData = (text) => {
-	db.transaction((tx) => {
-		tx.executeSql("insert into items (done, value) values (0, ?)", [text]);
-		tx.executeSql("select * from items", [], (_, { rows }) => {
-			// console.log(JSON.stringify(rows))
-		});
-	}, null);
+const getPrayers = async (num, starting) => {
+	const id = await _getRowId(starting);
+	let query = `SELECT rowid,* FROM prayers WHERE rowid >="${id}" LIMIT "${num}"`;
+	const prayers = await promisifyQuery(db, query);
+	return prayers;
 };
 
-const getData = () => {
-	db.transaction((tx) => {
-		tx.executeSql(`select * from items`, null, (_, { rows: { _array } }) => {
-			// console.log(_array)
-		});
-	});
+const getSinglePrayer = async (date) => {
+	let query = `SELECT rowid,* FROM prayers WHERE data="${date}"`;
+	const prayer = await promisifyQuery(db, query);
+	return prayer;
 };
 
-// createTable();
-// createMockData("Hello");
-// getData();
-
-export { db, getData };
+//TODO Remove
+// (async () => {
+// 	const prayer = await getSinglePrayer("14/01/22");
+// 	console.log(prayer);
+// })();
+export { getSinglePrayer, getPrayers };

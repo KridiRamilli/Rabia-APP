@@ -7,15 +7,14 @@ import { getLocationAddress, getTodayDate } from "../utils";
 
 export const InfoHeader = () => {
 	const [address, setAddress] = useState("");
-	const [todayDate, setTodayDate] = useState("");
-
+	const [todayDate, setTodayDate] = useState(() =>
+		getTodayDate({ formated: true })
+	);
 	useEffect(() => {
 		(async () => {
 			const address = await getLocationAddress();
 			setAddress(address);
 		})();
-		const todayDate = getTodayDate();
-		setTodayDate(todayDate);
 	}, []);
 
 	return (

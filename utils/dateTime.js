@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 
 //Format like "E Premte, 18 Gusht"
-const formatDateString = (dateString) => {
+const _formatDateString = (dateString) => {
 	const dateParts = dateString.split(" ");
 	let result = dateParts
 		.map((el) => {
@@ -11,8 +11,23 @@ const formatDateString = (dateString) => {
 	return result;
 };
 
-export const getTodayDate = () => {
+export const getTodayDate = ({ formated }) => {
 	let dt = DateTime.now().setLocale("sq");
-	let dateString = dt.toFormat("EEEE, dd MMMM");
-	return formatDateString(dateString);
+	let formatedDateString = dt.toFormat("EEEE, dd MMMM");
+	let standardDateString = dt.toFormat("dd/MM/yy");
+	return formated ? _formatDateString(formatedDateString) : standardDateString;
+};
+
+export const formatPrayerTime = (time) => {
+	//Input time format = "11:57 (CET)";
+	time = time.replace(" (CET)", "");
+	const [hour, minutes] = time.split(":");
+	const timeObj = {
+		hour,
+		minutes,
+	};
+
+	//Output time format 11:57 AM
+	let formatedTime = DateTime.fromObject(timeObj).toFormat("HH:mm a");
+	return formatedTime;
 };
