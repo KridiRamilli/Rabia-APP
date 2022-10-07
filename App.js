@@ -15,7 +15,6 @@ export default function App() {
 	if (!fontsLoaded) {
 		return null;
 	}
-	db.getData();
 	return (
 		<Provider store={store}>
 			<PersistGate
