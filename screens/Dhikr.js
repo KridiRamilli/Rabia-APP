@@ -74,7 +74,11 @@ export const Dhikr = ({ navigation }) => {
 						<TouchableOpacity
 							key={idx}
 							style={styles.dhikrTimeContainer}
-							onPress={() => navigation.navigate(el)}
+							onPress={() =>
+								navigation.navigate(el, {
+									time: el,
+								})
+							}
 						>
 							<Image
 								source={
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
 	title: {
 		...FONTS.h1,
 		color: COLORS.pink2,
-		paddingTop: SIZES.padding / 4,
+		paddingTop: SIZES.padding + 4,
 	},
 	dhikrIconsContainer: {
 		width: "65%",
@@ -132,10 +136,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	dhikrTimeContainer: {
-		width: 80,
-		height: 60,
+		width: 70,
+		height: 50,
 		backgroundColor: COLORS.white,
 		borderRadius: SIZES.radius / 2,
+		//TODO style morning/evening icon in dhikr screen
 		shadowColor: "#ddd",
 		shadowOffset: {
 			width: 0,

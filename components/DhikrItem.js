@@ -7,6 +7,7 @@ export const DhikrItem = ({
 	dhikrArab,
 	dhikrAlbanian,
 	repeat,
+	note,
 	handlePress,
 	id,
 }) => {
@@ -14,6 +15,7 @@ export const DhikrItem = ({
 		<View style={styles.container}>
 			<Text style={styles.dhikrArab}>{dhikrArab}</Text>
 			<Text style={styles.dhikrAlbanian}>{dhikrAlbanian}</Text>
+			<Text style={styles.note}>{note}</Text>
 			<TouchableOpacity
 				style={styles.repeatContainer}
 				onPress={() => handlePress(id)}
@@ -35,17 +37,18 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "flex-start",
 		marginHorizontal: 5,
-		marginTop: 10,
+		marginTop: 6,
 		padding: 10,
+		paddingTop: 15,
 		backgroundColor: COLORS.white,
-		borderRadius: SIZES.radius,
+		borderRadius: 10,
 		shadowColor: "#ddd",
 		shadowOffset: {
 			width: 0,
 			height: 0,
 		},
 		shadowOpacity: 1,
-		shadowRadius: 3,
+		shadowRadius: 2,
 	},
 	repeatContainer: {
 		width: 50,
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		alignSelf: "flex-end",
 		marginRight: 15,
-		marginTop: 10,
+		marginTop: 5,
 		borderRadius: (SIZES.width + SIZES.height) / 2,
 		backgroundColor: COLORS.white,
 		shadowColor: "#888",
@@ -62,13 +65,13 @@ const styles = StyleSheet.create({
 			width: 0,
 			height: 2,
 		},
-		shadowOpacity: 0.41,
-		shadowRadius: 9.11,
+		shadowOpacity: 0.4,
+		shadowRadius: 6,
 		elevation: 14,
 	},
 	repeatTime: {
 		color: COLORS.white,
-		fontSize: SIZES.body2,
+		fontSize: SIZES.body2 + 2,
 	},
 	gradientBackground: {
 		width: "97%",
@@ -81,10 +84,19 @@ const styles = StyleSheet.create({
 	dhikrArab: {
 		fontSize: SIZES.body3,
 		fontFamily: "Roboto-Condensed",
+		textAlign: "justify",
 	},
 	dhikrAlbanian: {
 		marginTop: 5,
 		fontSize: SIZES.body4,
 		fontFamily: "Roboto-LightItalic",
+		textAlign: "justify",
+	},
+	note: {
+		marginTop: 5,
+		fontSize: SIZES.body4,
+		fontFamily: "Roboto-Regular",
+		textAlign: "justify",
+		color: COLORS.secondary,
 	},
 });

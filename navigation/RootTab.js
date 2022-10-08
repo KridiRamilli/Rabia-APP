@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useSelector } from "react-redux";
-import { Dhikr, Qibla, IntroScreens } from "../screens";
+import { Qibla, IntroScreens } from "../screens";
 import { screenOptions } from "./TabOptions";
 import RootStack from "./RootStack";
 import DhikrStack from "./DhikrStack";
@@ -21,7 +20,8 @@ const RootTab = () => {
 						initialRouteName="Prayer Times"
 						{...{ screenOptions }}
 					>
-						<TabNavigator.Screen name=" Dhikr" component={DhikrStack} />
+						{/* {TODO change name } */}
+						<TabNavigator.Screen name="Dhikr Counter" component={DhikrStack} />
 						<TabNavigator.Screen name="Prayer Times" component={RootStack} />
 						<TabNavigator.Screen name="Qibla Finder" component={Qibla} />
 					</TabNavigator.Navigator>
