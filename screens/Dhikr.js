@@ -16,7 +16,7 @@ import { FONTS, COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
-import { getData } from "../db";
+// import { getData } from "../db";
 import { setShowRealApp } from "../redux/reducers/settingsSlice";
 
 const dhikrTimes = ["Morning", "Evening"];
@@ -39,7 +39,6 @@ export const Dhikr = ({ navigation }) => {
 				[todayDate]: logCounter[todayDate] + 1,
 			};
 		});
-		getData();
 	}, [counter.num]);
 
 	const handleBtnPress = () => {
