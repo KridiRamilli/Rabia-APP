@@ -1,11 +1,17 @@
+import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
-
+import CountDown from "react-native-countdown-component";
 import { ICONS } from "../constants";
-import { FONTS, COLORS } from "../theme/theme";
+import { FONTS, COLORS, SIZES } from "../theme/theme";
 
-export const NextPrayer = () => {
+export const NextPrayer = ({
+	untilTime,
+	nextPrayer,
+	countdownId,
+	progress,
+	handleChange,
+}) => {
 	return (
 		<View style={styles.container}>
 			<LinearGradient
@@ -14,11 +20,35 @@ export const NextPrayer = () => {
 			>
 				<LinearGradient
 					colors={[COLORS.darkGreen, COLORS.green]}
-					style={[styles.inner, { width: "50%" }]}
+					style={[styles.inner, { width: `${progress}%` }]}
 				></LinearGradient>
 			</LinearGradient>
-			<Image source={ICONS.next_prayer_icon} style={styles.icon} />
-			<Text style={styles.infoText}>Ikindia 1h 53m 07s</Text>
+			<View style={styles.infoContainer}>
+				<Image source={ICONS.next_prayer_icon} style={styles.icon} />
+				<Text style={styles.infoText}>{nextPrayer}</Text>
+				<CountDown
+					id={countdownId}
+					until={untilTime}
+					onFinish={() => alert("finished")}
+					onPress={() => alert("hello")}
+					onChange={handleChange}
+					size={20}
+					timeToShow={["H", "M", "S"]}
+					timeLabels={{ h: "h ", m: "m", s: "s " }}
+					timeLabelStyle={{
+						position: "absolute",
+						right: 0,
+						fontSize: SIZES.h2,
+					}}
+					digitStyle={{
+						color: COLORS.white,
+						marginRight: 10,
+					}}
+					digitTxtStyle={{
+						color: COLORS.white,
+					}}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -30,6 +60,13 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "row",
+	},
+	infoContainer: {
+		width: "90%",
+		position: "absolute",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	upper: {
 		flex: 1,
@@ -46,13 +83,13 @@ const styles = StyleSheet.create({
 		...FONTS.body2,
 		color: COLORS.white,
 		justifySelf: "center",
-		position: "absolute",
+		marginLeft: 20,
 	},
 	icon: {
 		resizeMode: "contain",
 		width: 25,
 		height: 25,
 		position: "absolute",
-		left: 10,
+		left: 5,
 	},
 });
