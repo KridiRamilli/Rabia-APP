@@ -16,12 +16,10 @@ import { FONTS, COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
-// import { getData } from "../db";
-import { setShowRealApp } from "../redux/reducers/settingsSlice";
 
 export const Dhikr = () => {
 	const [todayDate, setTodayDate] = useState(() => {
-		let today = getTodayDate();
+		let today = getTodayDate({ formated: false });
 		return today;
 	});
 	const counter = useSelector((state) => {
@@ -30,7 +28,6 @@ export const Dhikr = () => {
 	});
 	const [logCounter, setLogCounter] = useState({ [todayDate]: 0 });
 	const dispatch = useDispatch();
-	// dispatch(setShowRealApp(false));
 	useEffect(() => {
 		setLogCounter(() => {
 			return {
@@ -85,8 +82,9 @@ export const Dhikr = () => {
 				>
 					<Image source={ICONS.hand_icon} style={styles.icon} />
 				</LinearGradient>
-				<StatusBar style="dark" />
 			</TouchableOpacity>
+			{/*TODO FIX status bar based on route */}
+			<StatusBar style="dark" />
 		</SafeAreaView>
 	);
 };
