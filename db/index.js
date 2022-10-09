@@ -2,7 +2,8 @@ import * as FileSystem from "expo-file-system";
 import { Asset } from "expo-asset";
 import * as SQLite from "expo-sqlite";
 
-import { promisifyQuery } from "../utils";
+import { promisifyQuery, formatPrayerTime } from "../utils";
+import { PRAYER_NAMES } from "../constants";
 
 //TODO insert db on intro pages
 (async function insertDbLocally() {
@@ -41,10 +42,23 @@ const getPrayers = async (num, starting) => {
 	return prayers;
 };
 
-const getSinglePrayer = async (date) => {
+const _getSinglePrayer = async (date) => {
 	let query = `SELECT rowid,* FROM prayers WHERE data="${date}"`;
 	const prayer = await promisifyQuery(db, query);
 	return prayer;
+};
+
+const getTodayPrayers = async (date) => {
+	const prayerTimes = [];
+	let _idx = 0;
+	const [prayerData] = await _getSinglePrayer(date);
+	//using Map type of prayer names for sorting
+	for (const [key, value] of PRAYER_NAMES) {
+		let formatedTime = formatPrayerTime(prayerData[key]);
+		prayerTimes.push({ id: _idx++, prayer: value, time: formatedTime });
+	}
+
+	return prayerTimes;
 };
 
 //TODO Remove
@@ -52,4 +66,4 @@ const getSinglePrayer = async (date) => {
 // 	const prayer = await getSinglePrayer("14/01/22");
 // 	console.log(prayer);
 // })();
-export { getSinglePrayer, getPrayers };
+export { getPrayers, getTodayPrayers };

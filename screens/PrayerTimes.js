@@ -14,33 +14,77 @@ import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
 import { IMAGES, ICONS } from "../constants";
-import { getTodayDate } from "../utils";
-import { getSinglePrayer } from "../db";
-import { prayerTimes } from "../__mocks__";
-
+import {
+	getTodayDate,
+	findNextPrayer,
+	findActivePrayer,
+	countdownToNextPrayer,
+	progressToNextPrayer,
+} from "../utils";
+import { getTodayPrayers } from "../db";
 import { COLORS, SIZES } from "../theme/theme";
+
 export const PrayerTimes = ({ navigation }) => {
 	const [todayDate, setTodayDate] = useState(() =>
 		getTodayDate({ formated: false })
 	);
+	const [prayerTimes, setPrayerTimes] = useState([]);
+	const [selectedPrayerId, setSelectedPrayerId] = useState({});
+	const [activePrayer, setActivePrayer] = useState({
+		id: 0,
+		prayer: "",
+		time: "00:00",
+	});
+	const [nextPrayerData, setNextPrayerData] = useState({
+		prayerName: "",
+		countdown: 0,
+		time: "00:00",
+	});
+	const [countdownId, setCountdownId] = useState("");
+	const [timeLeft, setTimeLeft] = useState(0);
+	const [progress, setProgress] = useState(0);
 	const [showModal, setShowModal] = useState(false);
-	const [selectedPrayerId, setSelectedPrayerId] = useState(null);
 	const [notificationType, setNotificationType] = useState({});
+	useEffect(() => {
+		(async () => {
+			const prayers = await getTodayPrayers(todayDate);
+			const activePrayer = findActivePrayer(prayers);
+			const nextPrayer = findNextPrayer(prayers, activePrayer);
+			const nextPrayerCountdown = countdownToNextPrayer(nextPrayer.time);
+			const nextPrayerCountdownId = new Date().getTime().toString();
+			setPrayerTimes(prayers);
+			setActivePrayer(activePrayer);
+			setNextPrayerData({
+				...nextPrayerData,
+				countdown: nextPrayerCountdown,
+				prayerName: nextPrayer.prayer,
+				time: nextPrayer.time,
+			});
+			setCountdownId(nextPrayerCountdownId);
+		})();
+	}, []);
+
+	useEffect(() => {
+		const progress = progressToNextPrayer(
+			activePrayer,
+			nextPrayerData,
+			nextPrayerData.countdown
+		);
+		setProgress(progress);
+	}, [nextPrayerData]);
 
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
-		// const prayer = getSinglePrayer(todayDate);
-		console.log(todayDate);
 		return prayerTimes.map(({ id, prayer, time }) => {
 			return (
 				<PrayerItem
 					key={id}
 					prayer={prayer}
 					time={time}
-					activePrayer={id == 3}
+					activePrayer={id == activePrayer.id}
 					notificationType={notificationType[id]}
 					onNotificationPress={() => {
-						//When notification set, RESET on press
+						//When notification is set, RESET on press
 						if (notificationType[id]) {
 							setNotificationType({
 								...notificationType,
@@ -103,14 +147,20 @@ export const PrayerTimes = ({ navigation }) => {
 					>
 						<View style={styles.prayerTimes}>
 							<InfoHeader />
-							<NextPrayer />
+							<NextPrayer
+								untilTime={nextPrayerData.countdown}
+								nextPrayer={nextPrayerData.prayerName}
+								countdownId={countdownId}
+								progress={progress}
+								handleChange={(timeLeft) => setTimeLeft(timeLeft)}
+							/>
 							<View style={styles.prayerInfo}>
 								{renderPrayerInfo(prayerTimes)}
 							</View>
 						</View>
 					</ScrollView>
+					<StatusBar style="light" />
 				</SafeAreaView>
-				<StatusBar style="light" />
 			</LinearGradient>
 		</ImageBackground>
 	);
