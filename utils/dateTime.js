@@ -46,6 +46,7 @@ export const countdownToNextPrayer = (time) => {
 	}
 	return Math.round(diff);
 };
+
 export const progressToNextPrayer = (activePrayer, nextPrayer, countdown) => {
 	const { time: activeTime } = activePrayer;
 	const { time: nextTime } = nextPrayer;
@@ -56,10 +57,9 @@ export const progressToNextPrayer = (activePrayer, nextPrayer, countdown) => {
 			days: 1,
 		});
 	}
+	//covert to seconds
 	let totalSeconds = (nextTimeSeconds - activeTimeSeconds) / 1000;
 	let timePassed = totalSeconds - countdown;
 	let progress = timePassed / totalSeconds;
 	return Math.round(progress * 100);
 };
-
-// console.log(progressToNextPrayer("15:00", "16:00", "1200"));

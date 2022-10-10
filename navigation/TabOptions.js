@@ -7,7 +7,7 @@ export const screenOptions = ({ route, ...props }) => ({
 	headerShown: false,
 	tabBarIcon: ({ focused, color, size }) => {
 		let iconName = "";
-		if (route.name == "Dhikr") {
+		if (route.name == "Dhikr Counter") {
 			iconName = "dhikr_icon";
 		} else if (route.name == "Prayer Times") {
 			iconName = "prayer_times_icon";

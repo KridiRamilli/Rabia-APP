@@ -71,7 +71,7 @@ export const PrayerTimes = ({ navigation }) => {
 			nextPrayerData.countdown
 		);
 		setProgress(progress);
-	}, [nextPrayerData]);
+	}, [timeLeft]);
 
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
