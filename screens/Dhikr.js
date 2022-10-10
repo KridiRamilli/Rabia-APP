@@ -69,7 +69,7 @@ export const Dhikr = ({ navigation }) => {
 					return (
 						<TouchableOpacity
 							key={idx}
-							style={styles.dhikrTimeContainer}
+							style={styles.dhikrTime}
 							onPress={() =>
 								navigation.navigate(el, {
 									time: el,
@@ -125,31 +125,12 @@ const styles = StyleSheet.create({
 		paddingTop: SIZES.padding + 4,
 	},
 	dhikrIconsContainer: {
-		width: "65%",
+		width: "75%",
 		height: 60,
 		marginTop: 10,
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-	},
-	dhikrTimeContainer: {
-		width: 70,
-		height: 50,
-		backgroundColor: COLORS.white,
-		borderRadius: SIZES.radius / 2,
-		//TODO style morning/evening icon in dhikr screen
-		shadowColor: "#ddd",
-		shadowOffset: {
-			width: 0,
-			height: 0,
-		},
-		shadowOpacity: 1,
-		shadowRadius: 6,
-		elevation: 4,
-	},
-	dhikrTimeIcon: {
-		width: "100%",
-		height: "100%",
 	},
 	counterContainer: {
 		width: "65%",
@@ -160,10 +141,31 @@ const styles = StyleSheet.create({
 		marginTop: SIZES.margin,
 		marginBottom: SIZES.margin,
 	},
+	dhikrTime: {
+		width: 70,
+		height: 70,
+		backgroundColor: COLORS.white,
+		borderRadius: 35,
+		//TODO style morning/evening icon in dhikr screen
+		shadowColor: "#ddd",
+		shadowOffset: {
+			width: 5,
+			height: 5,
+		},
+		shadowOpacity: 1,
+		shadowRadius: 6,
+		elevation: 4,
+	},
+	dhikrTimeIcon: {
+		width: "100%",
+		height: "100%",
+		resizeMode: "contain",
+	},
+
 	resetIconContainer: {
 		position: "absolute",
 		right: 5,
-		top: 5,
+		top: 15,
 		width: 40,
 		height: 40,
 		backgroundColor: COLORS.white,

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		paddingTop: 15,
 		backgroundColor: COLORS.white,
-		borderRadius: 10,
+		borderRadius: 5,
 		shadowColor: "#ddd",
 		shadowOffset: {
 			width: 0,
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		alignSelf: "flex-end",
 		marginRight: 15,
-		marginTop: 5,
 		borderRadius: (SIZES.width + SIZES.height) / 2,
 		backgroundColor: COLORS.white,
 		shadowColor: "#888",
