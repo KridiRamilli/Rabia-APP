@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 	inner: {
 		flex: 1,
 		width: "70%",
-		borderRadius: 20,
+		borderRadius: 40,
 	},
 	infoText: {
 		...FONTS.body2,
