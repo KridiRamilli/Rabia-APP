@@ -17,7 +17,10 @@ import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
 
-const dhikrTimes = ["Morning", "Evening"];
+const dhikrTimes = [
+	{ dhikrName: "Morning", theme: "light" },
+	{ dhikrName: "Evening", theme: "dark" },
+];
 
 export const Dhikr = ({ navigation }) => {
 	const [todayDate, setTodayDate] = useState(() => {
@@ -65,20 +68,21 @@ export const Dhikr = ({ navigation }) => {
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>Dhikr</Text>
 			<View style={styles.dhikrIconsContainer}>
-				{dhikrTimes.map((el, idx) => {
+				{dhikrTimes.map(({ dhikrName, theme }, idx) => {
 					return (
 						<TouchableOpacity
 							key={idx}
 							style={styles.dhikrTime}
 							onPress={() =>
-								navigation.navigate(el, {
-									time: el,
+								navigation.navigate(dhikrName, {
+									dhikrName,
+									theme,
 								})
 							}
 						>
 							<Image
 								source={
-									el == "Morning"
+									dhikrName == "Morning"
 										? ICONS.morning_dhikr_icon
 										: ICONS.evening_dhikr_icon
 								}

@@ -71,7 +71,7 @@ export const PrayerTimes = ({ navigation }) => {
 			nextPrayerData.countdown
 		);
 		setProgress(progress);
-	}, [timeLeft]);
+	}, [nextPrayerData]);
 
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
@@ -84,7 +84,7 @@ export const PrayerTimes = ({ navigation }) => {
 					activePrayer={id == activePrayer.id}
 					notificationType={notificationType[id]}
 					onNotificationPress={() => {
-						//When notification set, RESET on press
+						//When notification is set, RESET on press
 						if (notificationType[id]) {
 							setNotificationType({
 								...notificationType,

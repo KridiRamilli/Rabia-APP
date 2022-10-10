@@ -5,30 +5,49 @@ import {
 	View,
 	TouchableOpacity,
 	Text,
+	Image,
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import { DhikrItem } from "../components/DhikrItem";
-import { COLORS, SIZES } from "../theme/theme";
+import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { useEffect } from "react";
 
 import { MORNING_DHIKR, EVENING_DHIKR } from "../constants/dhikr";
+import { ICONS } from "./../constants/icons";
 
 export const DailyDhikr = ({ navigation, route }) => {
-	const { time, theme } = route.params;
+	const { dhikrName, theme } = route.params;
 
 	const [dhikrData, setDhikrData] = useState(
-		time === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
+		dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
 	);
-
 	const flatListRef = useRef();
 	useEffect(() => {
 		navigation.setOptions({
+			headerStyle: {
+				backgroundColor: theme === "dark" ? "#101821" : "#fff",
+			},
+			headerTitleStyle: {
+				...FONTS.h4,
+				fontSize: SIZES.font + 6,
+				color: theme === "dark" ? "#fff" : "#000",
+			},
+			headerRight: () => (
+				<TouchableOpacity onPress={() => navigation.goBack()}>
+					<Image
+						source={ICONS.close_icon}
+						style={[styles.closeIcon, theme === "dark" && styles.closeIconDark]}
+					/>
+				</TouchableOpacity>
+			),
 			headerLeft: () => (
 				<TouchableOpacity
 					style={styles.resetContainer}
 					onPress={() => {
 						//TODO find right method to reset dhikr
-						setDhikrData(time === "Morning" ? MORNING_DHIKR : EVENING_DHIKR);
+						setDhikrData(
+							dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
+						);
 					}}
 				>
 					<Text style={styles.resetText}>Reset</Text>
@@ -46,6 +65,7 @@ export const DailyDhikr = ({ navigation, route }) => {
 				repeat={item.repeat}
 				note={item.note}
 				handlePress={handlePress}
+				theme={theme}
 			/>
 		);
 	};
@@ -69,7 +89,12 @@ export const DailyDhikr = ({ navigation, route }) => {
 		}
 	};
 	return (
-		<View style={styles.container}>
+		<View
+			style={[
+				styles.container,
+				theme === "dark" && { backgroundColor: "#2C3A47" },
+			]}
+		>
 			<FlatList
 				ref={flatListRef}
 				data={dhikrData}
@@ -106,5 +131,13 @@ const styles = StyleSheet.create({
 		paddingVertical: 5,
 		paddingHorizontal: 10,
 		color: COLORS.darkPurple,
+	},
+	closeIcon: {
+		width: 25,
+		height: 25,
+		marginLeft: 10,
+	},
+	closeIconDark: {
+		tintColor: "#fff",
 	},
 });

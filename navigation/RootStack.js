@@ -32,7 +32,6 @@ const RootStack = ({ navigation }) => {
 			<Stack.Group
 				screenOptions={{
 					presentation: "modal",
-					// headerShown: false
 				}}
 			>
 				<Stack.Screen
@@ -72,12 +71,6 @@ const RootStack = ({ navigation }) => {
 						headerTitleStyle: {
 							...FONTS.h4,
 							fontSize: SIZES.font + 4,
-						},
-						// headerStyle: {
-						//   backgroundColor: COLORS.pinkGradient,
-						// },
-						headerLeft: () => {
-							navigation.goBack();
 						},
 					}}
 				/>

@@ -10,12 +10,26 @@ export const DhikrItem = ({
 	note,
 	handlePress,
 	id,
+	theme,
 }) => {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.dhikrArab}>{dhikrArab}</Text>
-			<Text style={styles.dhikrAlbanian}>{dhikrAlbanian}</Text>
-			<Text style={styles.note}>{note}</Text>
+		<View
+			style={[
+				styles.container,
+				theme === "dark" && { backgroundColor: "#101821" },
+			]}
+		>
+			<View style={styles.textContainer}>
+				<Text style={[styles.dhikrArab, theme === "dark" && { color: "#fff" }]}>
+					{dhikrArab}
+				</Text>
+				<Text
+					style={[styles.dhikrAlbanian, theme === "dark" && { color: "#fff" }]}
+				>
+					{dhikrAlbanian}
+				</Text>
+				{note && <Text style={styles.note}>{note}</Text>}
+			</View>
 			<TouchableOpacity
 				style={styles.repeatContainer}
 				onPress={() => handlePress(id)}
@@ -49,6 +63,9 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 1,
 		shadowRadius: 2,
+	},
+	textContainer: {
+		paddingBottom: 0,
 	},
 	repeatContainer: {
 		width: 50,

@@ -32,22 +32,6 @@ const DhikrStack = ({ navigation, route }) => {
 							key={idx}
 							name={time}
 							component={DailyDhikr}
-							options={{
-								headerRight: () => (
-									<TouchableOpacity onPress={() => navigation.goBack()}>
-										<Image source={ICONS.close_icon} style={styles.closeIcon} />
-									</TouchableOpacity>
-								),
-								headerLeft: () => (
-									<TouchableOpacity style={styles.resetContainer}>
-										<Text style={styles.resetText}>Reset</Text>
-									</TouchableOpacity>
-								),
-								headerTitleStyle: {
-									...FONTS.h4,
-									fontSize: SIZES.font + 4,
-								},
-							}}
 						></Stack.Screen>
 					);
 				})}
