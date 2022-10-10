@@ -17,13 +17,14 @@ import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
 
-export const Dhikr = () => {
+const dhikrTimes = ["Morning", "Evening"];
+
+export const Dhikr = ({ navigation }) => {
 	const [todayDate, setTodayDate] = useState(() => {
 		let today = getTodayDate({ formated: false });
 		return today;
 	});
 	const counter = useSelector((state) => {
-		// console.log(state);
 		return state.counter;
 	});
 	const [logCounter, setLogCounter] = useState({ [todayDate]: 0 });
@@ -36,8 +37,6 @@ export const Dhikr = () => {
 			};
 		});
 	}, [counter.num]);
-
-	// console.log(counter.num);
 
 	const handleBtnPress = () => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -65,6 +64,30 @@ export const Dhikr = () => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text style={styles.title}>Dhikr</Text>
+			<View style={styles.dhikrIconsContainer}>
+				{dhikrTimes.map((el, idx) => {
+					return (
+						<TouchableOpacity
+							key={idx}
+							style={styles.dhikrTimeContainer}
+							onPress={() =>
+								navigation.navigate(el, {
+									time: el,
+								})
+							}
+						>
+							<Image
+								source={
+									el == "Morning"
+										? ICONS.morning_dhikr_icon
+										: ICONS.evening_dhikr_icon
+								}
+								style={styles.dhikrTimeIcon}
+							/>
+						</TouchableOpacity>
+					);
+				})}
+			</View>
 			<View style={styles.counterContainer}>
 				<TouchableOpacity
 					style={styles.resetIconContainer}
@@ -99,7 +122,34 @@ const styles = StyleSheet.create({
 	title: {
 		...FONTS.h1,
 		color: COLORS.pink2,
-		paddingTop: SIZES.padding / 4,
+		paddingTop: SIZES.padding + 4,
+	},
+	dhikrIconsContainer: {
+		width: "65%",
+		height: 60,
+		marginTop: 10,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
+	dhikrTimeContainer: {
+		width: 70,
+		height: 50,
+		backgroundColor: COLORS.white,
+		borderRadius: SIZES.radius / 2,
+		//TODO style morning/evening icon in dhikr screen
+		shadowColor: "#ddd",
+		shadowOffset: {
+			width: 0,
+			height: 0,
+		},
+		shadowOpacity: 1,
+		shadowRadius: 6,
+		elevation: 4,
+	},
+	dhikrTimeIcon: {
+		width: "100%",
+		height: "100%",
 	},
 	counterContainer: {
 		width: "65%",
@@ -107,7 +157,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: SIZES.margin * 3,
+		marginTop: SIZES.margin,
 		marginBottom: SIZES.margin,
 	},
 	resetIconContainer: {
@@ -135,7 +185,6 @@ const styles = StyleSheet.create({
 	counter: {
 		fontSize: SIZES.font * 7,
 		fontFamily: "Roboto-Bold",
-		// fontFamily: "Roboto-Regular",
 		color: COLORS.pink2,
 	},
 	mainBtn: {
@@ -153,7 +202,6 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.41,
 		shadowRadius: 9.11,
-
 		elevation: 14,
 	},
 	gradientBackground: {

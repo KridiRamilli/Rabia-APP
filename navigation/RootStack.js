@@ -76,9 +76,9 @@ const RootStack = ({ navigation }) => {
 						// headerStyle: {
 						//   backgroundColor: COLORS.pinkGradient,
 						// },
-						// headerLeft: () => {
-						//   navigation.goBack();
-						// },
+						headerLeft: () => {
+							navigation.goBack();
+						},
 					}}
 				/>
 			</Stack.Group>
