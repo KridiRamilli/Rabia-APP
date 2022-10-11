@@ -12,10 +12,12 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import counterReducer from "./reducers/counterSlice";
 import settingsReducer from "./reducers/settingsSlice";
+import dailyDhikrReducer from "./reducers/dailyDhikrSlice";
 
 const rootReducer = combineReducers({
 	settings: settingsReducer,
 	counter: counterReducer,
+	dailyDhikr: dailyDhikrReducer,
 });
 
 const persistConfig = {
