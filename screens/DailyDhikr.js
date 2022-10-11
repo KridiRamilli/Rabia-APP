@@ -30,7 +30,7 @@ export const DailyDhikr = ({ navigation, route }) => {
 			headerTitleStyle: {
 				...FONTS.h4,
 				fontSize: SIZES.font + 6,
-				color: theme === "dark" ? "#fff" : "#000",
+				color: theme === "dark" ? "#fff" : "#101821",
 			},
 			headerRight: () => (
 				<TouchableOpacity onPress={() => navigation.goBack()}>
@@ -57,13 +57,14 @@ export const DailyDhikr = ({ navigation, route }) => {
 	}, [navigation]);
 
 	const renderItem = ({ item }) => {
+		const { id, arabic, alb, repeat, note } = item;
 		return (
 			<DhikrItem
-				id={item.id}
-				dhikrArab={item.arabic}
-				dhikrAlbanian={item.alb}
-				repeat={item.repeat}
-				note={item.note}
+				id={id}
+				dhikrArab={arabic}
+				dhikrAlbanian={alb}
+				repeat={repeat}
+				note={note}
 				handlePress={handlePress}
 				theme={theme}
 			/>
