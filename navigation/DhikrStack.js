@@ -40,31 +40,4 @@ const DhikrStack = ({ navigation, route }) => {
 	);
 };
 
-const styles = StyleSheet.create({
-	closeIcon: {
-		width: 25,
-		height: 25,
-		marginLeft: 10,
-	},
-	resetContainer: {
-		backgroundColor: COLORS.white,
-		borderRadius: 5,
-		shadowColor: "#ccc",
-		shadowOpacity: 0.8,
-		shadowRadius: 4,
-		shadowOffset: {
-			width: 0,
-			height: 0,
-		},
-	},
-	resetText: {
-		display: "flex",
-		alignSelf: "center",
-		fontSize: SIZES.body3,
-		fontFamily: "Roboto-Medium",
-		paddingVertical: 5,
-		paddingHorizontal: 10,
-		color: COLORS.darkPurple,
-	},
-});
 export default DhikrStack;

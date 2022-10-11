@@ -7,4 +7,5 @@ export {
 } from "./dateTime";
 export { getLocationPermission, getLocationAddress } from "./location";
 export { getNotificationsPermission } from "./notification";
-export { promisifyQuery, findActivePrayer, findNextPrayer } from "./prayerData";
+export { findActivePrayer, findNextPrayer } from "./prayerData";
+export { promisifyQuery } from "./tools";

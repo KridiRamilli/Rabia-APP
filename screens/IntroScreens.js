@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react";
 
-import { StyleSheet } from "react-native";
-
 import AppIntroSlider from "react-native-app-intro-slider";
 
 import { IntroPage, IntroPagination } from "../components";
@@ -12,11 +10,11 @@ export const IntroScreens = () => {
 	const [shouldShowSkip, setShouldShowSkip] = useState(false);
 
 	const slider = useRef();
+	const _keyExtractor = (item) => item.key;
 
 	const onDone = () => {
 		setShowRealApp(true);
 	};
-	const _keyExtractor = (item) => item.key;
 	const onSkip = () => {
 		slider.current.goToSlide(2);
 	};

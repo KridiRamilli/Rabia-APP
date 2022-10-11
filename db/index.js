@@ -31,7 +31,7 @@ const db = SQLite.openDatabase("prayerTimes.db");
 
 const _getRowId = async (date) => {
 	let query = `SELECT rowid FROM prayers WHERE data="${date}"`;
-	const [resultObj] = await promisifyQuery(db, query);
+	const resultObj = await promisifyQuery(db, query);
 	return resultObj.rowid;
 };
 
@@ -51,7 +51,7 @@ const _getSinglePrayer = async (date) => {
 const getTodayPrayers = async (date) => {
 	const prayerTimes = [];
 	let _idx = 0;
-	const [prayerData] = await _getSinglePrayer(date);
+	const prayerData = await _getSinglePrayer(date);
 	//using Map type of prayer names for sorting
 	for (const [key, value] of PRAYER_NAMES) {
 		let formatedTime = formatPrayerTime(prayerData[key]);
@@ -63,7 +63,7 @@ const getTodayPrayers = async (date) => {
 
 //TODO Remove
 // (async () => {
-// 	const prayer = await getSinglePrayer("14/01/22");
+// 	const prayer = await _getSinglePrayer("14/01/22");
 // 	console.log(prayer);
 // })();
 export { getPrayers, getTodayPrayers };
