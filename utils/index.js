@@ -1,6 +1,7 @@
 export {
 	getTodayDate,
 	formatPrayerTime,
+	formatScheduleDate,
 	isTimePassed,
 	countdownToNextPrayer,
 	progressToNextPrayer,
@@ -8,4 +9,4 @@ export {
 export { getLocationPermission, getLocationAddress } from "./location";
 export { getNotificationsPermission } from "./notification";
 export { findActivePrayer, findNextPrayer } from "./prayerData";
-export { promisifyQuery } from "./tools";
+export { promisifyQuery, mapValuesToArray } from "./tools";

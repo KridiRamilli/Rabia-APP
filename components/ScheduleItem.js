@@ -1,22 +1,25 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { COLORS, SIZES } from "../theme/theme";
+import { mapValuesToArray, formatScheduleDate } from "../utils";
 
-export const ScheduleItem = ({ prayerTimeSchedule, date }) => {
-	//Remove ID from showing in schedule
-	const { id, ...dailyTimes } = prayerTimeSchedule;
+export const ScheduleItem = ({ prayerTimeSchedule, todayDate }) => {
+	const id = prayerTimeSchedule.get("id");
+	const date = prayerTimeSchedule.get("date");
+	//remove id and date from array
+	const [, ...dailyTimes] = mapValuesToArray(prayerTimeSchedule);
 	return (
 		<View
 			style={[
 				styles.container,
 				// mark today timings
-				prayerTimeSchedule.date == date ? styles.today : "",
+				formatScheduleDate(todayDate) == date ? styles.today : "",
 				// style table with zebra rows
-				prayerTimeSchedule.id % 2 == 0 ? styles.even : styles.odd,
+				id % 2 == 0 ? styles.even : styles.odd,
 			]}
 		>
 			{/* Generate prayer timing */}
-			{Object.values(dailyTimes).map((value, idx) => {
+			{dailyTimes.map((value, idx) => {
 				return (
 					<Text key={idx} style={styles.time}>
 						{value}
@@ -48,5 +51,7 @@ const styles = StyleSheet.create({
 	time: {
 		fontSize: SIZES.font,
 		color: COLORS.white,
+		flex: 0.12,
+		textAlign: "center",
 	},
 });

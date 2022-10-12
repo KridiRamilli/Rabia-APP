@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useSelector } from "react-redux";
 import { Qibla, IntroScreens } from "../screens";
 import { screenOptions } from "./TabOptions";
 import RootStack from "./RootStack";
 import DhikrStack from "./DhikrStack";
+import { selectSettings } from "../redux/reducers/settingsSlice";
+
 const TabNavigator = createBottomTabNavigator();
 
 const RootTab = () => {
-	const [showRealApp, setShowRealApp] = useState(true);
-
+	const { showRealApp } = useSelector(selectSettings);
 	return (
 		<>
 			{!showRealApp ? (

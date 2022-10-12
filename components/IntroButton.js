@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Text, Image, StyleSheet } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 
 import Animated, {
 	useSharedValue,
@@ -10,17 +9,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { ICONS } from "../constants";
 import { COLORS } from "../theme/theme";
-import { getNotificationsPermission, getLocationPermission } from "../utils";
-import {
-	setShowRealApp,
-	setLocationStatus,
-	selectSettings,
-} from "../redux/reducers/settingsSlice";
 
-export const IntroButton = ({ slider, activeIndex, rounded, text }) => {
-	const dispatch = useDispatch();
-	const { locationStatus } = useSelector(selectSettings);
-	const isLocationStatusSet = locationStatus !== "undetermined";
+export const IntroButton = ({ rounded, text, handleBtnPress }) => {
 	useEffect(() => {
 		if (!rounded) {
 			animatedWidth.value = withTiming(150, config);
@@ -56,45 +46,14 @@ export const IntroButton = ({ slider, activeIndex, rounded, text }) => {
 		};
 	});
 
-	const goToNextSlide = (pageIdx, slider) => {
-		return slider.current.goToSlide(pageIdx + 1);
-	};
-
-	const handleLocationPermission = async () => {
-		const locationStatus = await getLocationPermission();
-		dispatch(setLocationStatus(locationStatus));
-	};
-
-	const handleDone = async () => {
-		if (!isLocationStatusSet) {
-			handleLocationPermission();
-		} else {
-			dispatch(setShowRealApp(true));
-		}
-	};
-
-	const handleBtnPress = (pageIdx, slider) => {
-		switch (pageIdx) {
-			case 0:
-				goToNextSlide(pageIdx, slider);
-				break;
-			case 1:
-				getNotificationsPermission();
-				break;
-			case 2:
-				handleDone();
-				break;
-		}
-	};
-
 	return (
-		<TouchableOpacity onPress={() => handleBtnPress(activeIndex, slider)}>
+		<TouchableOpacity onPress={handleBtnPress}>
 			<Animated.View style={[styles.roundedBtn, animatedStyle]}>
 				{rounded ? (
 					<Image source={ICONS.intro_arrow} style={styles.btnImage} />
 				) : (
 					<Animated.Text style={[{ color: "#fff" }, animatedTextStyle]}>
-						{isLocationStatusSet && activeIndex === 2 ? "Done" : text}
+						{text}
 					</Animated.Text>
 				)}
 			</Animated.View>
