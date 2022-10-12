@@ -159,6 +159,10 @@ export const PrayerTimes = ({ navigation }) => {
 								countdownId={countdownId}
 								progress={progress}
 								handleChange={(timeLeft) => setTimeLeft(timeLeft)}
+								handleFinish={() => {
+									//Recalculate active and next prayer
+									//Update Progress
+								}}
 							/>
 							<View style={styles.prayerInfo}>
 								{renderPrayerInfo(prayerTimes)}

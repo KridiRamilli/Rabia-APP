@@ -72,7 +72,6 @@ const getTodayPrayers = async (date) => {
 		let formatedTime = formatPrayerTime(prayerData[key]);
 		prayerTimes.push({ id: _idx++, prayer: value, time: formatedTime });
 	}
-
 	return prayerTimes;
 };
 
@@ -81,4 +80,4 @@ const getTodayPrayers = async (date) => {
 // 	const prayers = await getPrayers(11, "12/10/22");
 // 	console.log(prayers[0]);
 // })();
-export { getPrayers, getTodayPrayers };
+export { getPrayers, getTodayPrayers, insertDbLocally };
