@@ -32,9 +32,6 @@ export const getLocationAddress = async () => {
 	return result;
 };
 
-const getLocationHeading = async () => {
-	// data["location"] = await Location.getHeadingAsync();
-	// data["heading"] = await Location.watchHeadingAsync((heading) => {
-	// 	console.log(heading);
-	// });
+export const getLocationHeading = async (handleHeadingChange) => {
+	await Location.watchHeadingAsync(handleHeadingChange);
 };
