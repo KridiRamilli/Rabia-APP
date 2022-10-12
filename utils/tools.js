@@ -1,5 +1,5 @@
 const _queryDb = (db, query) => {
-	return new Promise((res, rej) => {
+	return new Promise((resolve, reject) => {
 		db.transaction((tx) => {
 			tx.executeSql(
 				`${query}`,
@@ -7,11 +7,11 @@ const _queryDb = (db, query) => {
 				(_transactionObj, { rows: { _array } }) => {
 					// console.log(_transactionObj["_error"]);
 					if (_array[0]) {
-						res(_array[0]);
+						resolve(_array);
 					}
 				},
 				(errObj, errMsg) => {
-					rej(errMsg);
+					reject(errMsg);
 				}
 			);
 		});
@@ -24,4 +24,12 @@ export const promisifyQuery = async (db, query) => {
 	} catch (err) {
 		console.error(err);
 	}
+};
+
+export const mapValuesToArray = (map) => {
+	const values = [];
+	for (const [key, value] of map) {
+		values.push(value);
+	}
+	return values;
 };

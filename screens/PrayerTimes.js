@@ -133,7 +133,13 @@ export const PrayerTimes = ({ navigation }) => {
 					/>
 					{/* upper icons */}
 					<View style={styles.upper}>
-						<TouchableOpacity onPress={() => navigation.navigate("Schedule")}>
+						<TouchableOpacity
+							onPress={() =>
+								navigation.navigate("Schedule", {
+									todayDate,
+								})
+							}
+						>
 							<Image source={ICONS.schedule_icon} style={styles.upperIcons} />
 						</TouchableOpacity>
 						<TouchableOpacity onPress={() => navigation.navigate("Settings")}>

@@ -5,6 +5,7 @@ const settingsSlice = createSlice({
 	initialState: {
 		showRealApp: false,
 		locationStatus: "undetermined",
+		notificationStatus: "undetermined",
 	},
 	reducers: {
 		setShowRealApp(state, action) {
@@ -13,10 +14,14 @@ const settingsSlice = createSlice({
 		setLocationStatus(state, action) {
 			state.locationStatus = action.payload;
 		},
+		setNotificationStatus(state, action) {
+			state.notificationStatus = action.payload;
+		},
 	},
 });
 
-export const { setShowRealApp, setLocationStatus } = settingsSlice.actions;
+export const { setShowRealApp, setLocationStatus, setNotificationStatus } =
+	settingsSlice.actions;
 export const selectSettings = (state) => state.settings;
 
 export default settingsSlice.reducer;

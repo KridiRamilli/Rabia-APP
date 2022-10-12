@@ -31,6 +31,11 @@ export const formatPrayerTime = (time) => {
 	return formatedTime;
 };
 
+export const formatScheduleDate = (date) => {
+	const formatedDate = DateTime.fromFormat(date, "dd/MM/yy").toFormat("dd MMM");
+	return formatedDate;
+};
+
 export const isTimePassed = (time) => {
 	let inputTime = DateTime.fromFormat(time, "HH:mm");
 	return DateTime.now() > inputTime;

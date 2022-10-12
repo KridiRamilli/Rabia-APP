@@ -6,7 +6,14 @@ import {
 	SafeAreaView,
 	TouchableOpacity,
 } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getNotificationsPermission, getLocationPermission } from "../utils";
+import {
+	setShowRealApp,
+	setLocationStatus,
+	setNotificationStatus,
+	selectSettings,
+} from "../redux/reducers/settingsSlice";
 import { IntroButton } from "./IntroButton";
 import { COLORS } from "../theme/theme";
 
@@ -17,6 +24,60 @@ const slideBtnInfo = {
 };
 
 export const IntroPagination = ({ activeIndex, slider, slides }) => {
+	const dispatch = useDispatch();
+	const { locationStatus, notificationStatus } = useSelector(selectSettings);
+
+	let buttonText = "";
+	const isLocationStatusSet = locationStatus !== "undetermined";
+	const isNotificationSet = notificationStatus !== "undetermined";
+
+	if (isLocationStatusSet && activeIndex === 2) {
+		buttonText = "Done";
+	} else if (isNotificationSet && activeIndex === 1) {
+		buttonText = "Next";
+	} else {
+		buttonText = slideBtnInfo[activeIndex];
+	}
+
+	const goToNextSlide = (pageIdx, slider) => {
+		return slider.current.goToSlide(pageIdx + 1);
+	};
+
+	const handleNotificationPermission = async () => {
+		const notificationStatus = await getNotificationsPermission();
+		dispatch(setNotificationStatus(notificationStatus));
+		if (isNotificationSet) {
+			goToNextSlide(activeIndex, slider);
+		}
+	};
+
+	const handleLocationPermission = async () => {
+		const locationStatus = await getLocationPermission();
+		dispatch(setLocationStatus(locationStatus));
+	};
+
+	const handleDone = async () => {
+		if (!isLocationStatusSet) {
+			handleLocationPermission();
+		} else {
+			dispatch(setShowRealApp(true));
+		}
+	};
+
+	const handleBtnPress = (pageIdx, slider) => {
+		switch (pageIdx) {
+			case 0:
+				goToNextSlide(pageIdx, slider);
+				break;
+			case 1:
+				handleNotificationPermission();
+				break;
+			case 2:
+				handleDone();
+				break;
+		}
+	};
+
 	return (
 		<View style={styles.paginationContainer}>
 			<SafeAreaView style={styles.contentArea}>
@@ -40,7 +101,7 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
 				</View>
 				<View style={styles.buttonContainer}>
 					{/* show skip only on notifications page */}
-					{activeIndex === 1 ? (
+					{activeIndex === 1 && !isNotificationSet ? (
 						<TouchableOpacity
 							onPress={() => slider.current.goToSlide(activeIndex + 1)}
 						>
@@ -51,9 +112,10 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
 					)}
 					<IntroButton
 						rounded={activeIndex == 0}
-						text={slideBtnInfo[activeIndex]}
+						text={buttonText}
 						activeIndex={activeIndex}
 						slider={slider}
+						handleBtnPress={() => handleBtnPress(activeIndex, slider)}
 					/>
 				</View>
 			</SafeAreaView>
