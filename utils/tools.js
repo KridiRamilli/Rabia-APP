@@ -33,3 +33,15 @@ export const mapValuesToArray = (map) => {
 	}
 	return values;
 };
+
+export const approxValue = (relativeVal, targetVal, approx) => {
+	if (
+		typeof relativeVal !== "number" ||
+		typeof targetVal !== "number" ||
+		typeof approx !== "number"
+	) {
+		console.error("You must use number types only!");
+		return;
+	}
+	return Math.abs(relativeVal - targetVal) < approx;
+};

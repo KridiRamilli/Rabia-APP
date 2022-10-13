@@ -5,7 +5,6 @@ import * as SQLite from "expo-sqlite";
 import { promisifyQuery, formatPrayerTime, formatScheduleDate } from "../utils";
 import { PRAYER_NAMES } from "../constants";
 
-//TODO insert db on intro pages
 async function insertDbLocally() {
 	let dbFile = require("./prayerTimes.db");
 	if (

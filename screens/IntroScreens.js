@@ -11,6 +11,7 @@ export const IntroScreens = () => {
 
 	useEffect(() => {
 		(async () => {
+			//TODO: Handle case wehen db insert not successful
 			//Insert prayer data DB before using APP
 			await insertDbLocally();
 		})();
