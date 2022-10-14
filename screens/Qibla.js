@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Image, SafeAreaView } from "react-native";
 import * as Haptics from "expo-haptics";
 
@@ -20,13 +20,12 @@ import {
 import { IMAGES, ICONS } from "../constants";
 import { COLORS, SIZES, FONTS } from "../theme/theme";
 
-export const Qibla = () => {
+export const Qibla = ({ route }) => {
 	const [qiblaAngle, setQiblaAngle] = useState(0);
 	const [directionAngle, setDirectionAngle] = useState(90);
 	const [isFound, setIsFound] = useState(false);
 	const [showLeftIcon, setShowLeftIcon] = useState(false);
 	const [showRightIcon, setShowRightIcon] = useState(false);
-
 	useEffect(() => {
 		(async () => {
 			const {
@@ -48,7 +47,6 @@ export const Qibla = () => {
 			);
 		})();
 	}, []);
-
 	useEffect(() => {
 		if (approxValue(directionAngle, qiblaAngle, 10)) {
 			setIsFound(true);
@@ -57,10 +55,8 @@ export const Qibla = () => {
 		}
 		if (directionAngle > qiblaAngle && !isFound) {
 			setShowLeftIcon(true);
-			setShowRightIcon(false);
 		} else if (directionAngle < qiblaAngle && !isFound) {
 			setShowRightIcon(true);
-			setShowLeftIcon(false);
 		} else {
 			setShowLeftIcon(false);
 			setShowRightIcon(false);
@@ -116,7 +112,7 @@ export const Qibla = () => {
 						<View></View>
 					)}
 				</Animated.View>
-				<Text style={styles.text}>{directionAngle}</Text>
+				{/* <Text style={styles.text}>{directionAngle}</Text> */}
 				<Animated.Image
 					style={[styles.image, animatedStyle]}
 					source={IMAGES.qibla_compass}
@@ -128,13 +124,14 @@ export const Qibla = () => {
 					<Text style={styles.text}>2916.1 km</Text>
 				</View>
 				<View style={styles.footerElement}>
-					<Text style={styles.text}>Kibla</Text>
+					<Text style={styles.text}>Qibla</Text>
 					<Text style={styles.text}>{qiblaAngle}°N</Text>
 				</View>
 			</View>
 		</SafeAreaView>
 	);
 };
+//
 
 const styles = StyleSheet.create({
 	container: {

@@ -31,13 +31,13 @@ export const getLocationAddress = async () => {
 	const location = await getLocationCoords();
 	//returns array with address obj
 	const [address] = await Location.reverseGeocodeAsync(location.coords);
-	const { district, city } = address;
+	const { region, city } = address;
 
-	if (district && city) {
-		result = `${district}, ${city}`;
+	if (region && city) {
+		result = `${city}, ${region}`;
 		return result;
 	}
-	result = `${city || ""}`;
+	result = `${region || ""}`;
 	return result;
 };
 
