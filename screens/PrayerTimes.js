@@ -9,9 +9,10 @@ import {
 	Image,
 	TouchableOpacity,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
+import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
+
 import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
 import { IMAGES, ICONS } from "../constants";
 import {
