@@ -9,10 +9,17 @@ import {
 	Image,
 	TouchableOpacity,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
+import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
-import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
+
+import {
+	InfoHeader,
+	PrayerItem,
+	NextPrayer,
+	CustomModal,
+	NotificationsComponent,
+} from "../components";
 import { IMAGES, ICONS } from "../constants";
 import {
 	getTodayDate,
@@ -44,9 +51,11 @@ export const PrayerTimes = ({ navigation }) => {
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [progress, setProgress] = useState(0);
 	const [showModal, setShowModal] = useState(false);
+	const [countdownFinish, setCountdownFinish] = useState(false);
 	const [notificationType, setNotificationType] = useState({});
 	useEffect(() => {
 		(async () => {
+			console.log("prayerTImes called");
 			const prayers = await getTodayPrayers(todayDate);
 			const activePrayer = findActivePrayer(prayers);
 			const nextPrayer = findNextPrayer(prayers, activePrayer);
@@ -62,7 +71,7 @@ export const PrayerTimes = ({ navigation }) => {
 			});
 			setCountdownId(nextPrayerCountdownId);
 		})();
-	}, []);
+	}, [countdownFinish]);
 
 	useEffect(() => {
 		const progress = progressToNextPrayer(
@@ -105,6 +114,7 @@ export const PrayerTimes = ({ navigation }) => {
 				colors={[COLORS.primary95, COLORS.darkBlue95]}
 			>
 				<SafeAreaView style={{ flex: 1 }}>
+					<NotificationsComponent />
 					<CustomModal
 						modalVisible={showModal}
 						onClosePress={() => setShowModal(false)}
@@ -157,10 +167,11 @@ export const PrayerTimes = ({ navigation }) => {
 								nextPrayer={nextPrayerData.prayerName}
 								countdownId={countdownId}
 								progress={progress}
-								handleChange={(timeLeft) => setTimeLeft(timeLeft)}
+								// handleChange={(timeLeft) => setTimeLeft(timeLeft)}
 								handleFinish={() => {
 									//Recalculate active and next prayer
 									//Update Progress
+									setCountdownFinish(!countdownFinish);
 								}}
 								handlePress={(untilTime) =>
 									navigation.navigate("Countdown", {

@@ -6,6 +6,16 @@
 		"orientation": "portrait",
 		"icon": "",
 		"userInterfaceStyle": "light",
+		"plugins": [
+			[
+				"expo-notifications",
+				{
+					"icon": "./assets/notifications/notification_icon",
+					"color": "#fff",
+					"sounds": ["./assets/notifications/notification-sound.wav"]
+				}
+			]
+		],
 		"splash": {
 			"image": "",
 			"resizeMode": "contain",
@@ -16,6 +26,7 @@
 		},
 		"assetBundlePatterns": ["**/*"],
 		"ios": {
+			"infoPlist": { "UIBackgroundModes": ["remote-notification"] },
 			"supportsTablet": true,
 			"requireFullScreen": true
 		},

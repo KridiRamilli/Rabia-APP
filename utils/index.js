@@ -14,6 +14,9 @@ export {
 	calculateQiblaAngle,
 	getLocationCoords,
 } from "./location";
-export { getNotificationsPermission } from "./notification";
+export {
+	getNotificationsPermission,
+	scheduleNotification,
+} from "./notification";
 export { findActivePrayer, findNextPrayer } from "./prayerData";
 export { promisifyQuery, mapValuesToArray, approxValue } from "./tools";
