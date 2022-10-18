@@ -13,17 +13,35 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import { DhikrItem } from "../components/DhikrItem";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { MORNING_DHIKR, EVENING_DHIKR } from "../constants/dhikr";
 import { ICONS } from "./../constants/icons";
 
+import {
+	resetMorningDhikr,
+	resetEveningDhikr,
+	substractMorningDhikr,
+	substractEveningDhikr,
+} from "../redux/reducers/dailyDhikrSlice";
+
 export const DailyDhikr = ({ navigation, route }) => {
 	const { dhikrName, theme } = route.params;
+	// const [dhikrData, setDhikrData] = useState(
+	//  dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
+	// );
 
-	const [dhikrData, setDhikrData] = useState(
-		dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
-	);
+	const dhikrData = useSelector((state) => {
+		// console.log(state.dailyDhikr.MORNING_DHIKR);
+		return dhikrName === "Morning"
+			? state.dailyDhikr.MORNING_DHIKR
+			: state.dailyDhikr.EVENING_DHIKR;
+	});
+
 	const flatListRef = useRef();
+
+	const dispatch = useDispatch();
+
 
 	useEffect(() => {
 		(async () => {
@@ -33,6 +51,7 @@ export const DailyDhikr = ({ navigation, route }) => {
 			);
 		})();
 	}, []);
+
 
 	useEffect(() => {
 		navigation.setOptions({
@@ -56,10 +75,16 @@ export const DailyDhikr = ({ navigation, route }) => {
 				<TouchableOpacity
 					style={styles.resetContainer}
 					onPress={() => {
-						//TODO find right method to reset dhikr
-						setDhikrData(
-							dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
+						Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+						dispatch(
+							dhikrName === "Morning"
+								? resetMorningDhikr()
+								: resetEveningDhikr()
 						);
+						//TODO find right method to reset dhikr
+						// setDhikrData(
+						//  dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
+						// );
 					}}
 				>
 					<Text style={styles.resetText}>Reset</Text>
@@ -86,13 +111,23 @@ export const DailyDhikr = ({ navigation, route }) => {
 	//TODO try to achieve O(1) when changing repeat
 	const handlePress = (id) => {
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-		const updatedDhikrData = dhikrData.map((el) => {
-			//decrement pressed dhikr value
-			return el.id !== id || el.repeat <= 0
-				? el
-				: { ...el, repeat: el.repeat - 1 };
-		});
-		setDhikrData(updatedDhikrData);
+		if (dhikrData[id].repeat > 0) {
+			dhikrName === "Morning"
+				? dispatch(substractMorningDhikr(id))
+				: dispatch(substractEveningDhikr(id));
+
+			// setDhikrData([
+			//  ...dhikrData,
+			//  (dhikrData[id].repeat = dhikrData[id].repeat - 1),
+			// ]);
+		}
+		// const updatedDhikrData = dhikrData.map((el) => {
+		//  //decrement pressed dhikr value
+		//  return el.id !== id || el.repeat <= 0
+		//    ? el
+		//    : { ...el, repeat: el.repeat - 1 };
+		// });
+		// setDhikrData(updatedDhikrData);
 
 		//scroll to next dhikr when done (exclude the last one)
 		if ((dhikrData[id].repeat <= 1) & (id < dhikrData.length - 1)) {
