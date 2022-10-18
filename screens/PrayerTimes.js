@@ -72,7 +72,6 @@ export const PrayerTimes = ({ navigation }) => {
 		);
 		setProgress(progress);
 	}, [nextPrayerData]);
-
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
 		return prayerTimes.map(({ id, prayer, time }) => {
@@ -163,6 +162,13 @@ export const PrayerTimes = ({ navigation }) => {
 									//Recalculate active and next prayer
 									//Update Progress
 								}}
+								handlePress={(untilTime) =>
+									navigation.navigate("Countdown", {
+										countdownId,
+										untilTime,
+										prayer: nextPrayerData.prayerName,
+									})
+								}
 							/>
 							<View style={styles.prayerInfo}>
 								{renderPrayerInfo(prayerTimes)}

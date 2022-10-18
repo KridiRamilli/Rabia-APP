@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import CountDown from "react-native-countdown-component";
@@ -11,7 +11,10 @@ export const NextPrayer = ({
 	countdownId,
 	progress,
 	handleChange,
+	handlePress,
 }) => {
+	const countdownRef = useRef();
+	// console.log(countdownRef.current.state.until);
 	return (
 		<View style={styles.container}>
 			<LinearGradient
@@ -30,7 +33,7 @@ export const NextPrayer = ({
 					id={countdownId}
 					until={untilTime}
 					onFinish={() => alert("finished")}
-					onPress={() => alert("hello")}
+					onPress={() => handlePress(countdownRef.current.state.until)}
 					onChange={handleChange}
 					size={20}
 					timeToShow={["H", "M", "S"]}
@@ -47,6 +50,7 @@ export const NextPrayer = ({
 					digitTxtStyle={{
 						color: COLORS.white,
 					}}
+					ref={countdownRef}
 				/>
 			</View>
 		</View>

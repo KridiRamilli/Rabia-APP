@@ -8,6 +8,8 @@ import {
 	Image,
 } from "react-native";
 import * as Haptics from "expo-haptics";
+import * as ScreenOrientation from "expo-screen-orientation";
+
 import { DhikrItem } from "../components/DhikrItem";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { useEffect } from "react";
@@ -22,6 +24,16 @@ export const DailyDhikr = ({ navigation, route }) => {
 		dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
 	);
 	const flatListRef = useRef();
+
+	useEffect(() => {
+		(async () => {
+			//TODO Lock daily dhikr to portrait mode
+			await ScreenOrientation.lockAsync(
+				ScreenOrientation.OrientationLock.PORTRAIT_UP
+			);
+		})();
+	}, []);
+
 	useEffect(() => {
 		navigation.setOptions({
 			headerStyle: {
