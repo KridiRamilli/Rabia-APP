@@ -72,7 +72,6 @@ export const PrayerTimes = ({ navigation }) => {
 		);
 		setProgress(progress);
 	}, [nextPrayerData]);
-
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
 		return prayerTimes.map(({ id, prayer, time }) => {
@@ -133,7 +132,13 @@ export const PrayerTimes = ({ navigation }) => {
 					/>
 					{/* upper icons */}
 					<View style={styles.upper}>
-						<TouchableOpacity onPress={() => navigation.navigate("Schedule")}>
+						<TouchableOpacity
+							onPress={() =>
+								navigation.navigate("Schedule", {
+									todayDate,
+								})
+							}
+						>
 							<Image source={ICONS.schedule_icon} style={styles.upperIcons} />
 						</TouchableOpacity>
 						<TouchableOpacity onPress={() => navigation.navigate("Settings")}>
@@ -153,6 +158,17 @@ export const PrayerTimes = ({ navigation }) => {
 								countdownId={countdownId}
 								progress={progress}
 								handleChange={(timeLeft) => setTimeLeft(timeLeft)}
+								handleFinish={() => {
+									//Recalculate active and next prayer
+									//Update Progress
+								}}
+								handlePress={(untilTime) =>
+									navigation.navigate("Countdown", {
+										countdownId,
+										untilTime,
+										prayer: nextPrayerData.prayerName,
+									})
+								}
 							/>
 							<View style={styles.prayerInfo}>
 								{renderPrayerInfo(prayerTimes)}

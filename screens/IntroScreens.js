@@ -1,22 +1,28 @@
-import React, { useState, useRef } from "react";
-
-import { StyleSheet } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
 
 import AppIntroSlider from "react-native-app-intro-slider";
 
 import { IntroPage, IntroPagination } from "../components";
-
+import { insertDbLocally } from "../db";
 import { SLIDES } from "../constants";
 
 export const IntroScreens = () => {
 	const [shouldShowSkip, setShouldShowSkip] = useState(false);
 
+	useEffect(() => {
+		(async () => {
+			//TODO: Handle case wehen db insert not successful
+			//Insert prayer data DB before using APP
+			await insertDbLocally();
+		})();
+	}, []);
+
 	const slider = useRef();
+	const _keyExtractor = (item) => item.key;
 
 	const onDone = () => {
 		setShowRealApp(true);
 	};
-	const _keyExtractor = (item) => item.key;
 	const onSkip = () => {
 		slider.current.goToSlide(2);
 	};

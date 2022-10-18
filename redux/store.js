@@ -38,3 +38,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+//TODO: Remove, used for development purpose to delete persisted store
+// persistor.purge();

@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Schedule, Settings, PrayerTimes } from "../screens";
+import { Schedule, Settings, PrayerTimes, Countdown } from "../screens";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 
@@ -71,6 +71,20 @@ const RootStack = ({ navigation }) => {
 						headerTitleStyle: {
 							...FONTS.h4,
 							fontSize: SIZES.font + 4,
+						},
+					}}
+				/>
+				<Stack.Screen
+					name="Countdown"
+					component={Countdown}
+					options={{
+						headerTitleStyle: {
+							...FONTS.h4,
+							fontSize: SIZES.font + 14,
+							color: COLORS.white,
+						},
+						headerStyle: {
+							backgroundColor: COLORS.black,
 						},
 					}}
 				/>

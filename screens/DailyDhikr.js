@@ -8,6 +8,8 @@ import {
 	Image,
 } from "react-native";
 import * as Haptics from "expo-haptics";
+import * as ScreenOrientation from "expo-screen-orientation";
+
 import { DhikrItem } from "../components/DhikrItem";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { useEffect } from "react";
@@ -37,7 +39,19 @@ export const DailyDhikr = ({ navigation, route }) => {
 	});
 
 	const flatListRef = useRef();
+
 	const dispatch = useDispatch();
+
+
+	useEffect(() => {
+		(async () => {
+			//TODO Lock daily dhikr to portrait mode
+			await ScreenOrientation.lockAsync(
+				ScreenOrientation.OrientationLock.PORTRAIT_UP
+			);
+		})();
+	}, []);
+
 
 	useEffect(() => {
 		navigation.setOptions({
@@ -47,7 +61,7 @@ export const DailyDhikr = ({ navigation, route }) => {
 			headerTitleStyle: {
 				...FONTS.h4,
 				fontSize: SIZES.font + 6,
-				color: theme === "dark" ? "#fff" : "#000",
+				color: theme === "dark" ? "#fff" : "#101821",
 			},
 			headerRight: () => (
 				<TouchableOpacity onPress={() => navigation.goBack()}>
@@ -80,13 +94,14 @@ export const DailyDhikr = ({ navigation, route }) => {
 	}, [navigation]);
 
 	const renderItem = ({ item }) => {
+		const { id, arabic, alb, repeat, note } = item;
 		return (
 			<DhikrItem
-				id={item.id}
-				dhikrArab={item.arabic}
-				dhikrAlbanian={item.alb}
-				repeat={item.repeat}
-				note={item.note}
+				id={id}
+				dhikrArab={arabic}
+				dhikrAlbanian={alb}
+				repeat={repeat}
+				note={note}
 				handlePress={handlePress}
 				theme={theme}
 			/>

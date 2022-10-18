@@ -7,7 +7,7 @@ import { COLORS, SIZES, FONTS } from "../theme/theme";
 
 export const IntroPage = ({ item }) => {
 	let { image, logo, content, infoIcon, title } = item;
-	const { locationStatus } = useSelector(selectSettings);
+	const { locationStatus, notificationStatus } = useSelector(selectSettings);
 	const generateTextContent = (content, idx) => {
 		const { text, icon } = content;
 		return (
@@ -22,6 +22,15 @@ export const IntroPage = ({ item }) => {
 			</View>
 		);
 	};
+
+	if (notificationStatus !== "undetermined" && item.key === "r2") {
+		title = "Notifications set!";
+		content = [
+			{
+				text: "Thank you!",
+			},
+		];
+	}
 
 	//Show success image and text on third intro page!
 	if (locationStatus !== "undetermined" && item.key === "r3") {
