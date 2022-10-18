@@ -6,4 +6,5 @@ export const IMAGES = {
 	intro_image_3: require("../assets/images/intro_image3.png"),
 	intro_image_success: require("../assets/images/intro_image_success.png"),
 	logo: require("../assets/images/logo.png"),
+	error: require("../assets/images/error.png"),
 };
