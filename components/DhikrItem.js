@@ -54,6 +54,7 @@ export const DhikrItem = ({
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
 		justifyContent: "center",
 		alignItems: "flex-start",
 		marginHorizontal: 5,

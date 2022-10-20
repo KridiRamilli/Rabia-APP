@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
 	StyleSheet,
 	FlatList,
@@ -15,7 +15,6 @@ import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { MORNING_DHIKR, EVENING_DHIKR } from "../constants/dhikr";
 import { ICONS } from "./../constants/icons";
 
 import {
@@ -27,21 +26,25 @@ import {
 
 export const DailyDhikr = ({ navigation, route }) => {
 	const { dhikrName, theme } = route.params;
-	// const [dhikrData, setDhikrData] = useState(
-	//  dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
-	// );
 
 	const dhikrData = useSelector((state) => {
-		// console.log(state.dailyDhikr.MORNING_DHIKR);
 		return dhikrName === "Morning"
 			? state.dailyDhikr.MORNING_DHIKR
 			: state.dailyDhikr.EVENING_DHIKR;
 	});
 
 	const flatListRef = useRef();
-
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		//scroll to first unfinished dhikr
+		setTimeout(() => {
+			let idx = dhikrData.findIndex((el) => el.repeat > 0);
+			idx === -1
+				? flatListRef.current.scrollToEnd({ animated: true })
+				: flatListRef.current.scrollToIndex({ animated: true, index: idx });
+		}, 500);
+	}, []);
 
 	useEffect(() => {
 		(async () => {
@@ -51,7 +54,6 @@ export const DailyDhikr = ({ navigation, route }) => {
 			);
 		})();
 	}, []);
-
 
 	useEffect(() => {
 		navigation.setOptions({
@@ -81,6 +83,8 @@ export const DailyDhikr = ({ navigation, route }) => {
 								? resetMorningDhikr()
 								: resetEveningDhikr()
 						);
+						//scroll to top
+						flatListRef.current.scrollToOffset({ offset: 0, animated: true });
 						//TODO find right method to reset dhikr
 						// setDhikrData(
 						//  dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
@@ -115,22 +119,10 @@ export const DailyDhikr = ({ navigation, route }) => {
 			dhikrName === "Morning"
 				? dispatch(substractMorningDhikr(id))
 				: dispatch(substractEveningDhikr(id));
-
-			// setDhikrData([
-			//  ...dhikrData,
-			//  (dhikrData[id].repeat = dhikrData[id].repeat - 1),
-			// ]);
 		}
-		// const updatedDhikrData = dhikrData.map((el) => {
-		//  //decrement pressed dhikr value
-		//  return el.id !== id || el.repeat <= 0
-		//    ? el
-		//    : { ...el, repeat: el.repeat - 1 };
-		// });
-		// setDhikrData(updatedDhikrData);
 
 		//scroll to next dhikr when done (exclude the last one)
-		if ((dhikrData[id].repeat <= 1) & (id < dhikrData.length - 1)) {
+		if (dhikrData[id].repeat <= 1 && id < dhikrData.length - 1) {
 			setTimeout(() => {
 				flatListRef.current.scrollToIndex({ animated: true, index: id + 1 });
 			}, 800);
@@ -148,6 +140,9 @@ export const DailyDhikr = ({ navigation, route }) => {
 				data={dhikrData}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.id}
+				onScrollToIndexFailed={(err) => {
+					console.log(err, "failed to scroll");
+				}}
 			/>
 		</View>
 	);
