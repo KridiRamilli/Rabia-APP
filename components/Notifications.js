@@ -25,7 +25,7 @@ TaskManager.defineTask(
 
 // Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
 
-export const NotificationsComponent = () => {
+export const NotificationsComponent = ({ activeNotifications }) => {
 	const [notification, setNotification] = useState(false);
 	useEffect(() => {
 		(async () => {
@@ -42,9 +42,9 @@ export const NotificationsComponent = () => {
 				});
 				arr.push(id);
 			}
-			const allNotifs = await Notifications.getAllScheduledNotificationsAsync();
-			await Notifications.cancelAllScheduledNotificationsAsync();
-			console.log(allNotifs);
+			// const allNotifs = await Notifications.getAllScheduledNotificationsAsync();
+			// await Notifications.cancelAllScheduledNotificationsAsync();
+			// console.log(allNotifs);
 		})();
 	}, []);
 
