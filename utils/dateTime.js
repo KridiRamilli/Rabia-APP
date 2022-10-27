@@ -36,9 +36,28 @@ export const formatScheduleDate = (date) => {
 	return formatedDate;
 };
 
+export const formatNotificationDate = (date) => {
+	const formatedDate = DateTime.fromFormat(date, "dd MMM").toFormat("dd/MM/yy");
+	return formatedDate;
+};
+
 export const isTimePassed = (time) => {
 	let inputTime = DateTime.fromFormat(time, "HH:mm");
 	return DateTime.now() > inputTime;
+};
+
+export const setExpiredDate = (todayDate, time) => {
+	let inputTime = DateTime.fromFormat(`${todayDate} ${time}`, "dd/MM/yy HH:mm");
+
+	if (isTimePassed(time)) {
+		return inputTime.plus({ days: 1 }).toISO();
+	}
+	return inputTime.toString();
+};
+
+export const isDateExpired = (date) => {
+	const inputDate = DateTime.fromISO(date);
+	return DateTime.now() > inputDate;
 };
 
 export const countdownToNextPrayer = (time) => {

@@ -9,3 +9,4 @@ export { SearchInput } from "./SearchInput";
 export { SettingsElement } from "./SettingsElement";
 export { ScheduleItem } from "./ScheduleItem";
 export { ScheduleHeader } from "./ScheduleHeader";
+export { NotificationsComponent } from "./Notifications";

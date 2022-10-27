@@ -9,7 +9,7 @@ export const PrayerItem = ({
 	time,
 	activePrayer,
 	onNotificationPress,
-	notificationType,
+	notification,
 }) => {
 	const selectNotificationIcon = (notificationType) => {
 		switch (notificationType) {
@@ -31,9 +31,9 @@ export const PrayerItem = ({
 						style={[
 							styles.notificationIcon,
 							//Change icon color when notification Once | Every Day
-							notificationType && { tintColor: COLORS.pink2 },
+							notification && { tintColor: COLORS.pink2 },
 						]}
-						source={selectNotificationIcon(notificationType)}
+						source={selectNotificationIcon(notification?.type)}
 					/>
 				</TouchableOpacity>
 				<Text style={styles.infoPrayer}>{time}</Text>

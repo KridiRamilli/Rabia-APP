@@ -90,7 +90,7 @@ export const KEHF = {
 		87: "Ai (Dhulkarnejni) tha: 'Ai që vazhdon edhe më tej të jetë zullumqar, atë do ta dënojmë, pastaj i kthehet Zotit të vet e Ai e dënon atë me një dënim të tmerrshëm'.",
 		88: "Sa i përket atij që besoi dhe bëri vepra të mira, atij i takon shpërblimi më i mirë (xhenneti) dhe atij nga ana Jonë do t'i bëjmë lehtësi (në jetë).",
 		89: "Pastaj, ai iu rrek një aso mundësie (mori rrugën e lindjes).",
-		90: "Deri kur arriti vndlindjen e diellit, e gjeti se po lind mbi një popull, që nuk i kemi dhënë ndonjë mbulojë prej tij (diellit).",
+		90: "Deri kur arriti vendlindjen e diellit, e gjeti se po lind mbi një popull, që nuk i kemi dhënë ndonjë mbulojë prej tij (diellit).",
 		91: "Ashtu (bëri edhe me këtë popull), e Ne e kemi ditur gjendjen e tij (mundësitë dhe sundimin e drejtë të tij).",
 		92: "Mandej, ai iu rrek përsëri një aso mundësie (një rruge të tretë mes perëndimit e lindjes - nga veriu).",
 		93: "Deri kur arriti mes dy kodrave (si penda) dhe prapa tyre gjeti një popull që thuajse nuk kuptonte asnjë gjuhë (përveç gjuhës së vet).",

@@ -9,10 +9,19 @@ import {
 	Image,
 	TouchableOpacity,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
+import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
-import { InfoHeader, PrayerItem, NextPrayer, CustomModal } from "../components";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+	InfoHeader,
+	PrayerItem,
+	NextPrayer,
+	CustomModal,
+	NotificationsComponent,
+} from "../components";
 import { IMAGES, ICONS } from "../constants";
 import {
 	getTodayDate,
@@ -20,16 +29,24 @@ import {
 	findActivePrayer,
 	countdownToNextPrayer,
 	progressToNextPrayer,
+	setExpiredDate,
+	removeExpiredNotifications,
 } from "../utils";
 import { getTodayPrayers } from "../db";
 import { COLORS, SIZES } from "../theme/theme";
+import {
+	addNotification,
+	removeNotification,
+	selectNotifications,
+	removeExpired,
+} from "../redux/reducers/notificationSlice";
 
 export const PrayerTimes = ({ navigation }) => {
 	const [todayDate, setTodayDate] = useState(() =>
 		getTodayDate({ formated: false })
 	);
 	const [prayerTimes, setPrayerTimes] = useState([]);
-	const [selectedPrayerId, setSelectedPrayerId] = useState({});
+	const [selectedPrayer, setSelectedPrayer] = useState({});
 	const [activePrayer, setActivePrayer] = useState({
 		id: 0,
 		prayer: "",
@@ -44,7 +61,10 @@ export const PrayerTimes = ({ navigation }) => {
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [progress, setProgress] = useState(0);
 	const [showModal, setShowModal] = useState(false);
-	const [notificationType, setNotificationType] = useState({});
+	const [countdownFinish, setCountdownFinish] = useState(false);
+	// const [notification, setNotification] = useState({});
+	const notifications = useSelector(selectNotifications);
+
 	useEffect(() => {
 		(async () => {
 			const prayers = await getTodayPrayers(todayDate);
@@ -62,7 +82,7 @@ export const PrayerTimes = ({ navigation }) => {
 			});
 			setCountdownId(nextPrayerCountdownId);
 		})();
-	}, []);
+	}, [countdownFinish]);
 
 	useEffect(() => {
 		const progress = progressToNextPrayer(
@@ -72,6 +92,14 @@ export const PrayerTimes = ({ navigation }) => {
 		);
 		setProgress(progress);
 	}, [nextPrayerData]);
+
+	useEffect(() => {
+		const ids = removeExpiredNotifications(notifications);
+		dispatch(removeExpired(ids));
+	}, [notifications]);
+
+	const dispatch = useDispatch();
+
 	//Prayer element containing single prayer info
 	const renderPrayerInfo = (prayerTimes) => {
 		return prayerTimes.map(({ id, prayer, time }) => {
@@ -81,17 +109,14 @@ export const PrayerTimes = ({ navigation }) => {
 					prayer={prayer}
 					time={time}
 					activePrayer={id == activePrayer.id}
-					notificationType={notificationType[id]}
+					notification={notifications[id]}
 					onNotificationPress={() => {
 						//When notification is set, RESET on press
-						if (notificationType[id]) {
-							setNotificationType({
-								...notificationType,
-								[id]: undefined,
-							});
+						if (notifications[id]) {
+							dispatch(removeNotification(id));
 							return;
 						}
-						setSelectedPrayerId(id);
+						setSelectedPrayer({ id, prayer, time });
 						setShowModal(true);
 					}}
 				/>
@@ -105,6 +130,10 @@ export const PrayerTimes = ({ navigation }) => {
 				colors={[COLORS.primary95, COLORS.darkBlue95]}
 			>
 				<SafeAreaView style={{ flex: 1 }}>
+					<NotificationsComponent
+						activeNotifications={notifications}
+						startingDate={todayDate}
+					/>
 					<CustomModal
 						modalVisible={showModal}
 						onClosePress={() => setShowModal(false)}
@@ -112,19 +141,31 @@ export const PrayerTimes = ({ navigation }) => {
 						leftButtonLabel={"Once"}
 						rightButtonLabel={"Every Day"}
 						onLeftButtonPress={() => {
-							setNotificationType({
-								...notificationType,
-								[selectedPrayerId]: "once",
-							});
+							const { time, prayer, id } = selectedPrayer;
+							dispatch(
+								addNotification({
+									type: "once",
+									time,
+									prayer,
+									id,
+									expires: setExpiredDate(todayDate, time),
+								})
+							);
 							setTimeout(() => {
 								setShowModal(false);
 							}, 300);
 						}}
 						onRightButtonPress={() => {
-							setNotificationType({
-								...notificationType,
-								[selectedPrayerId]: "everyday",
-							});
+							const { time, prayer, id } = selectedPrayer;
+							dispatch(
+								addNotification({
+									type: "everyday",
+									time,
+									prayer,
+									id,
+									expires: false,
+								})
+							);
 							setTimeout(() => {
 								setShowModal(false);
 							}, 300);
@@ -157,10 +198,11 @@ export const PrayerTimes = ({ navigation }) => {
 								nextPrayer={nextPrayerData.prayerName}
 								countdownId={countdownId}
 								progress={progress}
-								handleChange={(timeLeft) => setTimeLeft(timeLeft)}
+								// handleChange={(timeLeft) => setTimeLeft(timeLeft)}
 								handleFinish={() => {
 									//Recalculate active and next prayer
 									//Update Progress
+									setCountdownFinish(!countdownFinish);
 								}}
 								handlePress={(untilTime) =>
 									navigation.navigate("Countdown", {
