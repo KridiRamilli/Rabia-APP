@@ -29,6 +29,8 @@ import {
 	findActivePrayer,
 	countdownToNextPrayer,
 	progressToNextPrayer,
+	setExpiredDate,
+	removeExpiredNotifications,
 } from "../utils";
 import { getTodayPrayers } from "../db";
 import { COLORS, SIZES } from "../theme/theme";
@@ -36,6 +38,7 @@ import {
 	addNotification,
 	removeNotification,
 	selectNotifications,
+	removeExpired,
 } from "../redux/reducers/notificationSlice";
 
 export const PrayerTimes = ({ navigation }) => {
@@ -90,7 +93,10 @@ export const PrayerTimes = ({ navigation }) => {
 		setProgress(progress);
 	}, [nextPrayerData]);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		const ids = removeExpiredNotifications(notifications);
+		dispatch(removeExpired(ids));
+	}, [notifications]);
 
 	const dispatch = useDispatch();
 
@@ -117,7 +123,6 @@ export const PrayerTimes = ({ navigation }) => {
 			);
 		});
 	};
-	console.log(notifications);
 	return (
 		<ImageBackground style={styles.imageBackground} source={IMAGES.little_girl}>
 			<LinearGradient
@@ -125,7 +130,10 @@ export const PrayerTimes = ({ navigation }) => {
 				colors={[COLORS.primary95, COLORS.darkBlue95]}
 			>
 				<SafeAreaView style={{ flex: 1 }}>
-					<NotificationsComponent activeNotifications={notifications} />
+					<NotificationsComponent
+						activeNotifications={notifications}
+						startingDate={todayDate}
+					/>
 					<CustomModal
 						modalVisible={showModal}
 						onClosePress={() => setShowModal(false)}
@@ -140,6 +148,7 @@ export const PrayerTimes = ({ navigation }) => {
 									time,
 									prayer,
 									id,
+									expires: setExpiredDate(todayDate, time),
 								})
 							);
 							setTimeout(() => {
@@ -154,6 +163,7 @@ export const PrayerTimes = ({ navigation }) => {
 									time,
 									prayer,
 									id,
+									expires: false,
 								})
 							);
 							setTimeout(() => {

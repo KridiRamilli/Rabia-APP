@@ -12,7 +12,7 @@ export const Schedule = ({ route, handlePress }) => {
 	const { todayDate } = route.params;
 	useEffect(() => {
 		(async () => {
-			const prayers = await getPrayers(50, todayDate);
+			const prayers = await getPrayers(50, todayDate, 10);
 			setData(prayers);
 		})();
 	}, []);

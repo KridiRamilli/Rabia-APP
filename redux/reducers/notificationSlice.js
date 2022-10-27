@@ -5,16 +5,23 @@ const notificationSlice = createSlice({
 	initialState: {},
 	reducers: {
 		addNotification(state = initialState, action) {
-			const { id, type, prayer, time } = action.payload;
+			const { id, type, prayer, time, expires } = action.payload;
 			state[id] = {
 				type,
 				time,
 				prayer,
+				expires,
 			};
 		},
 		removeNotification(state = initialState, action) {
-			const id = action.payload;
+			let id = action.payload;
 			state[id] = undefined;
+		},
+		removeExpired(state = initialState, action) {
+			const ids = action.payload;
+			ids.forEach((id) => {
+				state[id] = undefined;
+			});
 		},
 		resetAllNotifications(state = initialState, action) {
 			state = initialState;
@@ -30,6 +37,7 @@ export const {
 	removeNotification,
 	resetAllNotifications,
 	addAllNotificatons,
+	removeExpired,
 } = notificationSlice.actions;
 
 export const selectNotifications = (state) => state.notification;

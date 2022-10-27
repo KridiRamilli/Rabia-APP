@@ -12,6 +12,7 @@ export const NextPrayer = ({
 	progress,
 	handleChange,
 	handlePress,
+	handleFinish,
 }) => {
 	const countdownRef = useRef();
 	// console.log(countdownRef.current.state.until);
@@ -32,7 +33,7 @@ export const NextPrayer = ({
 				<CountDown
 					id={countdownId}
 					until={untilTime}
-					onFinish={() => alert("finished")}
+					onFinish={handleFinish}
 					onPress={() => handlePress(countdownRef.current.state.until)}
 					onChange={handleChange}
 					size={20}

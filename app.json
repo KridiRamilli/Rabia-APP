@@ -10,9 +10,9 @@
 			[
 				"expo-notifications",
 				{
-					"icon": "./assets/notifications/notification_icon",
+					"icon": "./assets/notifications/notification_icon.png",
 					"color": "#fff",
-					"sounds": ["./assets/notifications/notification-sound.wav"]
+					"sounds": ["./assets/notifications/notification_sound.wav"]
 				}
 			]
 		],

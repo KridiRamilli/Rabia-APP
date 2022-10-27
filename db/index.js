@@ -36,10 +36,11 @@ const _getRowId = async (date) => {
 	return resultObj.rowid;
 };
 
-const getPrayers = async (num, starting) => {
+const getPrayers = async (num, starting, daysBefore = 0) => {
+	//TODO catch errors in db operations(ex: starting === undefined)
 	const id = await _getRowId(starting);
 	let query = `SELECT rowid,* FROM prayers WHERE rowid >="${
-		id - 10
+		id - daysBefore
 	}" LIMIT "${num}"`;
 	const prayersData = await promisifyQuery(db, query);
 	const prayers = prayersData.map((prayer) => {
