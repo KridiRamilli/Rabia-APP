@@ -25,7 +25,7 @@ const RootTab = () => {
 						{/* {TODO change name } */}
 						<TabNavigator.Screen name="Dhikr Counter" component={DhikrStack} />
 						<TabNavigator.Screen name="Prayer Times" component={RootStack} />
-						<TabNavigator.Screen name="Qibla Finder" component={Error} />
+						<TabNavigator.Screen name="Qibla Finder" component={Qibla} />
 					</TabNavigator.Navigator>
 				</NavigationContainer>
 			)}
