@@ -7,7 +7,10 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getNotificationsPermission, getLocationPermission } from "../utils";
+import {
+	requestNotificationsPermission,
+	requestLocationPermission,
+} from "../utils";
 import {
 	setShowRealApp,
 	setLocationStatus,
@@ -44,7 +47,7 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
 	};
 
 	const handleNotificationPermission = async () => {
-		const notificationStatus = await getNotificationsPermission();
+		const notificationStatus = await requestNotificationsPermission();
 		dispatch(setNotificationStatus(notificationStatus));
 		if (isNotificationSet) {
 			goToNextSlide(activeIndex, slider);
@@ -52,7 +55,7 @@ export const IntroPagination = ({ activeIndex, slider, slides }) => {
 	};
 
 	const handleLocationPermission = async () => {
-		const locationStatus = await getLocationPermission();
+		const locationStatus = await requestLocationPermission();
 		dispatch(setLocationStatus(locationStatus));
 	};
 

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Text, View, StyleSheet, Image, SafeAreaView } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+
 import * as Haptics from "expo-haptics";
 
 import Animated, {
@@ -13,19 +15,24 @@ import Animated, {
 import {
 	getLocationHeading,
 	calculateQiblaAngle,
+	getLocationPermission,
 	getLocationCoords,
 	approxValue,
 } from "./../utils";
+import { useAppState } from "../hooks";
 
 import { IMAGES, ICONS } from "../constants";
 import { COLORS, SIZES, FONTS } from "../theme/theme";
+import { Error } from "./Error";
 
 export const Qibla = ({ route }) => {
+	const [locationGranted, setLocationGranted] = useState(false);
 	const [qiblaAngle, setQiblaAngle] = useState(0);
 	const [directionAngle, setDirectionAngle] = useState(90);
 	const [isFound, setIsFound] = useState(false);
 	const [showLeftIcon, setShowLeftIcon] = useState(false);
 	const [showRightIcon, setShowRightIcon] = useState(false);
+	const [appState, setAppState] = useAppState("");
 	useEffect(() => {
 		(async () => {
 			const {
@@ -47,6 +54,21 @@ export const Qibla = ({ route }) => {
 			);
 		})();
 	}, []);
+	useFocusEffect(
+		useCallback(() => {
+			const checkLocationPermission = async () => {
+				let granted = await getLocationPermission();
+				if (!granted) {
+					setLocationGranted(false);
+					return;
+				}
+				setLocationGranted(true);
+			};
+			if (appState === "active") {
+				checkLocationPermission();
+			}
+		}, [appState])
+	);
 	useEffect(() => {
 		if (approxValue(directionAngle, qiblaAngle, 10)) {
 			setIsFound(true);
@@ -88,6 +110,10 @@ export const Qibla = ({ route }) => {
 		};
 	}, [directionAngle]);
 	const arrowStyle = useAnimatedStyle(() => ({ opacity: opacity.value }), []);
+
+	if (!locationGranted) {
+		return <Error />;
+	}
 
 	return (
 		<SafeAreaView style={[styles.container, isFound ? styles.found : ""]}>

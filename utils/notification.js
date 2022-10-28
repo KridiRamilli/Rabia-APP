@@ -6,7 +6,7 @@ import {
 	formatNotificationDate,
 	isDateExpired,
 } from "./dateTime";
-export const getNotificationsPermission = async () => {
+export const requestNotificationsPermission = async () => {
 	if (Device.isDevice) {
 		const { status: existingStatus } =
 			await Notifications.getPermissionsAsync();
@@ -34,7 +34,7 @@ export const scheduleNotification = async ({
 	repeats,
 	type,
 }) => {
-	await getNotificationsPermission();
+	await requestNotificationsPermission();
 	const trigger = {
 		hour: +hour,
 		minute: +minute,
