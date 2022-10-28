@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 
-export const getLocationPermission = async () => {
+export const requestLocationPermission = async () => {
 	let { status } = await Location.requestForegroundPermissionsAsync();
-	//TODO Case if location denied
-	// if (status !== "granted") {
-	// 	alert("");
-	// }
 	return status;
+};
+export const getLocationPermission = async () => {
+	let { granted } = await Location.getForegroundPermissionsAsync();
+	return granted;
 };
 
 export const getLocationCoords = async () => {
-	let status = await getLocationPermission();
-	if (status !== "granted") {
+	let granted = await getLocationPermission();
+	if (!granted) {
 		//TODO handle error
 		return;
 	}
@@ -25,7 +25,8 @@ export const getLocationCoords = async () => {
 };
 
 export const getLocationAddress = async () => {
-	let status = await getLocationPermission();
+	//TODO handle error when locatation !granted
+	let granted = await getLocationPermission();
 	let result = "";
 
 	const location = await getLocationCoords();

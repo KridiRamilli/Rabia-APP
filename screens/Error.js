@@ -1,14 +1,16 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Haptics from "expo-haptics";
+import * as Linking from "expo-linking";
 import { IMAGES } from "../constants/images";
-import { COLORS, SIZES } from "../theme/theme";
-
-const handlePress = () => {
-	Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-};
+import { FONTS, COLORS, SIZES } from "../theme/theme";
 
 export const Error = () => {
+	const handlePress = () => {
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+		Linking.openSettings();
+	};
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.mainTitle}>Ooops!</Text>
@@ -16,8 +18,7 @@ export const Error = () => {
 			<View style={styles.textContainer}>
 				<Text style={styles.textTitle}>We're sorry!</Text>
 				<Text style={styles.textContent}>
-					To find right Qibla direction, please enable location services and
-					then try again.
+					Please enable location services to find Qibla direction!
 				</Text>
 			</View>
 			<TouchableOpacity onPress={handlePress} style={styles.buttonContainer}>

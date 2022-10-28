@@ -10,6 +10,7 @@ export {
 	isDateExpired,
 } from "./dateTime";
 export {
+	requestLocationPermission,
 	getLocationPermission,
 	getLocationAddress,
 	getLocationHeading,
@@ -18,7 +19,7 @@ export {
 	getLocationCoords,
 } from "./location";
 export {
-	getNotificationsPermission,
+	requestNotificationsPermission,
 	scheduleNotification,
 	getScheduledNotifications,
 	removeExpiredNotifications,
