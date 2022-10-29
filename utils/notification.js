@@ -52,9 +52,9 @@ export const scheduleNotification = async ({
 			title: `${prayer} ka hyrë! 😇`,
 			body: "",
 			data: { prayer, type, id },
+			sound: "notification_sound.wav",
+			vibrate: [0, 250, 250, 250],
 		},
-		sound: true,
-		vibrate: true,
 		trigger,
 	});
 

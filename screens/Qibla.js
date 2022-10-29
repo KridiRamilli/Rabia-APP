@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Text, View, StyleSheet, Image, SafeAreaView } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 import * as Haptics from "expo-haptics";
 
@@ -33,29 +33,34 @@ export const Qibla = ({ route }) => {
 	const [showLeftIcon, setShowLeftIcon] = useState(false);
 	const [showRightIcon, setShowRightIcon] = useState(false);
 	const [appState, setAppState] = useAppState("");
+	const isFocused = useIsFocused();
 	useEffect(() => {
 		(async () => {
-			const {
-				coords: { latitude, longitude },
-			} = await getLocationCoords();
-			const angle = calculateQiblaAngle(latitude, longitude);
-			setQiblaAngle(angle);
-			getLocationHeading((headingObj) => {
-				let { magHeading } = headingObj;
-				magHeading = Math.round(magHeading);
-				setDirectionAngle(magHeading);
-			});
-
-			//Called once so it does repeat as shown
-			opacity.value = withRepeat(
-				withTiming(1, { duration: 1000, easing: Easing.ease }),
-				0,
-				true
-			);
+			let granted = await getLocationPermission();
+			if (granted) {
+				const {
+					coords: { latitude, longitude },
+				} = await getLocationCoords();
+				const angle = calculateQiblaAngle(latitude, longitude);
+				setQiblaAngle(angle);
+				//TODO subscription remove bug
+				getLocationHeading((headingObj) => {
+					let { magHeading } = headingObj;
+					magHeading = Math.round(magHeading);
+					setDirectionAngle(magHeading);
+				});
+				//Called once so it does repeat as shown
+				opacity.value = withRepeat(
+					withTiming(1, { duration: 1000, easing: Easing.ease }),
+					0,
+					true
+				);
+			}
 		})();
-	}, []);
+	}, [locationGranted]);
 	useFocusEffect(
 		useCallback(() => {
+			//Re-Check when user changes settings
 			const checkLocationPermission = async () => {
 				let granted = await getLocationPermission();
 				if (!granted) {
@@ -87,7 +92,7 @@ export const Qibla = ({ route }) => {
 	}, [directionAngle]);
 
 	useEffect(() => {
-		if (isFound === true) {
+		if (isFound === true && isFocused) {
 			Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 		}
 	}, [isFound]);

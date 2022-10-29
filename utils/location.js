@@ -26,9 +26,7 @@ export const getLocationCoords = async () => {
 
 export const getLocationAddress = async () => {
 	//TODO handle error when locatation !granted
-	let granted = await getLocationPermission();
 	let result = "";
-
 	const location = await getLocationCoords();
 	//returns array with address obj
 	const [address] = await Location.reverseGeocodeAsync(location.coords);
@@ -37,13 +35,15 @@ export const getLocationAddress = async () => {
 	if (region && city) {
 		result = `${city}, ${region}`;
 		return result;
+
+		result = `${region || ""}`;
 	}
-	result = `${region || ""}`;
 	return result;
 };
 
 export const getLocationHeading = async (handleHeadingChange) => {
-	await Location.watchHeadingAsync(handleHeadingChange);
+	const subscription = await Location.watchHeadingAsync(handleHeadingChange);
+	return subscription;
 };
 
 export const degree = (magHeading) => {

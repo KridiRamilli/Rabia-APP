@@ -42,7 +42,11 @@ export const DhikrItem = ({
 			>
 				<LinearGradient
 					// Button Linear Gradient
-					colors={[COLORS.pinkGradient, COLORS.purpleGradient]}
+					colors={
+						repeat === 0
+							? [COLORS.gray, COLORS.gray2]
+							: [COLORS.pinkGradient, COLORS.purpleGradient]
+					}
 					style={styles.gradientBackground}
 				>
 					<Text style={styles.repeatTime}>{repeat}</Text>
@@ -81,7 +85,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		alignSelf: "flex-end",
 		marginRight: 15,
-		borderRadius: (SIZES.width + SIZES.height) / 2,
+		borderRadius: "50%",
 		backgroundColor: COLORS.white,
 		shadowColor: "#888",
 		shadowOffset: {
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
 	gradientBackground: {
 		width: "97%",
 		height: "97%",
-		borderRadius: (SIZES.width + SIZES.height) / 2,
+		borderRadius: "50%",
 		overflow: "hidden",
 		justifyContent: "center",
 		alignItems: "center",

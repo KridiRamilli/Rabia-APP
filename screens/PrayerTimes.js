@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-	Text,
 	View,
 	StyleSheet,
 	ScrollView,
@@ -62,7 +61,6 @@ export const PrayerTimes = ({ navigation }) => {
 	const [progress, setProgress] = useState(0);
 	const [showModal, setShowModal] = useState(false);
 	const [countdownFinish, setCountdownFinish] = useState(false);
-	// const [notification, setNotification] = useState({});
 	const notifications = useSelector(selectNotifications);
 
 	useEffect(() => {
@@ -111,7 +109,7 @@ export const PrayerTimes = ({ navigation }) => {
 					activePrayer={id == activePrayer.id}
 					notification={notifications[id]}
 					onNotificationPress={() => {
-						//When notification is set, RESET on press
+						//RESET notification on press
 						if (notifications[id]) {
 							dispatch(removeNotification(id));
 							return;
