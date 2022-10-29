@@ -4,13 +4,12 @@ import {
 	Modal,
 	StyleSheet,
 	Text,
-	Pressable,
 	View,
 	TouchableOpacity,
 	Image,
 } from "react-native";
 import { ICONS } from "../constants";
-import { COLORS, SIZES, FONTS } from "../theme/theme";
+import { COLORS, FONTS } from "../theme/theme";
 
 export const CustomModal = ({
 	modalVisible,

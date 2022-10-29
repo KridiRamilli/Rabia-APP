@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 
 import { ICONS } from "../constants";
 import { FONTS, SIZES, COLORS } from "../theme/theme";
-import { getLocationAddress, getTodayDate } from "../utils";
+import {
+	getLocationAddress,
+	getLocationPermission,
+	getTodayDate,
+} from "../utils";
 
 export const InfoHeader = () => {
 	const [address, setAddress] = useState("");
@@ -12,8 +16,11 @@ export const InfoHeader = () => {
 	);
 	useEffect(() => {
 		(async () => {
-			const address = await getLocationAddress();
-			setAddress(address);
+			let granted = await getLocationPermission();
+			if (granted) {
+				const address = await getLocationAddress();
+				setAddress(address);
+			}
 		})();
 	}, []);
 

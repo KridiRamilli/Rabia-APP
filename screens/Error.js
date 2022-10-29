@@ -23,7 +23,6 @@ export const Error = () => {
 			</View>
 			<TouchableOpacity onPress={handlePress} style={styles.buttonContainer}>
 				<LinearGradient
-					// Button Linear Gradient
 					colors={[COLORS.pinkGradient, COLORS.purpleGradient]}
 					style={styles.gradientBackground}
 				>
@@ -42,13 +41,12 @@ const styles = StyleSheet.create({
 		backgroundColor: COLORS.white,
 	},
 	buttonContainer: {
-		borderRadius: 8,
 		shadowColor: COLORS.black,
 		shadowOffset: {
 			width: 0,
 			height: 4,
 		},
-		shadowOpacity: 0.2,
+		shadowOpacity: 0.1,
 		shadowRadius: 6,
 		elevation: 8,
 		marginBottom: 120,
@@ -59,33 +57,30 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 40,
 	},
 	mainTitle: {
-		fontSize: SIZES.h1,
-		fontFamily: "Roboto-Medium",
+		...FONTS.h1,
 		color: COLORS.secondary,
 		marginTop: 10,
 	},
 	errorImage: {
-		flex: 0.6,
+		flex: 0.5,
 		resizeMode: "contain",
 	},
 	textTitle: {
-		fontSize: SIZES.h2 + 2,
-		fontFamily: "Roboto-Bold",
+		...FONTS.h1,
 	},
 	textContent: {
+		...FONTS.body3,
 		textAlign: "center",
-		fontFamily: "Roboto-Light",
-		fontSize: SIZES.font + 5,
 		marginTop: SIZES.margin,
 	},
 	gradientBackground: {
 		paddingVertical: 10,
 		paddingHorizontal: 15,
-		borderRadius: 8,
+		borderRadius: 10,
 	},
 	buttonText: {
-		fontSize: SIZES.body2,
-		fontFamily: "Roboto-Regular",
+		...FONTS.body2,
+		lineHeight: 0,
 		color: COLORS.white,
 	},
 });

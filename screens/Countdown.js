@@ -1,10 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
 import CountDown from "react-native-countdown-component";
 
-import { COLORS, SIZES } from "../theme/theme";
+import { COLORS } from "../theme/theme";
 import { ICONS } from "../constants";
 
 export const Countdown = ({ navigation, route }) => {

@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
-import { scheduleNotification, isTimePassed } from "../utils";
 import { getPrayers } from "../db";
 import { addNotificationToSchedule } from "../utils/notification";
 
@@ -46,7 +44,6 @@ export const NotificationsComponent = ({
 					console.error
 				);
 			// console.log(allNotifs[14]);
-			// console.log(activeNotifications, startingDate);
 		})();
 	}, [activeNotifications]);
 

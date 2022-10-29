@@ -16,8 +16,6 @@ import { FONTS, COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
-//TODO remove
-import "../utils/notification";
 const dhikrTimes = [
 	{ dhikrName: "Morning", theme: "light" },
 	{ dhikrName: "Evening", theme: "dark" },

@@ -1,13 +1,3 @@
-// export const PRAYER_TIMES = {
-// 	imsaku: "Imsaku",
-// 	sabahu: "Sabahu",
-// 	lindjaediellit: "Lindja e Diellit",
-// 	dreka: "Dreka",
-// 	ikindia: "Ikindia",
-// 	akshami: "Akshami",
-// 	jacia: "Jacia",
-// };
-
 const PRAYER_NAMES = new Map();
 PRAYER_NAMES.set("imsaku", "Imsaku");
 PRAYER_NAMES.set("sabahu", "Sabahu");
