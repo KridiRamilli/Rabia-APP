@@ -15,7 +15,6 @@ export const NextPrayer = ({
 	handleFinish,
 }) => {
 	const countdownRef = useRef();
-	// console.log(countdownRef.current.state.until);
 	return (
 		<View style={styles.container}>
 			<LinearGradient
