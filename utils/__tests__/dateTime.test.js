@@ -12,15 +12,8 @@ const {
 } = require("../datetime");
 
 beforeAll(() => {
-	DateTime.now = jest.fn(() => DateTime.fromISO("2022-08-10T11:00:00"));
-	DateTime.fromFormat = jest.fn((hour) => {
-		let timeRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
-		let isoString = "2022-08-10T11:00:00";
-		if (timeRegex.test(hour)) {
-			isoString = `2022-08-10T${hour}:00`;
-		}
-		return DateTime.fromISO(isoString);
-	});
+	jest.useFakeTimers();
+	jest.setSystemTime(new Date("August 10, 2022 11:00:00"));
 });
 
 describe("Testing date time utils", () => {
@@ -57,8 +50,8 @@ describe("Testing date time utils", () => {
 		let expiredDate = setExpiredDate("10/08/22", "10:00");
 		let expiredDate2 = setExpiredDate("10/08/22", "12:00");
 		//should set expiration next day
-		expect(expiredDate).toBe("2022-08-11T11:00:00.000+02:00");
-		expect(expiredDate2).toBe("2022-08-10T11:00:00.000+02:00");
+		expect(expiredDate).toBe("2022-08-11T10:00:00.000+02:00");
+		expect(expiredDate2).toBe("2022-08-10T12:00:00.000+02:00");
 	});
 	it("should test if date is expired", () => {
 		const dateExpired = isDateExpired("2022-08-11T11:00:00.000+02:00");

@@ -1,0 +1,109 @@
+Date : 2022-10-28 13:55:48
+Directory : e:\Rabia-APP
+Total : 68 files,  38860 codes, 118 comments, 294 blanks, all 39272 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          5 |     34,181 |         17 |          4 |     34,202 |
+| JavaScript |         63 |      4,679 |        101 |        290 |      5,070 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                |         68 |     38,860 |        118 |        294 |     39,272 |
+| .expo-shared                                     |          1 |          4 |          0 |          1 |          5 |
+| __mocks__                                        |          3 |        284 |          0 |          5 |        289 |
+| __tests__                                        |          1 |         12 |          2 |          2 |         16 |
+| assets                                           |          3 |          0 |          0 |          3 |          3 |
+| assets\icons                                     |          1 |          0 |          0 |          1 |          1 |
+| assets\images                                    |          1 |          0 |          0 |          1 |          1 |
+| components                                       |         14 |      1,076 |         23 |         69 |      1,168 |
+| constants                                        |          8 |      1,148 |          9 |         11 |      1,168 |
+| db                                               |          1 |         64 |         11 |          9 |         84 |
+| hooks                                            |          2 |         26 |          2 |          7 |         35 |
+| navigation                                       |          4 |        222 |          2 |         16 |        240 |
+| redux                                            |          5 |        148 |          4 |         23 |        175 |
+| redux\reducers                                   |          4 |        111 |          2 |         16 |        129 |
+| screens                                          |         11 |      1,149 |         25 |         84 |      1,258 |
+| theme                                            |          1 |        102 |          6 |         11 |        119 |
+| utils                                            |          6 |        404 |         17 |         39 |        460 |
++--------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                         | language   | code       | comment    | blank      | total      |
++--------------------------------------------------+------------+------------+------------+------------+------------+
+| e:\Rabia-APP\.expo-shared\assets.json            | JSON       |          4 |          0 |          1 |          5 |
+| e:\Rabia-APP\.prettierrc                         | JSON       |          7 |          0 |          1 |          8 |
+| e:\Rabia-APP\App.js                              | JavaScript |         24 |          0 |          5 |         29 |
+| e:\Rabia-APP\__mocks__\index.js                  | JavaScript |          2 |          0 |          2 |          4 |
+| e:\Rabia-APP\__mocks__\prayerTimes.js            | JavaScript |         38 |          0 |          2 |         40 |
+| e:\Rabia-APP\__mocks__\prayerTimesSchedule.js    | JavaScript |        244 |          0 |          1 |        245 |
+| e:\Rabia-APP\__tests__\screens.js                | JavaScript |         12 |          2 |          2 |         16 |
+| e:\Rabia-APP\app.json                            | JSON       |         27 |         17 |          0 |         44 |
+| e:\Rabia-APP\assets\icons\index.js               | JavaScript |          0 |          0 |          1 |          1 |
+| e:\Rabia-APP\assets\images\index.js              | JavaScript |          0 |          0 |          1 |          1 |
+| e:\Rabia-APP\assets\index.js                     | JavaScript |          0 |          0 |          1 |          1 |
+| e:\Rabia-APP\babel.config.js                     | JavaScript |          7 |          0 |          1 |          8 |
+| e:\Rabia-APP\components\CustomModal.js           | JavaScript |        136 |          1 |          4 |        141 |
+| e:\Rabia-APP\components\DhikrItem.js             | JavaScript |        122 |          1 |          3 |        126 |
+| e:\Rabia-APP\components\InfoHeader.js            | JavaScript |         54 |          0 |          5 |         59 |
+| e:\Rabia-APP\components\IntroButton.js           | JavaScript |         70 |          0 |          8 |         78 |
+| e:\Rabia-APP\components\IntroPage.js             | JavaScript |        130 |          1 |          6 |        137 |
+| e:\Rabia-APP\components\IntroPagination.js       | JavaScript |        163 |          0 |         12 |        175 |
+| e:\Rabia-APP\components\NextPrayer.js            | JavaScript |         97 |          1 |          3 |        101 |
+| e:\Rabia-APP\components\Notifications.js         | JavaScript |         44 |         13 |          9 |         66 |
+| e:\Rabia-APP\components\PrayerItem.js            | JavaScript |         69 |          1 |          4 |         74 |
+| e:\Rabia-APP\components\ScheduleHeader.js        | JavaScript |         41 |          2 |          4 |         47 |
+| e:\Rabia-APP\components\ScheduleItem.js          | JavaScript |         52 |          3 |          3 |         58 |
+| e:\Rabia-APP\components\SearchInput.js           | JavaScript |         41 |          0 |          4 |         45 |
+| e:\Rabia-APP\components\SettingsElement.js       | JavaScript |         45 |          0 |          3 |         48 |
+| e:\Rabia-APP\components\index.js                 | JavaScript |         12 |          0 |          1 |         13 |
+| e:\Rabia-APP\constants\dhikr.js                  | JavaScript |        808 |          0 |          1 |        809 |
+| e:\Rabia-APP\constants\fonts.js                  | JavaScript |         10 |          0 |          1 |         11 |
+| e:\Rabia-APP\constants\icons.js                  | JavaScript |         31 |          0 |          1 |         32 |
+| e:\Rabia-APP\constants\images.js                 | JavaScript |         10 |          0 |          1 |         11 |
+| e:\Rabia-APP\constants\index.js                  | JavaScript |          6 |          0 |          1 |          7 |
+| e:\Rabia-APP\constants\kehf.js                   | JavaScript |        228 |          0 |          1 |        229 |
+| e:\Rabia-APP\constants\prayerNames.js            | JavaScript |          9 |          9 |          3 |         21 |
+| e:\Rabia-APP\constants\slides.js                 | JavaScript |         46 |          0 |          2 |         48 |
+| e:\Rabia-APP\db\index.js                         | JavaScript |         64 |         11 |          9 |         84 |
+| e:\Rabia-APP\hooks\AppState.js                   | JavaScript |         25 |          2 |          6 |         33 |
+| e:\Rabia-APP\hooks\index.js                      | JavaScript |          1 |          0 |          1 |          2 |
+| e:\Rabia-APP\jest.config.js                      | JavaScript |          9 |          0 |          1 |         10 |
+| e:\Rabia-APP\metro.config.js                     | JavaScript |          4 |          0 |          4 |          8 |
+| e:\Rabia-APP\navigation\DhikrStack.js            | JavaScript |         39 |          0 |          5 |         44 |
+| e:\Rabia-APP\navigation\RootStack.js             | JavaScript |         92 |          0 |          5 |         97 |
+| e:\Rabia-APP\navigation\RootTab.js               | JavaScript |         33 |          0 |          4 |         37 |
+| e:\Rabia-APP\navigation\TabOptions.js            | JavaScript |         58 |          2 |          2 |         62 |
+| e:\Rabia-APP\package-lock.json                   | JSON       |     34,083 |          0 |          1 |     34,084 |
+| e:\Rabia-APP\package.json                        | JSON       |         60 |          0 |          1 |         61 |
+| e:\Rabia-APP\redux\reducers\counterSlice.js      | JavaScript |         17 |          1 |          3 |         21 |
+| e:\Rabia-APP\redux\reducers\dailyDhikrSlice.js   | JavaScript |         30 |          0 |          4 |         34 |
+| e:\Rabia-APP\redux\reducers\notificationSlice.js | JavaScript |         40 |          1 |          5 |         46 |
+| e:\Rabia-APP\redux\reducers\settingsSlice.js     | JavaScript |         24 |          0 |          4 |         28 |
+| e:\Rabia-APP\redux\store.js                      | JavaScript |         37 |          2 |          7 |         46 |
+| e:\Rabia-APP\screens\Countdown.js                | JavaScript |         74 |          0 |          6 |         80 |
+| e:\Rabia-APP\screens\DailyDhikr.js               | JavaScript |        164 |          9 |         14 |        187 |
+| e:\Rabia-APP\screens\Dhikr.js                    | JavaScript |        215 |          5 |          8 |        228 |
+| e:\Rabia-APP\screens\Error.js                    | JavaScript |         87 |          1 |          4 |         92 |
+| e:\Rabia-APP\screens\IntroScreens.js             | JavaScript |         46 |          2 |          9 |         57 |
+| e:\Rabia-APP\screens\Prayer.js                   | JavaScript |         15 |          0 |          5 |         20 |
+| e:\Rabia-APP\screens\PrayerTimes.js              | JavaScript |        244 |          6 |         11 |        261 |
+| e:\Rabia-APP\screens\Qibla.js                    | JavaScript |        204 |          2 |         15 |        221 |
+| e:\Rabia-APP\screens\Schedule.js                 | JavaScript |         37 |          0 |          6 |         43 |
+| e:\Rabia-APP\screens\Settings.js                 | JavaScript |         54 |          0 |          4 |         58 |
+| e:\Rabia-APP\screens\index.js                    | JavaScript |          9 |          0 |          2 |         11 |
+| e:\Rabia-APP\theme\theme.js                      | JavaScript |        102 |          6 |         11 |        119 |
+| e:\Rabia-APP\utils\dateTime.js                   | JavaScript |         72 |          6 |         12 |         90 |
+| e:\Rabia-APP\utils\index.js                      | JavaScript |         28 |          0 |          1 |         29 |
+| e:\Rabia-APP\utils\location.js                   | JavaScript |         70 |          5 |         10 |         85 |
+| e:\Rabia-APP\utils\notification.js               | JavaScript |        160 |          4 |          8 |        172 |
+| e:\Rabia-APP\utils\prayerData.js                 | JavaScript |         31 |          1 |          4 |         36 |
+| e:\Rabia-APP\utils\tools.js                      | JavaScript |         43 |          1 |          4 |         48 |
+| Total                                            |            |     38,860 |        118 |        294 |     39,272 |
++--------------------------------------------------+------------+------------+------------+------------+------------+
