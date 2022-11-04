@@ -3,8 +3,7 @@ module.exports = {
 	transform: {
 		"\\.[jt]sx?$": "babel-jest", // 👈 note this transform key
 	},
-	//TODO added expo to transform, test if its too much for test runner
 	transformIgnorePatterns: [
-		"node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation|expo-*)",
+		"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)",
 	],
 };
