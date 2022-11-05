@@ -87,3 +87,5 @@ export const progressToNextPrayer = (activePrayer, nextPrayer, countdown) => {
 	let progress = timePassed / totalSeconds;
 	return Math.round(progress * 100);
 };
+
+console.log(DateTime.now().day);

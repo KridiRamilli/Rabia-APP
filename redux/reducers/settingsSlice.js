@@ -6,6 +6,7 @@ const settingsSlice = createSlice({
 		showRealApp: false,
 		locationStatus: "undetermined",
 		notificationStatus: "undetermined",
+		notifySurahKehf: true,
 	},
 	reducers: {
 		setShowRealApp(state, action) {
@@ -17,11 +18,18 @@ const settingsSlice = createSlice({
 		setNotificationStatus(state, action) {
 			state.notificationStatus = action.payload;
 		},
+		setNotifiySurahKehf(state, action) {
+			state.notifySurahKehf = action.payload;
+		},
 	},
 });
 
-export const { setShowRealApp, setLocationStatus, setNotificationStatus } =
-	settingsSlice.actions;
+export const {
+	setShowRealApp,
+	setLocationStatus,
+	setNotificationStatus,
+	setNotifiySurahKehf,
+} = settingsSlice.actions;
 export const selectSettings = (state) => state.settings;
 
 export default settingsSlice.reducer;

@@ -2,8 +2,14 @@ import { useEffect, useRef, useState } from "react";
 
 import * as Notifications from "expo-notifications";
 import * as TaskManager from "expo-task-manager";
+import { useSelector, useDispatch } from "react-redux";
+
 import { getPrayers } from "../db";
-import { addNotificationToSchedule } from "../utils/notification";
+import {
+	addNotificationToSchedule,
+	scheduleReminder,
+} from "../utils/notification";
+import { selectSettings } from "../redux/reducers/settingsSlice";
 
 Notifications.setNotificationHandler({
 	handleNotification: async () => ({
@@ -30,6 +36,7 @@ export const NotificationsComponent = ({
 	startingDate,
 }) => {
 	const [notification, setNotification] = useState(false);
+	const { notifySurahKehf } = useSelector(selectSettings);
 	useEffect(() => {
 		(async () => {
 			const scheduledDays = await getPrayers(8, startingDate);
@@ -39,11 +46,19 @@ export const NotificationsComponent = ({
 			await addNotificationToSchedule(activeNotifications, scheduledDays).catch(
 				console.error
 			);
+			if (notifySurahKehf) {
+				await scheduleReminder({
+					name: "Sot e Xhuma!",
+					body: "Lexo suren Kehf",
+					weekday: 6,
+				});
+			}
 			const allNotifs =
 				await Notifications.getAllScheduledNotificationsAsync().catch(
 					console.error
 				);
-			// console.log(allNotifs[14]);
+			// console.log(allNotifs[15]);
+			console.log(allNotifs.length);
 		})();
 	}, [activeNotifications]);
 

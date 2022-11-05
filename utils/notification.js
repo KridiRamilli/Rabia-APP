@@ -169,3 +169,23 @@ export const removeExpiredNotifications = (notifications) => {
 	}
 	return ids;
 };
+
+export const scheduleReminder = async ({ title, body, weekday }) => {
+	const notificationId = await Notifications.scheduleNotificationAsync({
+		content: {
+			title: `${title} 😇`,
+			body,
+			data: { type: "Reminder" },
+			sound: "notification_sound.wav",
+			vibrate: [0, 250, 250, 250],
+		},
+		trigger: {
+			weekday,
+			hour: 10,
+			minute: 0,
+			repeats: true,
+		},
+	});
+
+	return notificationId;
+};
