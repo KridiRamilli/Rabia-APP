@@ -4,15 +4,19 @@ import { SearchInput, SettingsElement } from "../components";
 import { COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 
-export const Settings = () => {
+export const Settings = ({ navigation }) => {
 	const settings = [
-		["Account", ICONS.account_icon],
+		["Location", ICONS.account_icon],
 		["Notifications", ICONS.notification_icon],
-		["Appearance", ICONS.appearence_icon],
 		["Privacy & Security", ICONS.privacy_icon],
 		["Help & Support", ICONS.support_icon],
 		["About", ICONS.about_icon],
 	];
+
+	const handlePress = () => {
+		console.log("Pressed");
+		navigation.navigate("Notifications");
+	};
 
 	return (
 		<KeyboardAvoidingView
@@ -20,9 +24,6 @@ export const Settings = () => {
 			keyboardVerticalOffset={20}
 			behavior="padding"
 		>
-			<View style={styles.inputContainer}>
-				<SearchInput />
-			</View>
 			<View style={styles.settingsContainer}>
 				{settings.map((setting, idx) => {
 					return (
@@ -30,6 +31,7 @@ export const Settings = () => {
 							setting={setting[0]}
 							settingIcon={setting[1]}
 							key={idx}
+							handlePress={handlePress}
 						/>
 					);
 				})}

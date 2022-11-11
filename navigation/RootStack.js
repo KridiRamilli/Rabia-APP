@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Schedule, Settings, PrayerTimes, Countdown } from "../screens";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
+import SettingsStack from "./SettingsStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -65,13 +66,10 @@ const RootStack = ({ navigation }) => {
 					}}
 				/>
 				<Stack.Screen
-					name="Settings"
-					component={Settings}
+					name="SettingsStack"
+					component={SettingsStack}
 					options={{
-						headerTitleStyle: {
-							...FONTS.h4,
-							fontSize: SIZES.font + 4,
-						},
+						headerShown: false,
 					}}
 				/>
 				<Stack.Screen

@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
 
 import { IntroPage, IntroPagination } from "../components";
+let dbFile = require("../db/prayerTimes.db");
+
 import { insertDbLocally } from "../db";
 import { SLIDES } from "../constants";
 
@@ -13,7 +15,7 @@ export const IntroScreens = () => {
 		(async () => {
 			//TODO: Handle case wehen db insert not successful
 			//Insert prayer data DB before using APP
-			await insertDbLocally();
+			const result = await insertDbLocally(dbFile);
 		})();
 	}, []);
 

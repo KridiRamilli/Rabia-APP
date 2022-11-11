@@ -5,8 +5,11 @@ import * as SQLite from "expo-sqlite";
 import { promisifyQuery, formatPrayerTime, formatScheduleDate } from "../utils";
 import { PRAYER_NAMES } from "../constants";
 
-async function insertDbLocally() {
-	let dbFile = require("./prayerTimes.db");
+async function insertDbLocally(db) {
+	const result = {
+		success: false,
+		error: null,
+	};
 	if (
 		!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + "SQLite"))
 			.exists
@@ -18,15 +21,17 @@ async function insertDbLocally() {
 	const { exists: dbExists } = await FileSystem.getInfoAsync(
 		FileSystem.documentDirectory + "SQLite/prayerTimes.db"
 	);
-
 	//TODO bug when fresh install and no db open
-	// if (!dbExists) {
-	await FileSystem.downloadAsync(
-		Asset.fromModule(dbFile).uri,
-		FileSystem.documentDirectory + "SQLite/prayerTimes.db"
-	);
-	// }
-	// console.log(dbExists);
+	try {
+		await FileSystem.downloadAsync(
+			Asset.fromModule(db).uri,
+			FileSystem.documentDirectory + "SQLite/prayerTimes.db"
+		);
+		result["success"] = true;
+	} catch (error) {
+		result["error"] = error;
+	}
+	return result;
 }
 
 const db = SQLite.openDatabase("prayerTimes.db");

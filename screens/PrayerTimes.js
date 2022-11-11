@@ -32,7 +32,7 @@ import {
 	removeExpiredNotifications,
 } from "../utils";
 import { getTodayPrayers } from "../db";
-import { COLORS, SIZES } from "../theme/theme";
+import { COLORS } from "../theme/theme";
 import {
 	addNotification,
 	removeNotification,
@@ -180,7 +180,9 @@ export const PrayerTimes = ({ navigation }) => {
 						>
 							<Image source={ICONS.schedule_icon} style={styles.upperIcons} />
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+						<TouchableOpacity
+							onPress={() => navigation.navigate("SettingsStack")}
+						>
 							<Image source={ICONS.settings_icon} style={styles.upperIcons} />
 						</TouchableOpacity>
 					</View>

@@ -48,7 +48,7 @@ export const NotificationsComponent = ({
 			);
 			if (notifySurahKehf) {
 				await scheduleReminder({
-					name: "Sot e Xhuma!",
+					title: "Sot e Xhuma!",
 					body: "Lexo suren Kehf",
 					weekday: 6,
 				});

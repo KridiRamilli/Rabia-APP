@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		padding: SIZES.padding / 2,
 		paddingLeft: SIZES.width * 0.15,
-		// backgroundColor: "teal",
 	},
 	time: {
 		fontFamily: "Roboto-Regular",
@@ -41,6 +40,5 @@ const styles = StyleSheet.create({
 		color: COLORS.white,
 		flex: 0.14,
 		textAlign: "center",
-		// backgroundColor: "red",
 	},
 });
