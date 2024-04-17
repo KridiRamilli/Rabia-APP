@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 	infoText: {
 		...FONTS.body2,
 		color: COLORS.white,
-		justifySelf: "center",
+		// justifySelf: "center",
 		marginLeft: 20,
 	},
 	icon: {

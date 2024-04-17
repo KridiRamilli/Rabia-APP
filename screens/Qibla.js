@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 		width: 45,
 		height: 45,
 		resizeMode: "contain",
-		justifySelf: "flex-start",
+		// justifySelf: "flex-start",
 		tintColor: "red",
 	},
 });
