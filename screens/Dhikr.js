@@ -6,9 +6,23 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	Alert,
+	Button,
+	Pressable,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { MotiView, useDynamicAnimation } from "moti";
+import Animated, {
+	useSharedValue,
+	withSpring,
+	useAnimatedStyle,
+	Easing,
+} from "react-native-reanimated";
+import {
+	Gesture,
+	GestureDetector,
+	GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as Haptics from "expo-haptics";
@@ -16,6 +30,7 @@ import { FONTS, COLORS, SIZES } from "../theme/theme";
 import { ICONS } from "../constants";
 import { addCounter, resetCounter } from "../redux/reducers/counterSlice";
 import { getTodayDate } from "../utils";
+
 const dhikrTimes = [
 	{ dhikrName: "Morning", theme: "light" },
 	{ dhikrName: "Evening", theme: "dark" },
@@ -30,6 +45,29 @@ export const Dhikr = ({ navigation }) => {
 		return state.counter;
 	});
 	const [logCounter, setLogCounter] = useState({ [todayDate]: 0 });
+
+	// const state = useDynamicAnimation(() => ({
+	// 	opacity: 1,
+	// 	scale: 1,
+	// }));
+
+	// const gesture = Gesture.Tap()
+	// 	.onStart(() => {
+	// 		console.log("started");
+	// 		state.animateTo({
+	// 			opacity: 1,
+	// 			scale: 1.5,
+	// 		});
+	// 	})
+	// 	.onEnd(() => {
+	// 		console.log("ended");
+
+	// 		state.animateTo({
+	// 			opacity: 1,
+	// 			scale: 1,
+	// 		});
+	// 	});
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		setLogCounter(() => {
@@ -100,7 +138,26 @@ export const Dhikr = ({ navigation }) => {
 				</TouchableOpacity>
 				<Text style={styles.counter}>{counter.num}</Text>
 			</View>
-			<TouchableOpacity style={styles.mainBtn} onPress={handleBtnPress}>
+			<TouchableOpacity style={[styles.mainBtn]} onPress={handleBtnPress}>
+				{/* <MotiPressable style={[styles.waveEffect, { position: "absolute" }]} /> */}
+				{/* <MotiView
+					from={{ opacity: 1, scale: 1 }}
+					animate={{ opacity: 0, scale: 1.5 }}
+					transition={{
+						loop: true,
+						type: "timing",
+						duration: 2000,
+						easing: Easing.out(Easing.ease),
+						repeatReverse: false,
+					}}
+					style={[styles.waveEffect, { position: "absolute" }]}
+				></MotiView> */}
+				<Pressable
+					style={[styles.waveEffect, { position: "absolute" }]}
+					onPress={() => {
+						console.log("pressed");
+					}}
+				></Pressable>
 				<LinearGradient
 					// Button Linear Gradient
 					colors={[COLORS.pinkGradient, COLORS.purpleGradient]}
@@ -109,6 +166,7 @@ export const Dhikr = ({ navigation }) => {
 					<Image source={ICONS.hand_icon} style={styles.icon} />
 				</LinearGradient>
 			</TouchableOpacity>
+
 			{/*TODO FIX status bar based on route */}
 			<StatusBar style="dark" />
 		</SafeAreaView>
@@ -208,6 +266,17 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.41,
 		shadowRadius: 9.11,
 		elevation: 14,
+	},
+	waveEffect: {
+		width: SIZES.width * 0.55,
+		height: SIZES.width * 0.55,
+		borderRadius: (SIZES.width + SIZES.height) / 2,
+		borderWidth: 3,
+		borderColor: COLORS.darkBlue85,
+		justifyContent: "center",
+		alignItems: "center",
+		marginBottom: SIZES.margin * 11,
+		backgroundColor: COLORS.white,
 	},
 	gradientBackground: {
 		width: "97%",
