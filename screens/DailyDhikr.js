@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
 	StyleSheet,
 	FlatList,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import * as Haptics from "expo-haptics";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { ProgressBar } from "react-native-paper";
 
 import { DhikrItem } from "../components/DhikrItem";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
@@ -16,8 +17,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ICONS } from "./../constants/icons";
+import { TOTAL_MORNING_DHIKR, TOTAL_EVENING_DHIKR } from "../constants/dhikr";
 
-import {
+import dailyDhikrSlice, {
 	resetMorningDhikr,
 	resetEveningDhikr,
 	substractMorningDhikr,
@@ -33,8 +35,27 @@ export const DailyDhikr = ({ navigation, route }) => {
 			: state.dailyDhikr.EVENING_DHIKR;
 	});
 
+	const done = useSelector((state) => {
+		return {
+			morning_dhikr: state.dailyDhikr.done_morning_dhikr,
+			evening_dhikr: state.dailyDhikr.done_evening_dhikr,
+		};
+	});
+
 	const flatListRef = useRef();
 	const dispatch = useDispatch();
+
+	// const changeProgress = () => {
+	// 	dhikrName === "Morning"
+	// 		? setDhikr((prev) => ({
+	// 				...prev,
+	// 				done_morning_dhikr: (dhikr.done_morning_dhikr += 1),
+	// 		  }))
+	// 		: setDhikr((prev) => ({
+	// 				...prev,
+	// 				done_evening_dhikr: (dhikr.done_evening_dhikr += 1),
+	// 		  }));
+	// };
 
 	useEffect(() => {
 		//scroll to first unfinished dhikr
@@ -114,6 +135,7 @@ export const DailyDhikr = ({ navigation, route }) => {
 
 	//TODO try to achieve O(1) when changing repeat
 	const handlePress = (id) => {
+		// dhikrData[id].repeat > 0 && changeProgress();
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 		if (dhikrData[id].repeat > 0) {
 			dhikrName === "Morning"
@@ -135,6 +157,18 @@ export const DailyDhikr = ({ navigation, route }) => {
 				theme === "dark" && { backgroundColor: "#2C3A47" },
 			]}
 		>
+			<ProgressBar
+				progress={
+					dhikrName === "Morning"
+						? done.morning_dhikr / TOTAL_MORNING_DHIKR
+						: done.evening_dhikr / TOTAL_EVENING_DHIKR
+				}
+				width={SIZES.width}
+				style={{
+					backgroundColor: COLORS.lightGray3,
+				}}
+				color={COLORS.darkPurple}
+			/>
 			<FlatList
 				ref={flatListRef}
 				data={dhikrData}
