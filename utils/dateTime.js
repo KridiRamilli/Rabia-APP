@@ -13,7 +13,7 @@ const _formatDateString = (dateString) => {
 
 export const getTodayDate = ({ formated }) => {
 	let dt = DateTime.now().setLocale("sq");
-	let formatedDateString = dt.toFormat("EEEE, dd MMMM");
+	let formatedDateString = dt.toFormat("DDDD");
 	let standardDateString = dt.toFormat("dd/MM/yy");
 	return formated ? _formatDateString(formatedDateString) : standardDateString;
 };

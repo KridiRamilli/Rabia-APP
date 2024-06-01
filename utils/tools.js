@@ -1,10 +1,11 @@
 const _queryDb = (db, query) => {
-	return new Promise((resolve, reject) => {
-		db.transaction((tx) => {
-			tx.executeSql(
+	return new Promise(async (resolve, reject) => {
+		await db.transaction(async (tx) => {
+			await tx.execAsync(
 				`${query}`,
 				null,
 				(_transactionObj, { rows: { _array } }) => {
+					console.log("query completed");
 					// console.log(_transactionObj["_error"]);
 					if (_array[0]) {
 						resolve(_array);
@@ -20,9 +21,10 @@ const _queryDb = (db, query) => {
 
 export const promisifyQuery = async (db, query) => {
 	try {
+		let res = await _queryDb(db, query);
 		return await _queryDb(db, query);
 	} catch (err) {
-		console.error(err);
+		console.error("Error", err);
 	}
 };
 

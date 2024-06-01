@@ -25,14 +25,20 @@ async function insertDbLocally() {
 		Asset.fromModule(dbFile).uri,
 		FileSystem.documentDirectory + "SQLite/prayerTimes.db"
 	);
+	// console.log("dont exist");
 	// }
-	// console.log(dbExists);
+	console.log(dbExists);
 }
 
-const db = SQLite.openDatabase("prayerTimes.db");
+const db = SQLite.openDatabaseAsync("prayerTimes.db");
 const _getRowId = async (date) => {
-	let query = `SELECT rowid FROM prayers WHERE data="${date}"`;
-	const [resultObj] = await promisifyQuery(db, query);
+	// let query = `SELECT * FROM prayers`;
+	// let query = `SELECT rowid FROM prayers WHERE data="${date}"`;
+	// let res = (await db).getAllSync(query);
+	console.log("heree", date, query, res);
+	const [resultObj] = await promisifyQuery(db, query).then((res) =>
+		console.log(res)
+	);
 	return resultObj.rowid;
 };
 
@@ -75,7 +81,7 @@ const getTodayPrayers = async (date) => {
 	return prayerTimes;
 };
 
-//TODO Remove
+// TODO Remove
 // (async () => {
 // 	const prayers = await getPrayers(11, "12/10/22");
 // 	console.log(prayers[0]);

@@ -45,18 +45,6 @@ export const DailyDhikr = ({ navigation, route }) => {
 	const flatListRef = useRef();
 	const dispatch = useDispatch();
 
-	// const changeProgress = () => {
-	// 	dhikrName === "Morning"
-	// 		? setDhikr((prev) => ({
-	// 				...prev,
-	// 				done_morning_dhikr: (dhikr.done_morning_dhikr += 1),
-	// 		  }))
-	// 		: setDhikr((prev) => ({
-	// 				...prev,
-	// 				done_evening_dhikr: (dhikr.done_evening_dhikr += 1),
-	// 		  }));
-	// };
-
 	useEffect(() => {
 		//scroll to first unfinished dhikr
 		setTimeout(() => {
@@ -135,7 +123,6 @@ export const DailyDhikr = ({ navigation, route }) => {
 
 	//TODO try to achieve O(1) when changing repeat
 	const handlePress = (id) => {
-		// dhikrData[id].repeat > 0 && changeProgress();
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 		if (dhikrData[id].repeat > 0) {
 			dhikrName === "Morning"
