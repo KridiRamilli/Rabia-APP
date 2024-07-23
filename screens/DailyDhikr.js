@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
 	StyleSheet,
 	FlatList,
@@ -10,6 +10,7 @@ import {
 import * as Haptics from "expo-haptics";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { ProgressBar } from "react-native-paper";
+import Toast from "react-native-toast-message";
 
 import { DhikrItem } from "../components/DhikrItem";
 import { COLORS, FONTS, SIZES } from "../theme/theme";
@@ -28,6 +29,14 @@ import dailyDhikrSlice, {
 
 export const DailyDhikr = ({ navigation, route }) => {
 	const { dhikrName, theme } = route.params;
+	const toastConfig = {
+		successToast: ({ text1, props }) => (
+			<View style={styles.toastContainer}>
+				<Image style={styles.toastIcon} source={ICONS.ok_icon}></Image>
+				<Text style={styles.toastMessage}>{text1}</Text>
+			</View>
+		),
+	};
 
 	const dhikrData = useSelector((state) => {
 		return dhikrName === "Morning"
@@ -95,9 +104,6 @@ export const DailyDhikr = ({ navigation, route }) => {
 						//scroll to top
 						flatListRef.current.scrollToOffset({ offset: 0, animated: true });
 						//TODO find right method to reset dhikr
-						// setDhikrData(
-						//  dhikrName === "Morning" ? MORNING_DHIKR : EVENING_DHIKR
-						// );
 					}}
 				>
 					<Text style={styles.resetText}>Reset</Text>
@@ -123,6 +129,27 @@ export const DailyDhikr = ({ navigation, route }) => {
 
 	//TODO try to achieve O(1) when changing repeat
 	const handlePress = (id) => {
+		//Reset daily dhikr & trigger Success Screen when dhikr is done
+		if (dhikrName == "Morning" && TOTAL_MORNING_DHIKR == done.morning_dhikr) {
+			dispatch(resetMorningDhikr());
+			flatListRef.current.scrollToOffset({ offset: 0, animated: true });
+			Toast.show({
+				type: "successToast",
+				text1: "Allah jua pranoftë dhikrin e mëngjesit! 👋",
+				topOffset: 5,
+			});
+		} else if (
+			dhikrName == "Evening" &&
+			TOTAL_EVENING_DHIKR == done.evening_dhikr
+		) {
+			dispatch(resetEveningDhikr());
+			flatListRef.current.scrollToOffset({ offset: 0, animated: true });
+			Toast.show({
+				type: "successToast",
+				text1: "Allah jua pranoftë dhikrin e mbrëmjes! 👋",
+				topOffset: 5,
+			});
+		}
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 		if (dhikrData[id].repeat > 0) {
 			dhikrName === "Morning"
@@ -138,34 +165,37 @@ export const DailyDhikr = ({ navigation, route }) => {
 		}
 	};
 	return (
-		<View
-			style={[
-				styles.container,
-				theme === "dark" && { backgroundColor: "#2C3A47" },
-			]}
-		>
-			<ProgressBar
-				progress={
-					dhikrName === "Morning"
-						? done.morning_dhikr / TOTAL_MORNING_DHIKR
-						: done.evening_dhikr / TOTAL_EVENING_DHIKR
-				}
-				width={SIZES.width}
-				style={{
-					backgroundColor: COLORS.lightGray3,
-				}}
-				color={COLORS.darkPurple}
-			/>
-			<FlatList
-				ref={flatListRef}
-				data={dhikrData}
-				renderItem={renderItem}
-				keyExtractor={(item) => item.id}
-				onScrollToIndexFailed={(err) => {
-					console.log(err, "failed to scroll");
-				}}
-			/>
-		</View>
+		<>
+			<View
+				style={[
+					styles.container,
+					theme === "dark" && { backgroundColor: "#2C3A47" },
+				]}
+			>
+				<ProgressBar
+					progress={
+						dhikrName === "Morning"
+							? done.morning_dhikr / TOTAL_MORNING_DHIKR
+							: done.evening_dhikr / TOTAL_EVENING_DHIKR
+					}
+					width={SIZES.width}
+					style={{
+						backgroundColor: COLORS.lightGray3,
+					}}
+					color={COLORS.successGreen}
+				/>
+				<FlatList
+					ref={flatListRef}
+					data={dhikrData}
+					renderItem={renderItem}
+					keyExtractor={(item) => item.id}
+					onScrollToIndexFailed={(err) => {
+						console.log(err, "failed to scroll");
+					}}
+				/>
+			</View>
+			<Toast config={toastConfig} />
+		</>
 	);
 };
 
@@ -203,5 +233,26 @@ const styles = StyleSheet.create({
 	},
 	closeIconDark: {
 		tintColor: "#fff",
+	},
+	toastContainer: {
+		height: 60,
+		width: "80%",
+		backgroundColor: "#EFF8F1",
+		flexDirection: "row",
+		justifyContent: "space-around",
+		alignItems: "center",
+		borderWidth: 1,
+		borderColor: "#bae3c5",
+		borderRadius: SIZES.radius,
+	},
+	toastIcon: {
+		width: 35,
+		height: 35,
+		tintColor: "#3fbf62",
+	},
+	toastMessage: {
+		fontSize: 16,
+		fontFamily: "Roboto-Regular",
+		fontWeight: 500,
 	},
 });

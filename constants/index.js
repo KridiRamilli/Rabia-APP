@@ -4,3 +4,4 @@ export { FONT_FILES } from "./fonts";
 export { IMAGES } from "./images";
 export { SLIDES } from "./slides";
 export { KEHF } from "./kehf";
+export { NAMES } from "./names";

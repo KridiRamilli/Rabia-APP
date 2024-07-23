@@ -11,8 +11,10 @@ export const screenOptions = ({ route, ...props }) => ({
 			iconName = "dhikr_icon";
 		} else if (route.name == "Prayer Times") {
 			iconName = "prayer_times_icon";
-		} else {
+		} else if (route.name == "Qibla Finder") {
 			iconName = "qibla_icon";
+		} else {
+			iconName = "allah_names";
 		}
 		return (
 			<Image

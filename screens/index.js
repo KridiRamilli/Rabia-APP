@@ -7,4 +7,4 @@ export { IntroScreens } from "./IntroScreens";
 export { DailyDhikr } from "./DailyDhikr";
 export { Error } from "./Error";
 export { Countdown } from "./Countdown";
-
+export { Names } from "./Names";

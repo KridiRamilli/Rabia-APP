@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/store";
 
 import { FONT_FILES } from "./constants";
+import Toast from "react-native-toast-message";
 
 export default function App() {
 	const [fontsLoaded] = useFonts(FONT_FILES);
@@ -21,6 +22,7 @@ export default function App() {
 				persistor={persistor}
 			>
 				<RootTab />
+				<Toast />
 			</PersistGate>
 		</Provider>
 	);
