@@ -1,5 +1,7 @@
 # 🌙 Rabia APP
-
+<p align="center">
+<img src="assets/images/Rabia-app_INTRO.png" />
+</p>
 Rabia APP is a modern Islamic mobile application built with **React Native** and **Expo**. The app helps Muslims stay connected with their daily prayers through accurate prayer times, Qibla direction, Dhikr collections, prayer notifications, and a clean, user-friendly experience.
 
 ---
