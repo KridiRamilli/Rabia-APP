@@ -23,6 +23,7 @@ export const COLORS = {
 	white1: "#F1E6D8",
 	lightGreen: "#7EBDA2",
 	lightGreen2: "#BED2BB",
+	successGreen: "#5cb85c",
 	red: "#D84035",
 	red2: "#FF7363",
 	black: "#000000",

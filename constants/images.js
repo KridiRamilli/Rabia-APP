@@ -7,4 +7,6 @@ export const IMAGES = {
 	intro_image_success: require("../assets/images/intro_image_success.png"),
 	logo: require("../assets/images/logo.png"),
 	error: require("../assets/images/error.png"),
+	dhikr: require("../assets/images/dhikr_image.jpeg"),
+	allahNames: require("../assets/images/AllahNames.jpg"),
 };

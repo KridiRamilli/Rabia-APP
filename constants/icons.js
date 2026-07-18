@@ -28,4 +28,6 @@ export const ICONS = {
 	prayer_notification: require("../assets/icons/prayer_notification.png"),
 	prayer_notification_active: require("../assets/icons/prayer_notification_active.png"),
 	prayer_notification_once: require("../assets/icons/prayer_notification_once.png"),
+	allah_names: require("../assets/icons/99names.png"),
+	ok_icon: require("../assets/icons/ok_icon.png"),
 };

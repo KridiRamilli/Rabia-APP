@@ -1,43 +1,53 @@
 {
-	"expo": {
-		"name": "RabiaApp",
-		"slug": "RabiaApp",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "",
-		"userInterfaceStyle": "light",
-		"plugins": [
-			[
-				"expo-notifications",
-				{
-					"icon": "./assets/notifications/notification_icon.png",
-					"color": "#fff",
-					"sounds": ["./assets/notifications/notification_sound.wav"]
-				}
-			]
-		],
-		"splash": {
-			"image": "",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"infoPlist": { "UIBackgroundModes": ["remote-notification"] },
-			"supportsTablet": true,
-			"requireFullScreen": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "",
-				"backgroundColor": "#FFFFFF"
-			}
-		},
-		"web": {
-			"favicon": ""
-		}
-	}
+  "expo": {
+    "name": "RabiaApp",
+    "slug": "RabiaApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notifications/notification_icon.png",
+          "color": "#fff",
+          "sounds": [
+            "./assets/notifications/notification_sound.wav"
+          ]
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ],
+    "splash": {
+      "image": "",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      },
+      "supportsTablet": true,
+      "requireFullScreen": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": ""
+    }
+  }
 }

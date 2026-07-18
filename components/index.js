@@ -10,3 +10,4 @@ export { SettingsElement } from "./SettingsElement";
 export { ScheduleItem } from "./ScheduleItem";
 export { ScheduleHeader } from "./ScheduleHeader";
 export { NotificationsComponent } from "./Notifications";
+export { Name } from "./Name";

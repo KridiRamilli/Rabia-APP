@@ -806,3 +806,12 @@ export const EVENING_DHIKR = [
 		repeat: 1,
 	},
 ];
+
+export const TOTAL_MORNING_DHIKR = MORNING_DHIKR.reduce(
+	(accumulator, currentValue) => accumulator + currentValue.repeat,
+	0
+);
+export const TOTAL_EVENING_DHIKR = EVENING_DHIKR.reduce(
+	(accumulator, currentValue) => accumulator + currentValue.repeat,
+	0
+);
